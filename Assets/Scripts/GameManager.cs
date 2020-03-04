@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using Ink.Runtime;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,25 +15,41 @@ public class GameManager : MonoBehaviour
     private int sceneNum;
     public enum IntervieweeName
     {
-        Gabriel,
+        Andrea,
         Jalane,
+        Phyllis,
+        Jeffrey,
         Elizabeth
     }
 
     public static Dictionary<IntervieweeName, bool> MetInterviewees;
     
-    public Image humanFigure;
     public Image textBox;
     public TextMeshProUGUI textBoxText;
+    public Image portraitBackground;
+    public Image portraitSprite;
+    public Image portraitBorder;
     private Color transparentWhiteColor;
     private Color transparentBoxColor;
+    private Color transparentBlackColor;
+    private Color transparentPortraitBorderColor;
     public PostProcessVolume myPPV;
     [HideInInspector]
     public Vignette vignette;
+    
+    public Story story;
+
+    public float typeSpeed;
+    
+    private string currentTextBoxString = "";
 
     private void Awake()
     {
         instance = this;
+        
+        //Ink commands for loading the proper Ink file
+        TextAsset storyFile = Resources.Load<TextAsset>("Transcriptions");
+        story = new Story(storyFile.text);
     }
 
     // Start is called before the first frame update
@@ -53,14 +70,18 @@ public class GameManager : MonoBehaviour
     {
         //setup for interview player scripts, which access the text box, text, figure, and PPV set here
         transparentWhiteColor = new Color(255, 255, 255, 0);
+        transparentBlackColor = new Color(0, 0, 0, 0);
         transparentBoxColor = new Color(192, 184, 184, 0);
-        textBoxText.color = transparentWhiteColor;
+        transparentPortraitBorderColor = new Color(147, 134, 134, 0);
+        portraitBackground.color = transparentBlackColor;
+        portraitSprite.color = transparentWhiteColor;
+        textBoxText.color = transparentBlackColor;
         textBox.color = transparentBoxColor;
-        humanFigure.color = transparentWhiteColor;
+        portraitBorder.color = transparentPortraitBorderColor;
         
         textBox.gameObject.SetActive(false);
-        humanFigure.gameObject.SetActive(false);
         myPPV.profile.TryGetSettings(out vignette);
+
     }
 
     // Update is called once per frame
@@ -76,4 +97,12 @@ public class GameManager : MonoBehaviour
             Application.Quit();
         }
     }
+
+    public void SelectTranscription(string knot, string stitch)
+    {
+        var concatString = knot + "." + stitch;
+        story.ChoosePathString(concatString);
+    }
+    
+    
 }

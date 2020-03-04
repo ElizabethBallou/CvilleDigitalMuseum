@@ -7,6 +7,8 @@ public class InterviewData : ScriptableObject
 {
     public AudioClip clip;
     public string description;
-    public string transcription;
-    public InterviewEnum.InterviewTag InterviewTags;
+    public string inkKnot;
+    public string inkStitch;
+    public string speakerPortrait;
+    public InterviewTagEnum.InterviewTag InterviewTags;
 }
