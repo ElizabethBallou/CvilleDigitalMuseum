@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using Ink.Runtime;
 
 public class InterviewPlayer : MonoBehaviour
 {
@@ -16,24 +15,27 @@ public class InterviewPlayer : MonoBehaviour
     public float boxFadeTime = 1f;
     public float typeSpeed = .005f;
 
+    public string conversationName;
     public InterviewData thisInterview;
 
-    private string inkTranscriptionString;
+    private string transcriptionString;
     private string portraitName;
+
+    private Coroutine intervieweeCoroutine;
+    private ConversationInfo thisConversationInfo;
+
+    private int currentChunkIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        
-        var concatString = thisInterview.inkKnot + "." + thisInterview.inkStitch;
-        GameManager.instance.story.ChoosePathString(concatString);
-        GameManager.instance.story.Continue();
-        portraitName = EvaluateInkTag();
-        HandlePortraitActivation(portraitName);
-        inkTranscriptionString = GameManager.instance.story.currentText;
-        
+
+
+        thisConversationInfo = TranscriptionDataParser.instance.TranscriptionDataDictionary[conversationName];
+
+
     }
 
     // Update is called once per frame
@@ -76,11 +78,14 @@ public class InterviewPlayer : MonoBehaviour
 
     private void ShowTextBox()
     {
+        transcriptionString = thisConversationInfo.chunks[0]
+            .speakerText;
+        
+        HandlePortraitActivation(thisConversationInfo.chunks[0].Speaker);
         
         if (GameManager.instance.vignette != null)
             DOTween.To(() => GameManager.instance.vignette.intensity.value,
                 x => GameManager.instance.vignette.intensity.value = x, .45f, boxFadeTime);
-        
         GameManager.instance.textBox.gameObject.SetActive(true);
         GameManager.instance.textBox.DOFade(.82f, boxFadeTime);
         GameManager.instance.textBoxText.DOFade(1f, boxFadeTime);
@@ -91,16 +96,31 @@ public class InterviewPlayer : MonoBehaviour
 
 
         
-        StartCoroutine(ShowIntervieweeTranscription(inkTranscriptionString));
+        intervieweeCoroutine = StartCoroutine(ShowIntervieweeTranscription(transcriptionString));
 
     }
     
     private IEnumerator ShowIntervieweeTranscription(string transcription)
     {
+        float chunkDuration;
+        //if this is not the last chunk...
+        if (currentChunkIndex < thisConversationInfo.chunks.Length - 1)
+        {
+            chunkDuration = thisConversationInfo.chunks[currentChunkIndex + 1].speakerTimestamp -
+                            thisConversationInfo.chunks[currentChunkIndex].speakerTimestamp;
+        }
+        else
+        {
+            chunkDuration = thisInterview.clip.length - thisConversationInfo.chunks[currentChunkIndex].speakerTimestamp;
+        }
+
+        float timeElapsed = 0;
+
         for (int i = 0; i < transcription.Length; i++)
         {
             string wordsBeingPrinted = transcription.Substring(0, i);
             GameManager.instance.textBoxText.text = wordsBeingPrinted;
+            timeElapsed += Time.deltaTime;
             yield return new WaitForSeconds(typeSpeed);
             
             if (transcription[i].ToString() == "%")
@@ -128,34 +148,22 @@ public class InterviewPlayer : MonoBehaviour
 
     private void RefreshTextBox()
     {
+        StopCoroutine(intervieweeCoroutine);
         GameManager.instance.textBoxText.text = "";
     }
 
-    private void HandlePortraitActivation(string speakerName)
+    private void HandlePortraitActivation(Chunk.speakerName thisSpeaker)
     {
-        Debug.Log("The speaker name is " + speakerName);
-        if (speakerName != "")
+        if (thisSpeaker != Chunk.speakerName.none)
         {
-            Debug.Log("We here");
-            Debug.Log(PortraitInfo.instance.portraitDictionary.Count);
-            foreach (string name in PortraitInfo.instance.portraitDictionary.Keys)
+            foreach (Chunk.speakerName interviewee in PortraitInfo.instance.portraitDictionary.Keys)
             {
-                Debug.Log("WE HERE");
-                PortraitInfo.instance.portraitDictionary[name].gameObject.SetActive(false);
+                PortraitInfo.instance.portraitDictionary[interviewee].gameObject.SetActive(false);
             }
             
-            PortraitInfo.instance.portraitDictionary[speakerName.Trim()].gameObject.SetActive(true);
+            PortraitInfo.instance.portraitDictionary[thisSpeaker].gameObject.SetActive(true);
         }
     }
     
-    private string EvaluateInkTag()
-    {
-        foreach (string s in GameManager.instance.story.currentTags)
-        {
-            return s;
-        }
-
-        return "";
-    }
-    
+ 
 }

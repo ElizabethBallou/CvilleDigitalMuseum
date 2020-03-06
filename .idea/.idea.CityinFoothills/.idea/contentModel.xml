@@ -304,15 +304,24 @@
             </e>
           </e>
         </e>
+        <e p="Resources" t="Include">
+          <e p="TranscriptionInformation - Sheet1.txt" t="Include" />
+          <e p="TranscriptionInformation.txt" t="Include" />
+        </e>
         <e p="Scripts" t="Include">
+          <e p="Classes Only" t="Include">
+            <e p="Chunk.cs" t="Include" />
+            <e p="ConversationInfo.cs" t="Include" />
+            <e p="InterviewData.cs" t="Include" />
+          </e>
           <e p="GameManager.cs" t="Include" />
-          <e p="InterviewData.cs" t="Include" />
           <e p="InterviewPlayer.cs" t="Include" />
           <e p="InterviewTagEnum.cs" t="Include" />
           <e p="IntroScript.cs" t="Include" />
           <e p="LocationStampManager.cs" t="Include" />
           <e p="MouseLook.cs" t="Include" />
           <e p="PortraitInfo.cs" t="Include" />
+          <e p="TranscriptionDataParser.cs" t="Include" />
         </e>
         <e p="Standard Assets" t="Include">
           <e p="Cameras" t="Include">

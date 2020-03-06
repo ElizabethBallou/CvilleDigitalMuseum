@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
-using Ink.Runtime;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,19 +36,12 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Vignette vignette;
     
-    public Story story;
-
     public float typeSpeed;
     
-    private string currentTextBoxString = "";
-
     private void Awake()
     {
         instance = this;
-        
-        //Ink commands for loading the proper Ink file
-        TextAsset storyFile = Resources.Load<TextAsset>("Transcriptions");
-        story = new Story(storyFile.text);
+
     }
 
     // Start is called before the first frame update
@@ -98,11 +90,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SelectTranscription(string knot, string stitch)
+   /*  public void SelectTranscription(string knot, string stitch)
     {
         var concatString = knot + "." + stitch;
         story.ChoosePathString(concatString);
-    }
+    } */
     
     
 }

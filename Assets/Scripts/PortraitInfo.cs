@@ -8,19 +8,19 @@ public class PortraitInfo : MonoBehaviour
 {
     public static PortraitInfo instance;
     public Image[] portraitArray;
-    public string[] speakerStringArray;
+    public Chunk.speakerName[] SpeakerNames;
 
-    public Dictionary<string, Image> portraitDictionary;
+    public Dictionary<Chunk.speakerName, Image> portraitDictionary;
 
     private void Awake()
     {
         instance = this;
         
-        portraitDictionary = new Dictionary<string, Image>();
-        for (int i = 0; i < speakerStringArray.Length; i++)
+        portraitDictionary = new Dictionary<Chunk.speakerName, Image>();
+        for (int i = 0; i < SpeakerNames.Length; i++)
         {
-            portraitDictionary.Add(speakerStringArray[i], portraitArray[i]);
-            Debug.Log(portraitDictionary[speakerStringArray[i]]);
+            portraitDictionary.Add(SpeakerNames[i], portraitArray[i]);
+            Debug.Log(portraitDictionary[SpeakerNames[i]]);
         }
         Debug.Log(portraitDictionary.Count);
 
