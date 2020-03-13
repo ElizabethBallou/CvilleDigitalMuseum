@@ -7,7 +7,6 @@ using DG.Tweening;
 
 public class IntroTextData : MonoBehaviour
 {
-
     private TextMeshProUGUI factText;
 
     private Button continueButton1;
@@ -65,7 +64,7 @@ public class IntroTextData : MonoBehaviour
         
     }
     
-    public IEnumerator PrintText()
+    public IEnumerator ShowText()
     {
 
         
