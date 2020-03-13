@@ -4,11 +4,164 @@
     <e p="C:\Users\eliza\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\eliza\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_CityinFoothills.-176396880.00" t="ExcludeRecursive" />
     <e p="D:\Documents\Game Project Files\CityinFoothills" t="IncludeRecursive">
-      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
-      <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="backgroundAudioManager.cs" t="Include" />
+        <e p="FirstPersonExplorationKit" t="Include">
+          <e p="Documentation" t="Include">
+            <e p="readme.txt" t="Include" />
+            <e p="VersionHistory.txt" t="Include" />
+          </e>
+          <e p="FPEPlayerController" t="Include">
+            <e p="FPECharacters" t="Include">
+              <e p="FPEFirstPerson" t="Include">
+                <e p="Scripts" t="Include">
+                  <e p="FPEFirstPersonController.cs" t="Include" />
+                  <e p="FPEMouseLook.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="readme.txt" t="Include" />
+            <e p="Utility" t="Include">
+              <e p="FPECurveControlledBob.cs" t="Include" />
+              <e p="FPEFOVKick.cs" t="Include" />
+              <e p="FPELerpControlledBob.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Gizmos" t="Include">
+            <e p="_README.txt" t="Include" />
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="DemoScripts" t="Include">
+              <e p="DemoArcadeMachine.cs" t="Include" />
+              <e p="DemoCabinetScript.cs" t="Include" />
+              <e p="DemoCutscene.cs" t="Include" />
+              <e p="DemoCutsceneWithUI.cs" t="Include" />
+              <e p="DemoDebugHelperScript.cs" t="Include" />
+              <e p="DemoDoorCardScannerScript.cs" t="Include" />
+              <e p="DemoFanMachine.cs" t="Include" />
+              <e p="DemoForcePlayerLookAt.cs" t="Include" />
+              <e p="DemoGenericButton.cs" t="Include" />
+              <e p="DemoIdolScript.cs" t="Include" />
+              <e p="DemoIdolTrapScript.cs" t="Include" />
+              <e p="DemoInventoryConsumer.cs" t="Include" />
+              <e p="DemoLetterbox.cs" t="Include" />
+              <e p="DemoLevelBoxTriggerIndicator.cs" t="Include" />
+              <e p="DemoRadioComplexScript.cs" t="Include" />
+              <e p="DemoRadioSimpleScript.cs" t="Include" />
+              <e p="DemoSecuritySystem.cs" t="Include" />
+              <e p="DemoSlidingDoorScript.cs" t="Include" />
+              <e p="DemoSoundOnExamineObjectScript.cs" t="Include" />
+              <e p="DemoSwitchActivationScript.cs" t="Include" />
+              <e p="DemoTapeDeck.cs" t="Include" />
+              <e p="DemoToiletFlushScript.cs" t="Include" />
+              <e p="DemoToiletScript.cs" t="Include" />
+              <e p="DemoToiletSeatScript.cs" t="Include" />
+              <e p="DemoTriggerSequenceHelper.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="FPECheckLayersAndTags.cs" t="Include" />
+              <e p="FPEFindBrokenInteractions.cs" t="Include" />
+              <e p="FPEMinMaxRangeEditor.cs" t="Include" />
+              <e p="FPESaveGameErrorChecker.cs" t="Include" />
+              <e p="FPESoundBankEditor.cs" t="Include" />
+              <e p="FPEUniqueNameValidator.cs" t="Include" />
+            </e>
+            <e p="FPECore.cs" t="Include" />
+            <e p="FPEEventSystem.cs" t="Include" />
+            <e p="FPEInputManager.cs" t="Include" />
+            <e p="FPEInteractionManagerScript.cs" t="Include" />
+            <e p="FPEInventoryManagerScript.cs" t="Include" />
+            <e p="FPEPlayer.cs" t="Include" />
+            <e p="InteractableTypes" t="Include">
+              <e p="CollectableTypes" t="Include">
+                <e p="FPEAudioDiaryEntry.cs" t="Include" />
+                <e p="FPENoteEntry.cs" t="Include" />
+              </e>
+              <e p="DoorsAndDrawers" t="Include">
+                <e p="FPEAlwaysSwingOutDoor.cs" t="Include" />
+                <e p="FPEAutomaticDoorTrigger.cs" t="Include" />
+                <e p="FPEDoor.cs" t="Include" />
+                <e p="FPEDoorAndDrawerHitHelper.cs" t="Include" />
+                <e p="FPEDrawer.cs" t="Include" />
+                <e p="FPEDrawerContentsGrabber.cs" t="Include" />
+                <e p="FPESimpleDoor.cs" t="Include" />
+                <e p="FPESlidingDoor.cs" t="Include" />
+                <e p="FPESwingingDoor.cs" t="Include" />
+              </e>
+              <e p="FPEAttachedNote.cs" t="Include" />
+              <e p="FPEInteractableActivateScript.cs" t="Include" />
+              <e p="FPEInteractableAudioDiaryScript.cs" t="Include" />
+              <e p="FPEInteractableBaseScript.cs" t="Include" />
+              <e p="FPEInteractableDockScript.cs" t="Include" />
+              <e p="FPEInteractableInventoryItemScript.cs" t="Include" />
+              <e p="FPEInteractableJournalScript.cs" t="Include" />
+              <e p="FPEInteractablePickupScript.cs" t="Include" />
+              <e p="FPEInteractableStaticScript.cs" t="Include" />
+              <e p="FPEInventoryConsumer.cs" t="Include" />
+              <e p="FPEPassiveAudioDiary.cs" t="Include" />
+              <e p="FPEPutBackScript.cs" t="Include" />
+            </e>
+            <e p="LevelComponents" t="Include">
+              <e p="FPEDoorway.cs" t="Include" />
+              <e p="FPEPlayerStartLocation.cs" t="Include" />
+            </e>
+            <e p="SavingAndLoading" t="Include">
+              <e p="FPEGenericSaveableGameObject.cs" t="Include" />
+              <e p="FPEGenericSaveableInterface.cs" t="Include" />
+              <e p="FPESaveLoadLogic.cs" t="Include" />
+              <e p="FPESaveLoadManager.cs" t="Include" />
+            </e>
+            <e p="UI" t="Include">
+              <e p="FPEAudioDiaryData.cs" t="Include" />
+              <e p="FPEAudioDiaryEntrySlot.cs" t="Include" />
+              <e p="FPEDefaultHUD.cs" t="Include" />
+              <e p="FPEGameMenu.cs" t="Include" />
+              <e p="FPEHUD.cs" t="Include" />
+              <e p="FPEHUDData.cs" t="Include" />
+              <e p="FPEInventoryActionsPanel.cs" t="Include" />
+              <e p="FPEInventoryItemData.cs" t="Include" />
+              <e p="FPEInventoryItemInfoPanel.cs" t="Include" />
+              <e p="FPEInventoryItemSlot.cs" t="Include" />
+              <e p="FPEMainMenu.cs" t="Include" />
+              <e p="FPEMenu.cs" t="Include" />
+              <e p="FPEMenuButton.cs" t="Include" />
+              <e p="FPEMenuTab.cs" t="Include" />
+              <e p="FPEMenuToggle.cs" t="Include" />
+              <e p="FPEMinimalHUD.cs" t="Include" />
+              <e p="FPENoteContentsPanel.cs" t="Include" />
+              <e p="FPENoteData.cs" t="Include" />
+              <e p="FPENoteEntrySlot.cs" t="Include" />
+              <e p="FPESimpleMenu.cs" t="Include" />
+              <e p="FPETextButton.cs" t="Include" />
+              <e p="FPEUIHint.cs" t="Include" />
+            </e>
+            <e p="Utility" t="Include">
+              <e p="FPEEventTrigger.cs" t="Include" />
+              <e p="FPEGenericEvent.cs" t="Include" />
+              <e p="FPEMinMaxRangeAttribute.cs" t="Include" />
+              <e p="FPEObjectTypeLookup.cs" t="Include" />
+              <e p="FPESaveDataTypes.cs" t="Include" />
+              <e p="FPESimpleSoundBank.cs" t="Include" />
+              <e p="FPESoundBank.cs" t="Include" />
+              <e p="FPETagAndLayerHelper.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="DemoTriPlanar.shader" t="Include" />
+            <e p="ModifiedPB.shader" t="Include" />
+          </e>
+          <e p="Testing" t="Include">
+            <e p="_README.txt" t="Include" />
+            <e p="Scripts" t="Include">
+              <e p="FPEBuildIndexTester.cs" t="Include" />
+              <e p="FPECubePageMover.cs" t="Include" />
+              <e p="FPEInputTester.cs" t="Include" />
+              <e p="FPEInteractableDebugger.cs" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Imported" t="Include">
           <e p="Demigiant" t="Include">
             <e p="DOTween" t="Include">
@@ -36,6 +189,9 @@
             <e p="Script" t="Include">
               <e p="GlitchImageEffect.cs" t="Include" />
             </e>
+          </e>
+          <e p="Modern UI Pack" t="Include">
+            <e p="Read Me.txt" t="Include" />
           </e>
           <e p="NPR Paint Filter" t="Include">
             <e p="readme.txt" t="Include" />
@@ -73,24 +229,6 @@
             <e p="Shader" t="Include">
               <e p="BaiscRim.shader" t="Include" />
               <e p="BasicHologram.shader" t="Include" />
-            </e>
-          </e>
-          <e p="SampleScenes" t="Include">
-            <e p="Menu" t="Include">
-              <e p="Scripts" t="Include">
-                <e p="MenuSceneLoader.cs" t="Include" />
-                <e p="PauseMenu.cs" t="Include" />
-                <e p="SceneAndURLLoader.cs" t="Include" />
-              </e>
-            </e>
-            <e p="Scripts" t="Include">
-              <e p="CameraSwitch.cs" t="Include" />
-              <e p="LevelReset.cs" t="Include" />
-              <e p="PlaceTargetWithMouse.cs" t="Include" />
-              <e p="SlowMoButton.cs" t="Include" />
-            </e>
-            <e p="Shaders" t="Include">
-              <e p="Skybox-Procedural.shader" t="Include" />
             </e>
           </e>
           <e p="Skybox Cubemap Extended" t="Include">
@@ -135,283 +273,31 @@
               </e>
             </e>
           </e>
-        </e>
-        <e p="Modern UI Pack" t="Include">
-          <e p="Read Me.txt" t="Include" />
-        </e>
-        <e p="Plugins" t="Include">
-          <e p="Ink" t="Include">
-            <e p="Core" t="Include">
-              <e p="Editor" t="Include">
-                <e p="Compiler" t="Include">
-                  <e p="Auto Compiler" t="Include">
-                    <e p="InkPostProcessor.cs" t="Include" />
-                  </e>
-                  <e p="InkCompiler.cs" t="Include" />
-                </e>
-                <e p="Ink Library" t="Include">
-                  <e p="InkFile.cs" t="Include" />
-                  <e p="InkLibrary.cs" t="Include" />
-                  <e p="InkLibraryEditor.cs" t="Include" />
-                  <e p="InkMetaFile.cs" t="Include" />
-                  <e p="InkMetaLibrary.cs" t="Include" />
-                </e>
-                <e p="Ink Settings" t="Include">
-                  <e p="InkSettings.cs" t="Include" />
-                  <e p="InkSettingsEditor.cs" t="Include" />
-                </e>
-                <e p="InkEditorUtils.cs" t="Include" />
-              </e>
-            </e>
-            <e p="InkLibs" t="Include">
-              <e p="Ink-Libraries.asmdef" t="Include" />
-              <e p="InkCompiler" t="Include">
-                <e p="CharacterRange.cs" t="Include" />
-                <e p="CharacterSet.cs" t="Include" />
-                <e p="CommandLineInput.cs" t="Include" />
-                <e p="Compiler.cs" t="Include" />
-                <e p="Error.cs" t="Include" />
-                <e p="IFileHandler.cs" t="Include" />
-                <e p="InkParser" t="Include">
-                  <e p="CommentEliminator.cs" t="Include" />
-                  <e p="InkParser.cs" t="Include" />
-                  <e p="InkParser_AuthorWarning.cs" t="Include" />
-                  <e p="InkParser_CharacterRanges.cs" t="Include" />
-                  <e p="InkParser_Choices.cs" t="Include" />
-                  <e p="InkParser_CommandLineInput.cs" t="Include" />
-                  <e p="InkParser_Conditional.cs" t="Include" />
-                  <e p="InkParser_Content.cs" t="Include" />
-                  <e p="InkParser_Divert.cs" t="Include" />
-                  <e p="InkParser_Expressions.cs" t="Include" />
-                  <e p="InkParser_Include.cs" t="Include" />
-                  <e p="InkParser_Knot.cs" t="Include" />
-                  <e p="InkParser_Logic.cs" t="Include" />
-                  <e p="InkParser_Sequences.cs" t="Include" />
-                  <e p="InkParser_Statements.cs" t="Include" />
-                  <e p="InkParser_Tags.cs" t="Include" />
-                  <e p="InkParser_Whitespace.cs" t="Include" />
-                </e>
-                <e p="InkStringConversionExtensions.cs" t="Include" />
-                <e p="ParsedHierarchy" t="Include">
-                  <e p="AuthorWarning.cs" t="Include" />
-                  <e p="Choice.cs" t="Include" />
-                  <e p="Conditional.cs" t="Include" />
-                  <e p="ConditionalSingleBranch.cs" t="Include" />
-                  <e p="ConstantDeclaration.cs" t="Include" />
-                  <e p="ContentList.cs" t="Include" />
-                  <e p="Divert.cs" t="Include" />
-                  <e p="DivertTarget.cs" t="Include" />
-                  <e p="Expression.cs" t="Include" />
-                  <e p="ExternalDeclaration.cs" t="Include" />
-                  <e p="FlowBase.cs" t="Include" />
-                  <e p="FlowLevel.cs" t="Include" />
-                  <e p="FunctionCall.cs" t="Include" />
-                  <e p="Gather.cs" t="Include" />
-                  <e p="INamedContent.cs" t="Include" />
-                  <e p="IncludedFile.cs" t="Include" />
-                  <e p="IWeavePoint.cs" t="Include" />
-                  <e p="Knot.cs" t="Include" />
-                  <e p="List.cs" t="Include" />
-                  <e p="ListDefinition.cs" t="Include" />
-                  <e p="Number.cs" t="Include" />
-                  <e p="Object.cs" t="Include" />
-                  <e p="Path.cs" t="Include" />
-                  <e p="Return.cs" t="Include" />
-                  <e p="Sequence.cs" t="Include" />
-                  <e p="Stitch.cs" t="Include" />
-                  <e p="Story.cs" t="Include" />
-                  <e p="StringExpression.cs" t="Include" />
-                  <e p="Text.cs" t="Include" />
-                  <e p="TunnelOnwards.cs" t="Include" />
-                  <e p="VariableAssignment.cs" t="Include" />
-                  <e p="VariableReference.cs" t="Include" />
-                  <e p="Weave.cs" t="Include" />
-                  <e p="Wrap.cs" t="Include" />
-                </e>
-                <e p="Plugins" t="Include">
-                  <e p="Plugin.cs" t="Include" />
-                  <e p="PluginManager.cs" t="Include" />
-                </e>
-                <e p="Properties" t="Include">
-                  <e p="AssemblyInfo.cs" t="Include" />
-                </e>
-                <e p="StringParser" t="Include">
-                  <e p="StringParser.cs" t="Include" />
-                  <e p="StringParserState.cs" t="Include" />
-                </e>
-              </e>
-              <e p="InkRuntime" t="Include">
-                <e p="CallStack.cs" t="Include" />
-                <e p="Choice.cs" t="Include" />
-                <e p="ChoicePoint.cs" t="Include" />
-                <e p="Container.cs" t="Include" />
-                <e p="ControlCommand.cs" t="Include" />
-                <e p="DebugMetadata.cs" t="Include" />
-                <e p="Divert.cs" t="Include" />
-                <e p="Glue.cs" t="Include" />
-                <e p="INamedContent.cs" t="Include" />
-                <e p="InkList.cs" t="Include" />
-                <e p="JsonSerialisation.cs" t="Include" />
-                <e p="ListDefinition.cs" t="Include" />
-                <e p="ListDefinitionsOrigin.cs" t="Include" />
-                <e p="NativeFunctionCall.cs" t="Include" />
-                <e p="Object.cs" t="Include" />
-                <e p="Path.cs" t="Include" />
-                <e p="Pointer.cs" t="Include" />
-                <e p="Profiler.cs" t="Include" />
-                <e p="PushPop.cs" t="Include" />
-                <e p="SearchResult.cs" t="Include" />
-                <e p="SimpleJson.cs" t="Include" />
-                <e p="StatePatch.cs" t="Include" />
-                <e p="Story.cs" t="Include" />
-                <e p="StoryException.cs" t="Include" />
-                <e p="StoryState.cs" t="Include" />
-                <e p="StringJoinExtension.cs" t="Include" />
-                <e p="Tag.cs" t="Include" />
-                <e p="Value.cs" t="Include" />
-                <e p="VariableAssignment.cs" t="Include" />
-                <e p="VariableReference.cs" t="Include" />
-                <e p="VariablesState.cs" t="Include" />
-                <e p="Void.cs" t="Include" />
-              </e>
-            </e>
-            <e p="Tools" t="Include">
-              <e p="Build Validation" t="Include">
-                <e p="Editor" t="Include">
-                  <e p="InkPreBuildValidationCheck.cs" t="Include" />
-                </e>
-              </e>
-              <e p="File Icons" t="Include">
-                <e p="Editor" t="Include">
-                  <e p="InkBrowserIcons.cs" t="Include" />
-                  <e p="Resources" t="Include">
-                    <e p="InkDefaultTemplate.txt" t="Include" />
-                  </e>
-                </e>
-              </e>
-              <e p="Ink Inspector" t="Include">
-                <e p="Editor" t="Include">
-                  <e p="DefaultAssetEditor.cs" t="Include" />
-                  <e p="DefaultAssetInspector.cs" t="Include" />
-                  <e p="InkInspector.cs" t="Include" />
-                </e>
-              </e>
-              <e p="Player Window" t="Include">
-                <e p="Editor" t="Include">
-                  <e p="InkPlayerWindow.cs" t="Include" />
-                </e>
-              </e>
-            </e>
+          <e p="Stylized Nature Environment" t="Include">
+            <e p="readme.txt" t="Include" />
           </e>
         </e>
         <e p="Resources" t="Include">
-          <e p="TranscriptionInformation - Sheet1.txt" t="Include" />
           <e p="TranscriptionInformation.txt" t="Include" />
         </e>
         <e p="Scripts" t="Include">
+          <e p="CanvasLoader.cs" t="Include" />
           <e p="Classes Only" t="Include">
             <e p="Chunk.cs" t="Include" />
             <e p="ConversationInfo.cs" t="Include" />
             <e p="InterviewData.cs" t="Include" />
           </e>
+          <e p="FPEPlayerTriggerHandler.cs" t="Include" />
+          <e p="FPESwitchSceneMenu.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="InterviewPlayer.cs" t="Include" />
           <e p="InterviewTagEnum.cs" t="Include" />
           <e p="IntroScript.cs" t="Include" />
-          <e p="LocationStampManager.cs" t="Include" />
+          <e p="IntroTextData.cs" t="Include" />
+          <e p="LocationInfoManager.cs" t="Include" />
           <e p="MouseLook.cs" t="Include" />
           <e p="PortraitInfo.cs" t="Include" />
           <e p="TranscriptionDataParser.cs" t="Include" />
-        </e>
-        <e p="Standard Assets" t="Include">
-          <e p="Cameras" t="Include">
-            <e p="CameraGuidelines.txt" t="Include" />
-            <e p="Scripts" t="Include">
-              <e p="AbstractTargetFollower.cs" t="Include" />
-              <e p="AutoCam.cs" t="Include" />
-              <e p="FreeLookCam.cs" t="Include" />
-              <e p="HandHeldCam.cs" t="Include" />
-              <e p="LookatTarget.cs" t="Include" />
-              <e p="PivotBasedCameraRig.cs" t="Include" />
-              <e p="ProtectCameraFromWallClip.cs" t="Include" />
-              <e p="TargetFieldOfView.cs" t="Include" />
-            </e>
-          </e>
-          <e p="Characters" t="Include">
-            <e p="FirstPersonCharacter" t="Include">
-              <e p="FirstPersonCharacterGuidelines.txt" t="Include" />
-              <e p="Scripts" t="Include">
-                <e p="FirstPersonController.cs" t="Include" />
-                <e p="HeadBob.cs" t="Include" />
-                <e p="MouseLook.cs" t="Include" />
-                <e p="RigidbodyFirstPersonController.cs" t="Include" />
-              </e>
-            </e>
-            <e p="RollerBall" t="Include">
-              <e p="RollerBallGuidelines.txt" t="Include" />
-              <e p="Scripts" t="Include">
-                <e p="Ball.cs" t="Include" />
-                <e p="BallUserControl.cs" t="Include" />
-              </e>
-            </e>
-            <e p="ThirdPersonCharacter" t="Include">
-              <e p="Scripts" t="Include">
-                <e p="AICharacterControl.cs" t="Include" />
-                <e p="ThirdPersonCharacter.cs" t="Include" />
-                <e p="ThirdPersonUserControl.cs" t="Include" />
-              </e>
-              <e p="ThirdPersonCharacterGuidelines.txt" t="Include" />
-            </e>
-          </e>
-          <e p="CrossPlatformInput" t="Include">
-            <e p="CrossPlatformInputGuidelines.txt" t="Include" />
-            <e p="Scripts" t="Include">
-              <e p="AxisTouchButton.cs" t="Include" />
-              <e p="ButtonHandler.cs" t="Include" />
-              <e p="CrossPlatformInputManager.cs" t="Include" />
-              <e p="InputAxisScrollbar.cs" t="Include" />
-              <e p="Joystick.cs" t="Include" />
-              <e p="MobileControlRig.cs" t="Include" />
-              <e p="PlatformSpecific" t="Include">
-                <e p="MobileInput.cs" t="Include" />
-                <e p="StandaloneInput.cs" t="Include" />
-              </e>
-              <e p="TiltInput.cs" t="Include" />
-              <e p="TouchPad.cs" t="Include" />
-              <e p="VirtualInput.cs" t="Include" />
-            </e>
-          </e>
-          <e p="Editor" t="Include">
-            <e p="CrossPlatformInput" t="Include">
-              <e p="CrossPlatformInputInitialize.cs" t="Include" />
-            </e>
-          </e>
-          <e p="Utility" t="Include">
-            <e p="ActivateTrigger.cs" t="Include" />
-            <e p="AlphaButtonClickMask.cs" t="Include" />
-            <e p="AutoMobileShaderSwitch.cs" t="Include" />
-            <e p="AutoMoveAndRotate.cs" t="Include" />
-            <e p="CameraRefocus.cs" t="Include" />
-            <e p="CurveControlledBob.cs" t="Include" />
-            <e p="DragRigidbody.cs" t="Include" />
-            <e p="DynamicShadowSettings.cs" t="Include" />
-            <e p="EventSystemChecker.cs" t="Include" />
-            <e p="FollowTarget.cs" t="Include" />
-            <e p="ForcedReset.cs" t="Include" />
-            <e p="FOVKick.cs" t="Include" />
-            <e p="FPSCounter.cs" t="Include" />
-            <e p="LerpControlledBob.cs" t="Include" />
-            <e p="ObjectResetter.cs" t="Include" />
-            <e p="ParticleSystemDestroyer.cs" t="Include" />
-            <e p="PlatformSpecificContent.cs" t="Include" />
-            <e p="SimpleActivatorMenu.cs" t="Include" />
-            <e p="SimpleMouseRotator.cs" t="Include" />
-            <e p="SmoothFollow.cs" t="Include" />
-            <e p="TimedObjectActivator.cs" t="Include" />
-            <e p="TimedObjectDestructor.cs" t="Include" />
-            <e p="WaypointCircuit.cs" t="Include" />
-            <e p="WaypointProgressTracker.cs" t="Include" />
-          </e>
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
@@ -443,7 +329,6 @@
         </e>
       </e>
       <e p="CityinFoothills.sln" t="IncludeFlat" />
-      <e p="Ink-Libraries.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />

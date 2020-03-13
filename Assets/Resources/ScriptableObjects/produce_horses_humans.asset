@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
+  m_Name: produce_horses_humans
+  m_EditorClassIdentifier: 
+  specificClip: {fileID: 8300000, guid: 4450482db16e1994aadfb1b4c2532f41, type: 3}
+  InterviewTags: 0

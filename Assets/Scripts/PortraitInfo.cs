@@ -14,15 +14,18 @@ public class PortraitInfo : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance!=null){
+            Destroy(this.gameObject);
+        } else {
+            instance = this;         
+            DontDestroyOnLoad(gameObject);
+        }
         
         portraitDictionary = new Dictionary<Chunk.speakerName, Image>();
         for (int i = 0; i < SpeakerNames.Length; i++)
         {
             portraitDictionary.Add(SpeakerNames[i], portraitArray[i]);
-            Debug.Log(portraitDictionary[SpeakerNames[i]]);
         }
-        Debug.Log(portraitDictionary.Count);
 
         
         

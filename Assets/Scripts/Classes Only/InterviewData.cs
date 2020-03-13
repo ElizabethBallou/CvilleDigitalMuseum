@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "My Assets/InterviewData")]
 public class InterviewData : ScriptableObject
 {
-    public AudioClip clip;
-    public string conversationName;
+    public AudioClip specificClip;
     public InterviewTagEnum.InterviewTag InterviewTags;
 }

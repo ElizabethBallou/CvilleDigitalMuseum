@@ -13,9 +13,8 @@ public class InterviewPlayer : MonoBehaviour
 
     public float distanceFromPlayer = 2;
     public float boxFadeTime = 1f;
-    public float typeSpeed = .005f;
 
-    public string conversationName;
+    private string thisConversationName;
     public InterviewData thisInterview;
 
     private string transcriptionString;
@@ -26,15 +25,19 @@ public class InterviewPlayer : MonoBehaviour
 
     private int currentChunkIndex = 0;
 
+    private bool alreadyListenedToThis = false;
+    private MeshRenderer myHolographRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
-
-
-        thisConversationInfo = TranscriptionDataParser.instance.TranscriptionDataDictionary[conversationName];
-
+        myHolographRenderer = gameObject.GetComponent<MeshRenderer>();
+        Debug.Assert(TranscriptionDataParser.instance.TranscriptionDataDictionary != null);
+        thisConversationName = thisInterview.name;
+        thisConversationInfo = TranscriptionDataParser.instance.TranscriptionDataDictionary[thisConversationName];
+        assignObjectMaterial();
 
     }
 
@@ -49,7 +52,7 @@ public class InterviewPlayer : MonoBehaviour
             if (!myAudioSource.isPlaying && triggeredAudioSource == false)
                 // ...and if the clip hasn't already started playing...
             {
-                myAudioSource.PlayOneShot(thisInterview.clip);
+                myAudioSource.PlayOneShot(thisInterview.specificClip);
                 triggeredAudioSource = true;
                     if (!GameManager.instance.textBox.IsActive())
                     {
@@ -60,7 +63,7 @@ public class InterviewPlayer : MonoBehaviour
 
             if (triggeredAudioSource && !myAudioSource.isPlaying)
             {
-                HideTextBox();
+               // HideTextBox();
             }
         }
         else
@@ -76,12 +79,29 @@ public class InterviewPlayer : MonoBehaviour
         }
     }
 
+    private void assignObjectMaterial()
+    {
+        if (thisConversationInfo.chunks[0].Speaker == Chunk.speakerName.JH)
+        {
+            myHolographRenderer.material = GameManager.instance.MonacanObjectMat;
+        }
+        else if (thisConversationInfo.chunks[0].Speaker == Chunk.speakerName.JS ||
+                 thisConversationInfo.chunks[0].Speaker == Chunk.speakerName.AD)
+        {
+            myHolographRenderer.material = GameManager.instance.BAAObjectMat;
+        }
+        
+        else if (thisConversationInfo.chunks[0].Speaker == Chunk.speakerName.PL)
+        {
+            myHolographRenderer.material = GameManager.instance.JewishObjectMat;
+        }
+
+    }
+
     private void ShowTextBox()
     {
-        transcriptionString = thisConversationInfo.chunks[0]
-            .speakerText;
-        
-        HandlePortraitActivation(thisConversationInfo.chunks[0].Speaker);
+
+       
         
         if (GameManager.instance.vignette != null)
             DOTween.To(() => GameManager.instance.vignette.intensity.value,
@@ -96,39 +116,60 @@ public class InterviewPlayer : MonoBehaviour
 
 
         
-        intervieweeCoroutine = StartCoroutine(ShowIntervieweeTranscription(transcriptionString));
+        intervieweeCoroutine = StartCoroutine(ShowIntervieweeTranscription(thisConversationInfo.chunks));
 
     }
     
-    private IEnumerator ShowIntervieweeTranscription(string transcription)
+    private IEnumerator ShowIntervieweeTranscription(Chunk[] theseherechunks)
     {
-        float chunkDuration;
-        //if this is not the last chunk...
-        if (currentChunkIndex < thisConversationInfo.chunks.Length - 1)
+        
+        //for each chunk in the chunks
+        for (int i = 0; i < theseherechunks.Length; i++)
         {
-            chunkDuration = thisConversationInfo.chunks[currentChunkIndex + 1].speakerTimestamp -
-                            thisConversationInfo.chunks[currentChunkIndex].speakerTimestamp;
-        }
-        else
-        {
-            chunkDuration = thisInterview.clip.length - thisConversationInfo.chunks[currentChunkIndex].speakerTimestamp;
-        }
-
-        float timeElapsed = 0;
-
-        for (int i = 0; i < transcription.Length; i++)
-        {
-            string wordsBeingPrinted = transcription.Substring(0, i);
-            GameManager.instance.textBoxText.text = wordsBeingPrinted;
-            timeElapsed += Time.deltaTime;
-            yield return new WaitForSeconds(typeSpeed);
             
-            if (transcription[i].ToString() == "%")
+            HandlePortraitActivation(thisConversationInfo.chunks[i].Speaker);
+
+            transcriptionString = thisConversationInfo.chunks[i]
+                .speakerText;
+        
+            
+        
+            float chunkDuration;
+            //if this is not the last chunk...
+            if (i < thisConversationInfo.chunks.Length - 1)
             {
-                transcription = transcription.Remove(i, 1);
-                GameManager.instance.textBoxText.text = " ";
+                //chunk duration is now set to the time we have between this timestamp and the next time stamp
+                chunkDuration = thisConversationInfo.chunks[i + 1].speakerTimestamp -
+                                thisConversationInfo.chunks[i].speakerTimestamp;
             }
+            else
+            {
+                //i assume the full time of the interview minus the current time stamp (so the remainder of the interview time)
+                chunkDuration = (thisInterview.specificClip.length) - thisConversationInfo.chunks[i].speakerTimestamp;
+                Debug.Log("chunkDuration = " + chunkDuration);
+                Debug.Log("specificInterviewLength = " + thisInterview.specificClip.length);
+            }
+
+            float typeSpeed = chunkDuration / transcriptionString.Length;
+            string textToDisplay = "";
+
+            for (int j= 0; j < transcriptionString.Length; j++)
+            {
+                yield return new WaitForSeconds(typeSpeed);
+                if (transcriptionString[j].ToString() == "*")
+                {
+                    textToDisplay = " ";
+                }
+                else
+                {
+                    textToDisplay += transcriptionString[j];
+                    GameManager.instance.textBoxText.text = textToDisplay;
+                }
+            }
+ 
         }
+        HideTextBox();
+
 
     }
 
@@ -143,6 +184,12 @@ public class InterviewPlayer : MonoBehaviour
         GameManager.instance.portraitSprite.DOFade(0f, boxFadeTime);
         GameManager.instance.textBox.DOFade(0f, boxFadeTime).OnComplete(() => GameManager.instance.textBox.gameObject.SetActive(false));
         GameManager.instance.textBoxText.DOFade(0f, boxFadeTime).OnComplete(() => RefreshTextBox());
+
+        if (alreadyListenedToThis == false)
+        {
+            myHolographRenderer.material = GameManager.instance.playedObjectMat;
+            alreadyListenedToThis = true;
+        }
         
     }
 

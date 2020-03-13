@@ -12,16 +12,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private int sceneNum;
-    public enum IntervieweeName
-    {
-        Andrea,
-        Jalane,
-        Phyllis,
-        Jeffrey,
-        Elizabeth
-    }
-
-    public static Dictionary<IntervieweeName, bool> MetInterviewees;
     
     public Image textBox;
     public TextMeshProUGUI textBoxText;
@@ -37,11 +27,33 @@ public class GameManager : MonoBehaviour
     public Vignette vignette;
     
     public float typeSpeed;
+
+    public Material BAAObjectMat;
+    public Material MonacanObjectMat;
+    public Material JewishObjectMat;
+    public Material playedObjectMat;
+
+    [HideInInspector]
+    public AudioSource myAudioSource;
+
+    public AudioClip[] myBackgroundTracks;
+
+    public bool heardMBTMIntro = false;
+    public bool heardPLIntro = false;
+    public bool heardJHIntro = false;
+
+    public InterviewData MBTMIntroductionObject;
+    public InterviewData PLIntroductionObject;
+    public InterviewData JHIntroductionObject;
     
     private void Awake()
     {
-        instance = this;
-
+        if (instance!=null){
+            Destroy(this.gameObject);
+        } else {
+            instance = this;         
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     // Start is called before the first frame update
@@ -49,13 +61,9 @@ public class GameManager : MonoBehaviour
     {
         TextBoxSetup();
         sceneNum = SceneManager.GetActiveScene().buildIndex;
-        MetInterviewees = new Dictionary<IntervieweeName, bool>();
-        foreach (IntervieweeName thisName in Enum.GetValues(typeof(IntervieweeName)))
-        {
-            MetInterviewees.Add(thisName, false);
-        }
-        
-        
+        myAudioSource = gameObject.GetComponent<AudioSource>();
+
+
     }
 
     public void TextBoxSetup()
@@ -90,11 +98,4 @@ public class GameManager : MonoBehaviour
         }
     }
 
-   /*  public void SelectTranscription(string knot, string stitch)
-    {
-        var concatString = knot + "." + stitch;
-        story.ChoosePathString(concatString);
-    } */
-    
-    
 }

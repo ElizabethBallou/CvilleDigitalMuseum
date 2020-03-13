@@ -9,28 +9,32 @@ public class TranscriptionDataParser : MonoBehaviour
 
     public Dictionary<string, ConversationInfo> TranscriptionDataDictionary;
     
-    public TextAsset transcriptionSpreadsheet;
+    private TextAsset transcriptionSpreadsheet;
 
     public InterviewData[] interviewArray;
+    private string filepath;
+
+    public Dictionary<Chunk.speakerName, bool> metIntervieweeTracker = new Dictionary<Chunk.speakerName, bool>();
     
 
     private void Awake()
     {
-        instance = this;
-    }
+        if (instance!=null){
+            Destroy(this.gameObject);
+        } else {
+            instance = this;         
+            DontDestroyOnLoad(gameObject);
+        }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+        interviewArray = Resources.LoadAll<InterviewData>("ScriptableObjects");
         
-        //transcriptionSpreadsheet = Resources.Load<TextAsset>("TranscriptionInformation.txt");
+        transcriptionSpreadsheet = Resources.Load<TextAsset>("TranscriptionInformation");
         TranscriptionDataDictionary = new Dictionary<string, ConversationInfo>();
 
        string[] rowEntries = transcriptionSpreadsheet.text.Split('\n');
        foreach (string row in rowEntries)
        {
            string[] rowCells = row.Split('\t');
-           Debug.Log("the length of rowCells is " + rowCells.Length);
            int cellCount = 0;
            for (int i = 1; i < rowCells.Length; i++)
            {
@@ -39,7 +43,6 @@ public class TranscriptionDataParser : MonoBehaviour
                    cellCount++;
                }
            }
-           Debug.Log("cellCount is " + cellCount);
            Chunk[] chunkClassArray = new Chunk[cellCount];
            for (int i = 0; i < cellCount; i++)
            {
@@ -61,18 +64,25 @@ public class TranscriptionDataParser : MonoBehaviour
            }
            ConversationInfo thisConversationInfo = new ConversationInfo();
            thisConversationInfo.chunks = chunkClassArray;
-           string conversationName = rowCells[0].Trim().ToUpper();
-           Debug.Log("conversationName is " + conversationName);
+           string conversationName = rowCells[0].Trim().ToLower();
            thisConversationInfo.interviewData = getCorrectInterviewData(conversationName);
            TranscriptionDataDictionary.Add(conversationName, thisConversationInfo);
        }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        foreach (Enum interviewee in Enum.GetValues(typeof(Chunk.speakerName)))
+        {
+            //metIntervieweeTracker.Add(interviewee, false);
+        }
     }
     
     private Chunk.speakerName getSpeakerNameFromString(string cellString)
     {
         //edit out typos
         string cleanString = cellString.Trim().ToUpper();
-        Debug.Log(cleanString);
         switch (cleanString)
         {
             case "JS":
@@ -94,13 +104,18 @@ public class TranscriptionDataParser : MonoBehaviour
     {
         foreach (InterviewData interview in interviewArray)
         {
-            if (interview.conversationName == conversationName)
+            if (interview.name == conversationName)
             {
                 return interview;
             }
         }
 
         return null;
+    }
+
+    public void playIntroClip()
+    {
+        
     }
     
 }

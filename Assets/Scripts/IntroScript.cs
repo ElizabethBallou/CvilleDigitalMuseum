@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,16 +9,33 @@ using UnityEngine.SceneManagement;
 
 public class IntroScript : MonoBehaviour
 {
-    public Button beginButton;
-    public TextMeshProUGUI titleText;
 
-    public TextMeshProUGUI contentWarningText;
-    public Button readContentWarning;
+    public static IntroScript instance;
+    public Button playButton;
+    private TextMeshProUGUI playButtonText;
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI subhedText;
+    public Image charlottesvilleMap;
+    public IntroTextData[] myIntroTexts;
+    private int IntroTextArrayIndex = 0;
+    public float typeSpeed = .1f;
+    public float timeBetweenFacts = 2f;
+    
+    public TextMeshProUGUI followUpTextObject;
+    public Button beginButton;
+    private TextMeshProUGUI beginButtonText;
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        readContentWarning.gameObject.SetActive(false);
-        contentWarningText.gameObject.SetActive(false);
+        beginButtonText = beginButton.GetComponentInChildren<TextMeshProUGUI>();
+        beginButton.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -26,20 +44,43 @@ public class IntroScript : MonoBehaviour
         
     }
 
-    public void BeginButtonPressed()
+    public void playButtonPressed()
     {
-        beginButton.image.DOFade(0f, 1f);
-        beginButton.GetComponentInChildren<TextMeshProUGUI>().DOFade(0f, 1f);
-        titleText.DOFade(0f, 1f);
-        readContentWarning.gameObject.SetActive(true);
-        readContentWarning.image.DOFade(1f, 1f).SetDelay(1f);
-        readContentWarning.GetComponentInChildren<TextMeshProUGUI>().DOFade(1f, 1f).SetDelay(1f);
-        contentWarningText.gameObject.SetActive(true);
-        contentWarningText.DOFade(1f, 1f).SetDelay(1f);
+        playButton.image.DOFade(0f, 1f);
+        playButton.GetComponentInChildren<TextMeshProUGUI>().DOFade(0f, 1f);
+        subhedText.DOFade(0f, 1f);
+        charlottesvilleMap.DOFade(0f, 1f).OnComplete(() => StartCoroutine(TextController()));
+        titleText.DOFade(0f, 1f).OnComplete(() => backgroundAudioManager.instance.myAudioSource.Play());
+
     }
 
-    public void ContentWarningButtonPressed()
+    private IEnumerator TextController()
     {
-        SceneManager.LoadScene("The Lawn");
+
+        for (int i = 0; i < myIntroTexts.Length; i++)
+        {
+            myIntroTexts[IntroTextArrayIndex].StartCoroutine("PrintText");
+            yield return new WaitForSeconds(timeBetweenFacts);
+            IntroTextArrayIndex++;
+            Debug.Log("IntroTextArray is " + IntroTextArrayIndex);
+
+
+        }
+
     }
+    
+    public void followupText()
+    {
+        beginButton.gameObject.SetActive(true);
+        followUpTextObject.DOFade(1f, 4f);
+        beginButton.image.DOFade(1f, 7f);
+        beginButtonText.DOFade(1f, 7f);
+    }
+    
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(1);
+    }
+    
+
 }
