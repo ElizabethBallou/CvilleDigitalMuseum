@@ -45,6 +45,7 @@ namespace Whilefun.FPEKit
                 inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.PUZZLEBALL, "demoPuzzleBall");
                 inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.COLLECTIBLE, "demoCollectible");
                 inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.SIMPLEKEY, "demoSimpleKey");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.RECORD, "audio record");
 
                 // 
                 // To add a new item, simply add a new dictionary entry for that eInventoryItems type and 

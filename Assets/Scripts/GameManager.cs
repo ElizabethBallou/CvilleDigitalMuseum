@@ -14,25 +14,23 @@ public class GameManager : MonoBehaviour
     private int sceneNum;
     
     public Image textBox;
-    public TextMeshProUGUI textBoxText;
+    [HideInInspector] public TextMeshProUGUI textBoxText;
     public Image portraitBackground;
     public Image portraitSprite;
     public Image portraitBorder;
-    private Color transparentWhiteColor;
-    private Color transparentBoxColor;
-    private Color transparentBlackColor;
-    private Color transparentPortraitBorderColor;
+    public Image nameBox;
+    public Image nameBoxBorder;
+    [HideInInspector] public TextMeshProUGUI nameText;
+    [HideInInspector] public Color transparentWhiteColor;
+    [HideInInspector] public Color transparentBoxColor;
+    [HideInInspector] public Color transparentBlackColor;
+    [HideInInspector] public Color transparentPortraitBorderColor;
     public PostProcessVolume myPPV;
     [HideInInspector]
     public Vignette vignette;
     
     public float typeSpeed;
-
-    public Material BAAObjectMat;
-    public Material MonacanObjectMat;
-    public Material JewishObjectMat;
-    public Material playedObjectMat;
-
+    
     [HideInInspector]
     public AudioSource myAudioSource;
 
@@ -45,7 +43,10 @@ public class GameManager : MonoBehaviour
     public InterviewData MBTMIntroductionObject;
     public InterviewData PLIntroductionObject;
     public InterviewData JHIntroductionObject;
+
+    public GameObject startDoor;
     
+
     private void Awake()
     {
         if (instance!=null){
@@ -54,48 +55,58 @@ public class GameManager : MonoBehaviour
             instance = this;         
             DontDestroyOnLoad(gameObject);
         }
+
+        transparentWhiteColor = new Color(255, 255, 255, 0);
+        transparentBoxColor = new Color(192, 184, 184, 0);
+        transparentBlackColor = new Color(0, 0, 0, 0);
+        transparentPortraitBorderColor = new Color(147, 134, 134, 0);
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        TextBoxSetup();
+        SetupAllTextBoxes();
         sceneNum = SceneManager.GetActiveScene().buildIndex;
         myAudioSource = gameObject.GetComponent<AudioSource>();
-
+        Invoke("NoGoingBack", 3f);
 
     }
 
-    public void TextBoxSetup()
+    private void NoGoingBack()
+    {
+        Destroy(startDoor);
+    }
+
+    public void SetupAllTextBoxes()
     {
         //setup for interview player scripts, which access the text box, text, figure, and PPV set here
-        transparentWhiteColor = new Color(255, 255, 255, 0);
-        transparentBlackColor = new Color(0, 0, 0, 0);
-        transparentBoxColor = new Color(192, 184, 184, 0);
-        transparentPortraitBorderColor = new Color(147, 134, 134, 0);
+        
+        //create new colors for transparency functionality
+       
+        
+        //set up the interviewee text box
         portraitBackground.color = transparentBlackColor;
         portraitSprite.color = transparentWhiteColor;
         textBoxText.color = transparentBlackColor;
         textBox.color = transparentBoxColor;
         portraitBorder.color = transparentPortraitBorderColor;
-        
         textBox.gameObject.SetActive(false);
+        textBoxText = textBox.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        nameText = nameBox.GetComponentInChildren<TextMeshProUGUI>();
+        
+
+        
+        
         myPPV.profile.TryGetSettings(out vignette);
 
     }
+    
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(sceneNum);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+        
     }
 
 }

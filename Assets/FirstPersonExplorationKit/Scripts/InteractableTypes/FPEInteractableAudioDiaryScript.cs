@@ -131,7 +131,7 @@ namespace Whilefun.FPEKit
                     interactionString = duringPlaybackInteractionString;
                 }
 
-                interactionManager.GetComponent<FPEInteractionManagerScript>().playNewAudioDiary(gameObject);
+                //interactionManager.GetComponent<FPEInteractionManagerScript>().playNewAudioDiary(gameObject);
 
             }
 

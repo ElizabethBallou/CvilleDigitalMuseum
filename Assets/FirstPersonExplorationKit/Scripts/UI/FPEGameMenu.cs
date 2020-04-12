@@ -2,6 +2,7 @@
 
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 namespace Whilefun.FPEKit
 {
@@ -23,7 +24,7 @@ namespace Whilefun.FPEKit
         public enum eMenuTab
         {
             ITEMS = 0,
-            AUDIO_DIARIES = 1,
+            //AUDIO_DIARIES = 1,
             NOTES = 2,
             SYSTEM = 3
         }
@@ -61,14 +62,14 @@ namespace Whilefun.FPEKit
 
         // Our menu tabs - will need to be updated if you add or remove tabs
         private FPEMenuTab itemsTab = null;
-        private FPEMenuTab audioDiariesTab = null;
+        //private FPEMenuTab audioDiariesTab = null;
         private FPEMenuTab notesTab = null;
         private FPEMenuTab systemTab = null;
         // Our menu tab panels - will need to be updated if you add or remove tabs
         private GameObject inventoryItemsListPanel = null;
         private GameObject inventoryItemInfoPanelParent = null;
         private FPEInventoryItemInfoPanel itemInfoPanel = null;
-        private GameObject audioDiariesPanel = null;
+        //private GameObject audioDiariesPanel = null;
         private GameObject notesPanel = null;
         private GameObject noteContentsPanelParent = null;
         private FPENoteContentsPanel noteContentsPanel = null;
@@ -76,7 +77,7 @@ namespace Whilefun.FPEKit
         private GameObject exitConfirmationPanel = null;
         private GameObject actionsPanelParent = null;
         private FPEInventoryActionsPanel inventoryActionsPanel = null;
-        private GameObject pageControlPanel = null;
+       // private GameObject pageControlPanel = null;
 
         // Panels and slots of different types //
         private FPEInventoryItemSlot[] inventorySlots;
@@ -86,11 +87,11 @@ namespace Whilefun.FPEKit
         private FPEMenuButton[] exitConfirmationButtons;
 
         // Page selection buttons and gamepad hints
-        private GameObject previousPageButton = null;
-        private GameObject nextPageButton = null;
-        private GameObject previousPageHint = null;
-        private GameObject nextPageHint = null;
-        private Text pageIndicatorText = null;
+        //private GameObject previousPageButton = null;
+        //private GameObject nextPageButton = null;
+        //private GameObject previousPageHint = null;
+        //private GameObject nextPageHint = null;
+        //private TextMeshProUGUI pageIndicatorText = null;
 
         // Remember selections between menu uses
         private eMenuTab previouslySelectedTab = eMenuTab.ITEMS;
@@ -103,13 +104,13 @@ namespace Whilefun.FPEKit
         private int[] previouslySelectedPage;
 
         // System Stuff
-        [SerializeField, Tooltip("Minimum allowed mouse sensitivity value.")]
-        private float minSensitivity = 0.5f;
-        [SerializeField, Tooltip("Maximum allowed mouse sensitivity value")]
-        private float maxSensitivity = 32.0f;
-        private Text mouseSensitivityValueText = null;
-        private FPEMenuToggle lookSmoothingToggle = null;
-        private FPEMenuToggle useGamepadToggle = null;
+        //[SerializeField, Tooltip("Minimum allowed mouse sensitivity value.")]
+        //private float minSensitivity = 0.5f;
+        //[SerializeField, Tooltip("Maximum allowed mouse sensitivity value")]
+        //private float maxSensitivity = 32.0f;
+        //private Text mouseSensitivityValueText = null;
+        //private FPEMenuToggle lookSmoothingToggle = null;
+        //private FPEMenuToggle useGamepadToggle = null;
         private FPEMenuButton loadGameButton = null;
 
         // Visual feedback when errors occur, etc.
@@ -143,10 +144,10 @@ namespace Whilefun.FPEKit
                 {
                     itemsTab = menuTabs[t];
                 }
-                else if (menuTabs[t].transform.name == "AudioDiariesTab")
+                /*else if (menuTabs[t].transform.name == "AudioDiariesTab")
                 {
                     audioDiariesTab = menuTabs[t];
-                }
+                }*/
                 else if (menuTabs[t].transform.name == "NotesTab")
                 {
                     notesTab = menuTabs[t];
@@ -158,7 +159,7 @@ namespace Whilefun.FPEKit
 
             }
 
-            if (!itemsTab || !audioDiariesTab || !notesTab || !systemTab)
+            if (!itemsTab /*|| !audioDiariesTab*/ || !notesTab || !systemTab)
             {
                 Debug.LogError("FPEGameMenu:: Cannot find one or more of the menu tabs! Did you rename or remove them?");
             }
@@ -166,15 +167,15 @@ namespace Whilefun.FPEKit
             // Find panels  - will need to be updated if you add or remove tabs
             inventoryItemInfoPanelParent = menuCanvas.gameObject.transform.Find("InventoryItemInfoPanel").gameObject;
             inventoryItemsListPanel = menuCanvas.gameObject.transform.Find("InventoryListPanel").gameObject;
-            audioDiariesPanel = menuCanvas.gameObject.transform.Find("AudioDiariesPanel").gameObject;
+            //audioDiariesPanel = menuCanvas.gameObject.transform.Find("AudioDiariesPanel").gameObject;
             notesPanel = menuCanvas.gameObject.transform.Find("NotesPanel").gameObject;
             noteContentsPanelParent = menuCanvas.gameObject.transform.Find("NoteContentsPanel").gameObject;
             systemPanel = menuCanvas.gameObject.transform.Find("SystemPanel").gameObject;
             exitConfirmationPanel = menuCanvas.gameObject.transform.Find("ExitConfirmationPanel").gameObject;
             actionsPanelParent = menuCanvas.gameObject.transform.Find("InventoryActionsPanel").gameObject;
-            pageControlPanel = menuCanvas.gameObject.transform.Find("PageControlsPanel").gameObject;
+            //pageControlPanel = menuCanvas.gameObject.transform.Find("PageControlsPanel").gameObject;
 
-            if (!inventoryItemInfoPanelParent || !inventoryItemsListPanel || !audioDiariesPanel || !notesPanel || !noteContentsPanelParent || !systemPanel || !actionsPanelParent || !pageControlPanel)
+            if (!inventoryItemInfoPanelParent || !inventoryItemsListPanel || /*!audioDiariesPanel ||*/ !notesPanel || !noteContentsPanelParent || !systemPanel || !actionsPanelParent /*|| !pageControlPanel*/)
             {
                 Debug.LogError("FPEGameMenu:: Cannot find one or more of the menu panels! Did you rename or remove them?");
             }
@@ -205,13 +206,13 @@ namespace Whilefun.FPEKit
             }
 
             // Audio diary slots (we should have more than one of these as well)
-            audioDiariesPanel.SetActive(true);
+            /* audioDiariesPanel.SetActive(true);
             audioDiarySlots = menuCanvas.gameObject.GetComponentsInChildren<FPEAudioDiaryEntrySlot>();
 
             if (audioDiarySlots == null || audioDiarySlots.Length < 2)
             {
                 Debug.LogError("FPEGameMenu:: There are 1 or fewer audio diary slots on the audio diary panel! Things will break.");
-            }
+            } */
 
             // Note slots (we should have more than one of these as well)
             notesPanel.SetActive(true);
@@ -235,42 +236,42 @@ namespace Whilefun.FPEKit
             systemButtons = systemPanel.gameObject.GetComponentsInChildren<FPEMenuButton>();
             exitConfirmationPanel.SetActive(true);
             exitConfirmationButtons = exitConfirmationPanel.gameObject.GetComponentsInChildren<FPEMenuButton>();
-            mouseSensitivityValueText = systemPanel.gameObject.transform.Find("MouseSensitivityValue").GetComponent<Text>();
-            lookSmoothingToggle = systemPanel.gameObject.transform.Find("LookSmoothingToggle").GetComponent<FPEMenuToggle>();
-            useGamepadToggle = systemPanel.gameObject.transform.Find("UseGamepadToggle").GetComponent<FPEMenuToggle>();
+            //mouseSensitivityValueText = systemPanel.gameObject.transform.Find("MouseSensitivityValue").GetComponent<Text>();
+            //lookSmoothingToggle = systemPanel.gameObject.transform.Find("LookSmoothingToggle").GetComponent<FPEMenuToggle>();
+            //useGamepadToggle = systemPanel.gameObject.transform.Find("UseGamepadToggle").GetComponent<FPEMenuToggle>();
             loadGameButton = systemPanel.gameObject.transform.Find("LoadGameButton").GetComponent<FPEMenuButton>();
 
-            if (!mouseSensitivityValueText || !lookSmoothingToggle || !useGamepadToggle || !loadGameButton)
+            if (/*!mouseSensitivityValueText || !lookSmoothingToggle || !useGamepadToggle ||*/ !loadGameButton)
             {
                 Debug.LogError("FPEGameMenu:: mouseSensitivityValue Text, smoothing or gamepad toggle, or load game button component(s) are missing! Did you remove them?");
             }
 
             // Find Previous/Next page buttons and hints
-            pageControlPanel.SetActive(true);
-            previousPageButton = pageControlPanel.transform.Find("PreviousPageButton").gameObject;
-            nextPageButton = pageControlPanel.transform.Find("NextPageButton").gameObject;
-            previousPageHint = pageControlPanel.transform.Find("RightStickHintLeft").gameObject;
-            nextPageHint = pageControlPanel.transform.Find("RightStickHintRight").gameObject;
-            pageIndicatorText = pageControlPanel.transform.Find("PageIndicatorText").gameObject.GetComponent<Text>();
+            //pageControlPanel.SetActive(true);
+            //previousPageButton = pageControlPanel.transform.Find("PreviousPageButton").gameObject;
+            //nextPageButton = pageControlPanel.transform.Find("NextPageButton").gameObject;
+            //previousPageHint = pageControlPanel.transform.Find("RightStickHintLeft").gameObject;
+            //nextPageHint = pageControlPanel.transform.Find("RightStickHintRight").gameObject;
+            //pageIndicatorText = pageControlPanel.transform.Find("PageIndicatorText").gameObject.GetComponent<TextMeshProUGUI>();
 
-            if (!previousPageButton || !nextPageButton || !previousPageHint || !nextPageHint || !pageIndicatorText)
+            /*if (!previousPageButton || !nextPageButton || !previousPageHint || !nextPageHint || !pageIndicatorText)
             {
                 Debug.LogError("FPEGameMenu:: Page changing buttons, hints, or text are missing from InventoryListPanel! Did you remove them?");
-            }
+            }*/
 
             // items per page and previous page selections for each tab
             itemsPerPage = new int[Enum.GetNames(typeof(eMenuTab)).Length];
             itemsPerPage[(int)eMenuTab.ITEMS] = inventorySlots.Length;
-            itemsPerPage[(int)eMenuTab.AUDIO_DIARIES] = audioDiarySlots.Length;
+            //itemsPerPage[(int)eMenuTab.AUDIO_DIARIES] = audioDiarySlots.Length;
             itemsPerPage[(int)eMenuTab.NOTES] = noteSlots.Length;
 
             previouslySelectedPage = new int[Enum.GetNames(typeof(eMenuTab)).Length];
             previouslySelectedPage[(int)eMenuTab.ITEMS] = 0;
-            previouslySelectedPage[(int)eMenuTab.AUDIO_DIARIES] = 0;
+            //previouslySelectedPage[(int)eMenuTab.AUDIO_DIARIES] = 0;
 
             previouslySelectedTab = eMenuTab.ITEMS;
             previouslySelectedItemSlot = inventorySlots[0];
-            previouslySelectedAudioDiarySlot = audioDiarySlots[0];
+            //previouslySelectedAudioDiarySlot = audioDiarySlots[0];
             previouslySelectedNoteSlotIndex = -1;
 
         }
@@ -329,13 +330,13 @@ namespace Whilefun.FPEKit
                 }
 
                 // Allow player to stop all diaries wihtout having to select and "click" stop button (e.g. gamepad)
-                if (audioDiariesPanel.activeSelf)
+                /* if (audioDiariesPanel.activeSelf)
                 {
                     if (FPEInputManager.Instance.GetButtonDown(FPEInputManager.eFPEInput.FPE_INPUT_CLOSE))
                     {
                         stopAllDiaries();
                     }
-                }
+                } */
 
                 if (elementToJiggle)
                 {
@@ -371,8 +372,8 @@ namespace Whilefun.FPEKit
             if (!menuActive)
             {
 
-                menuAudio.clip = menuOpen;
-                menuAudio.Play();
+                //menuAudio.clip = menuOpen;
+                //menuAudio.Play();
                 menuCanvas.SetActive(true);
 
                 // Note: Doing all of these every time seemed wasteful. Though if your specific menu slows down for a couple frames when you refresh data views, this is a good place to conceal that slowdown.
@@ -422,9 +423,9 @@ namespace Whilefun.FPEKit
                 case (int)eMenuTab.ITEMS:
                     currentMenuTab = eMenuTab.ITEMS;
                     break;
-                case (int)eMenuTab.AUDIO_DIARIES:
+                /*case (int)eMenuTab.AUDIO_DIARIES:
                     currentMenuTab = eMenuTab.AUDIO_DIARIES;
-                    break;
+                    break;*/
                 case (int)eMenuTab.NOTES:
                     currentMenuTab = eMenuTab.NOTES;
                     break;
@@ -451,9 +452,9 @@ namespace Whilefun.FPEKit
                 case eMenuTab.ITEMS:
                     currentMenuTab = eMenuTab.ITEMS;
                     break;
-                case eMenuTab.AUDIO_DIARIES:
+                /*case eMenuTab.AUDIO_DIARIES:
                     currentMenuTab = eMenuTab.AUDIO_DIARIES;
-                    break;
+                    break;*/
                 case eMenuTab.NOTES:
                     currentMenuTab = eMenuTab.NOTES;
                     break;
@@ -480,12 +481,12 @@ namespace Whilefun.FPEKit
                 case eMenuTab.ITEMS:
                     menuTabError(itemsTab);
                     break;
-                case eMenuTab.AUDIO_DIARIES:
+                /*case eMenuTab.AUDIO_DIARIES:
                     currentMenuTab = eMenuTab.ITEMS;
                     refreshMenuTab();
-                    break;
+                    break;*/
                 case eMenuTab.NOTES:
-                    currentMenuTab = eMenuTab.AUDIO_DIARIES;
+                    //currentMenuTab = eMenuTab.AUDIO_DIARIES;
                     refreshMenuTab();
                     break;
                 case eMenuTab.SYSTEM:
@@ -507,13 +508,13 @@ namespace Whilefun.FPEKit
             {
 
                 case eMenuTab.ITEMS:
-                    currentMenuTab = eMenuTab.AUDIO_DIARIES;
+                    //currentMenuTab = eMenuTab.AUDIO_DIARIES;
                     refreshMenuTab();
                     break;
-                case eMenuTab.AUDIO_DIARIES:
+                /*case eMenuTab.AUDIO_DIARIES:
                     currentMenuTab = eMenuTab.NOTES;
                     refreshMenuTab();
-                    break;
+                    break;*/
                 case eMenuTab.NOTES:
                     currentMenuTab = eMenuTab.SYSTEM;
                     refreshMenuTab();
@@ -574,18 +575,18 @@ namespace Whilefun.FPEKit
             // Attempt to save selected item and diary slots. Note: we don't save the selected 
             // note slot because that behaves a little differently, and is saved on activation.
             saveSelectedItemSlot();
-            saveSelectedAudioDiarySlot();
+            //saveSelectedAudioDiarySlot();
 
             // And De-activate ALL panels
             inventoryItemsListPanel.SetActive(false);
             inventoryItemInfoPanelParent.SetActive(false);
-            audioDiariesPanel.SetActive(false);
+            //audioDiariesPanel.SetActive(false);
             notesPanel.SetActive(false);
             noteContentsPanelParent.SetActive(false);
             systemPanel.SetActive(false);
             exitConfirmationPanel.SetActive(false);
             actionsPanelParent.SetActive(false);
-            pageControlPanel.SetActive(false);
+            //pageControlPanel.SetActive(false);
 
             // Then force select tab and activate the correct panel(s)
             switch (currentMenuTab)
@@ -596,24 +597,24 @@ namespace Whilefun.FPEKit
                     refreshItemSlotsAndDetailsView();
                     inventoryItemsListPanel.SetActive(true);
                     inventoryItemInfoPanelParent.SetActive(true);
-                    pageControlPanel.SetActive(true);
+                    //pageControlPanel.SetActive(true);
                     restoreSelectedItemSlot();
                     break;
 
-                case eMenuTab.AUDIO_DIARIES:
+                /*case eMenuTab.AUDIO_DIARIES:
                     audioDiariesTab.ForceSelectTab();
                     refreshAudioDiarySlotsView();
                     audioDiariesPanel.SetActive(true);
                     pageControlPanel.SetActive(true);
                     restoreSelectedAudioDiarySlot();
-                    break;
+                    break;*/
 
                 case eMenuTab.NOTES:
                     notesTab.ForceSelectTab();
                     refreshNoteSlotsView();
                     notesPanel.SetActive(true);
                     noteContentsPanelParent.SetActive(true);
-                    pageControlPanel.SetActive(true);
+                    //pageControlPanel.SetActive(true);
                     //restoreSelectedNoteSlot();
                     break;
 
@@ -861,7 +862,7 @@ namespace Whilefun.FPEKit
 
         #region AUDIO_DIARY_ITEMS
 
-        private void saveSelectedAudioDiarySlot()
+        /* private void saveSelectedAudioDiarySlot()
         {
 
             if (currentMenuTab == eMenuTab.AUDIO_DIARIES)
@@ -954,7 +955,7 @@ namespace Whilefun.FPEKit
             FPEInventoryManagerScript.Instance.stopAllDiaryPlayback();
             menuAudio.PlayOneShot(menuDiaryStop);
         }
-
+*/
         #endregion
 
         #region NOTE_ITEMS
@@ -1141,14 +1142,14 @@ namespace Whilefun.FPEKit
 
             deactivateMenu();
             Time.timeScale = 1.0f;
-            FPEInteractionManagerScript.Instance.stopAllDiaryPlayback();
+            //FPEInteractionManagerScript.Instance.stopAllDiaryPlayback();
             FPESaveLoadManager.Instance.ReturnToMainMenu();
 
         }
 
 
         public void changeMouseSensitivity(float amount)
-        {
+        {/*
 
             float changedSensitivity = FPEInputManager.Instance.LookSensitivity.x + amount;
             if(changedSensitivity < minSensitivity)
@@ -1162,15 +1163,16 @@ namespace Whilefun.FPEKit
 
             FPEInteractionManagerScript.Instance.changeMouseSensitivityFromMenu(changedSensitivity);
             refreshOptionsValues();
+            */
 
         }
 
         private void refreshOptionsValues()
         {
 
-            mouseSensitivityValueText.text = FPEInputManager.Instance.LookSensitivity.x.ToString("n1");
-            lookSmoothingToggle.ForceToggleState(FPEInputManager.Instance.LookSmoothing);
-            useGamepadToggle.ForceToggleState(FPEInputManager.Instance.UseGamepad);
+            //mouseSensitivityValueText.text = FPEInputManager.Instance.LookSensitivity.x.ToString("n1");
+            //lookSmoothingToggle.ForceToggleState(FPEInputManager.Instance.LookSmoothing);
+            //useGamepadToggle.ForceToggleState(FPEInputManager.Instance.UseGamepad);
 
             // Always save options when they are changed - assumes they are refreshed using this function when changed from UI.
             if (FPESaveLoadManager.Instance != null)
@@ -1230,9 +1232,9 @@ namespace Whilefun.FPEKit
                 case eMenuTab.ITEMS:
                     selectItemPage(previouslySelectedPage[(int)eMenuTab.ITEMS]);
                     break;
-                case eMenuTab.AUDIO_DIARIES:
+                /* case eMenuTab.AUDIO_DIARIES:
                     selectAudioDiaryPage(previouslySelectedPage[(int)eMenuTab.AUDIO_DIARIES]);
-                    break;
+                    break; */
                 case eMenuTab.NOTES:
                     selectNotePage(previouslySelectedPage[(int)eMenuTab.NOTES]);
                     break;
@@ -1246,7 +1248,7 @@ namespace Whilefun.FPEKit
 
         // Refreshes the page hints for current tab
         private void refreshPageHintsUI(int pageNumber)
-        {
+        {/*
 
             int maxPageNumber = getMaxPagesForTab();
             pageIndicatorText.text = "Page " + (pageNumber + 1) + "/" + maxPageNumber;
@@ -1300,7 +1302,7 @@ namespace Whilefun.FPEKit
             {
                 Debug.LogError("FPEGameMenu.refreshPageHintsUI():: Encountered bad combination of number of inventory items and max pages for '"+currentMenuTab+"' tab. Prev/Next page buttons won't work.");
             }
-
+*/
         }
 
         private int getMaxPagesForTab()
@@ -1313,9 +1315,9 @@ namespace Whilefun.FPEKit
                 case eMenuTab.ITEMS:
                     maxPageNumber = ((itemData.Length - 1) / itemsPerPage[(int)eMenuTab.ITEMS]) + 1;
                     break;
-                case eMenuTab.AUDIO_DIARIES:
+                /* case eMenuTab.AUDIO_DIARIES:
                     maxPageNumber = ((audioDiaryData.Length - 1) / itemsPerPage[(int)eMenuTab.AUDIO_DIARIES]) + 1;
-                    break;
+                    break; */
                 case eMenuTab.NOTES:
                     maxPageNumber = ((noteData.Length - 1) / itemsPerPage[(int)eMenuTab.NOTES]) + 1;
                     break;

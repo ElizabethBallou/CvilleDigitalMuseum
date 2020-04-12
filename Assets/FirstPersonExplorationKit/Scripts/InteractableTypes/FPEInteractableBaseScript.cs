@@ -116,14 +116,14 @@ namespace Whilefun.FPEKit
                     if (showWithText)
                     {
 
-                        interactionManager.playSecondaryInteractionAudio(soundToPlayOnInteract, true, audioLogText);
+                        //interactionManager.playSecondaryInteractionAudio(soundToPlayOnInteract, true, audioLogText);
                         hasPlayedOnce = true;
 
                     }
                     else
                     {
 
-                        interactionManager.playSecondaryInteractionAudio(soundToPlayOnInteract, false, "");
+                        //interactionManager.playSecondaryInteractionAudio(soundToPlayOnInteract, false, "");
                         hasPlayedOnce = true;
 
                     }

@@ -121,7 +121,7 @@ namespace Whilefun.FPEKit
 
         private void playDiary()
         {
-            FPEMenu.Instance.GetComponent<FPEGameMenu>().performReplayAudioDiaryAction(currentAudioDiaryIndex);
+            //FPEMenu.Instance.GetComponent<FPEGameMenu>().performReplayAudioDiaryAction(currentAudioDiaryIndex);
         }
 
         private void executeClick()

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -29,8 +30,8 @@ namespace Whilefun.FPEKit
 
         private Image frameImage = null;
         private Image myImage = null;
-        private Text myName = null;
-        private Text myCount = null;
+        private TextMeshProUGUI myName = null;
+        //private Text myCount = null;
         private bool highlighted = false;
 
         // Internal stuff
@@ -47,10 +48,10 @@ namespace Whilefun.FPEKit
             base.Awake();
             frameImage = gameObject.GetComponent<Image>();
             myImage = gameObject.transform.Find("ItemImage").GetComponent<Image>();
-            myName = gameObject.transform.Find("ItemName").GetComponent<Text>();
-            myCount = gameObject.transform.Find("ItemCount").GetComponent<Text>();
+            myName = gameObject.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
+            //myCount = gameObject.transform.Find("ItemCount").GetComponent<Text>();
 
-            if (!frameImage || !myImage || !myName || !myCount)
+            if (!frameImage || !myImage || !myName /*|| !myCount*/)
             {
                 Debug.LogError("FPEInventoryItemSlot '" + gameObject.name + "' is missing one of ItemImage(Image), ItemName(Text), or ItemCount(Text) child objects!");
             }
@@ -143,7 +144,7 @@ namespace Whilefun.FPEKit
             myName.text = data.ItemName;
             myName.enabled = true;
 
-            if (data.Stackable)
+            /*if (data.Stackable)
             {
                 myCount.text = stackablePrefixString + data.Quantity;
                 myCount.enabled = true;
@@ -151,7 +152,7 @@ namespace Whilefun.FPEKit
             else
             {
                 myCount.enabled = false;
-            }
+            } */
 
         }
 
@@ -159,13 +160,13 @@ namespace Whilefun.FPEKit
         {
             myImage.enabled = false;
             myName.enabled = false;
-            myCount.enabled = false;
+            //myCount.enabled = false;
             currentInventoryDataIndex = -1;
         }
 
         public void setStackableItemQuantity(int quantity)
         {
-            myCount.text = stackablePrefixString + quantity;
+            //myCount.text = stackablePrefixString + quantity;
         }
 
         private void passItemDetailsToMenu()

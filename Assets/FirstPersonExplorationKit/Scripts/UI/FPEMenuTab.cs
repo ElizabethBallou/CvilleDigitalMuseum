@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using System;
+using TMPro;
 
 namespace Whilefun.FPEKit
 {
@@ -30,7 +31,7 @@ namespace Whilefun.FPEKit
         private Sprite selectedTabImage;
 
         private Image myImage;
-        private Text myText;
+        private TextMeshProUGUI myText;
         private bool highlighted = false;
 
         [Serializable]
@@ -45,7 +46,7 @@ namespace Whilefun.FPEKit
 
             base.Awake();
             myImage = gameObject.GetComponent<Image>();
-            myText = gameObject.GetComponentInChildren<Text>();
+            myText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
             if (!myImage || !myText)
             {

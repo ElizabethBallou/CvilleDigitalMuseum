@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 using UnityEngine.EventSystems;
 using System;
+using TMPro;
 
 namespace Whilefun.FPEKit
 {
@@ -34,7 +35,7 @@ namespace Whilefun.FPEKit
 
         private Image frameImage = null;
         private Image iconImage = null;
-        private Text myTitle = null;
+        private TextMeshProUGUI myTitle = null;
         private bool highlighted = false;
 
         private FPENoteEntrySlot[] allNoteSlots;
@@ -50,7 +51,7 @@ namespace Whilefun.FPEKit
             base.Awake();
             frameImage = gameObject.GetComponent<Image>();
             iconImage = gameObject.transform.Find("NoteIcon").GetComponent<Image>();
-            myTitle = gameObject.transform.Find("NoteTitle").GetComponent<Text>();
+            myTitle = gameObject.transform.Find("NoteTitle").GetComponent<TextMeshProUGUI>();
 
             if (!frameImage || !iconImage || !myTitle)
             {

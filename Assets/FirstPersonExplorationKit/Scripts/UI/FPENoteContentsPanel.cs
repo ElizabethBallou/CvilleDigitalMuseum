@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,14 +17,14 @@ namespace Whilefun.FPEKit
     public class FPENoteContentsPanel : MonoBehaviour
     {
 
-        private Text noteTitle = null;
-        private Text noteBody = null;
+        private TextMeshProUGUI noteTitle = null;
+        private TextMeshProUGUI noteBody = null;
 
         void Awake()
         {
 
-            noteTitle = transform.Find("NoteTitle").GetComponent<Text>();
-            noteBody = transform.Find("NoteBody").GetComponent<Text>();
+            noteTitle = transform.Find("NoteTitle").GetComponent<TextMeshProUGUI>();
+            noteBody = transform.Find("NoteBody").GetComponent<TextMeshProUGUI>();
 
             if (!noteTitle || !noteBody)
             {

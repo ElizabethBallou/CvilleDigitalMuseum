@@ -18,9 +18,9 @@ namespace Whilefun.FPEKit
     {
 
         private GameObject menuCanvas = null;
-        private FPEMenuButton newGameButton = null;
-        private FPEMenuButton continueGameButton = null;
-        private FPEMenuButton quitGameButton = null;
+        public FPEMenuButton newGameButton = null;
+        public FPEMenuButton continueGameButton = null;
+        public FPEMenuButton quitGameButton = null;
         private GameObject newGameConfirmationPanel = null;
         private FPEMenuButton[] newGameConfirmationButtons;
         private Text errorText = null;

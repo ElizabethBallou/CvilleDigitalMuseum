@@ -432,7 +432,7 @@ namespace Whilefun.FPEKit
                     restoringDataInProgress = true;
                     resetPlayerLook = false;
                     // We also want to stop all diary playback if loading a saved game
-                    FPEInteractionManagerScript.Instance.stopAllDiaryPlayback();
+                    //FPEInteractionManagerScript.Instance.stopAllDiaryPlayback();
                     updateStatusMessage("Loading Scene...");
                     break;
 

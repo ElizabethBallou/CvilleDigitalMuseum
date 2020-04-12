@@ -2542,7 +2542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HUDEnabled: 1
-  reticleEnabled: 1
+  reticleEnabled: 0
   interactionTextEnabled: 1
   controlHintUIEnabled: 1
   audioDiaryUIEnabled: 1

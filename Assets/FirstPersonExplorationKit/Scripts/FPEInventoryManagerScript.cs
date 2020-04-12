@@ -25,7 +25,8 @@ namespace Whilefun.FPEKit {
             PUZZLEBALL = 2,
             APPLE = 3,
             COLLECTIBLE = 4,
-            SIMPLEKEY = 5
+            SIMPLEKEY = 5,
+            RECORD = 6
 
         };
 
@@ -412,7 +413,7 @@ namespace Whilefun.FPEKit {
         /// Plays back diary at specified index
         /// </summary>
         /// <param name="diaryIndex"></param>
-        public void playbackAudioDiary(int diaryIndex)
+        /*public void playbackAudioDiary(int diaryIndex)
         {
 
             if (diaryIndex >= 0 && diaryIndex < audioDiaries.Count)
@@ -424,15 +425,15 @@ namespace Whilefun.FPEKit {
                 Debug.LogError("FPEInventoryManagerScript.playbackAudioDiary() given bad index of '"+diaryIndex+"'");
             }
 
-        }
+        }*/
 
         /// <summary>
         /// Halts all diary playback
         /// </summary>
-        public void stopAllDiaryPlayback()
+        /*public void stopAllDiaryPlayback()
         {
             FPEInteractionManagerScript.Instance.stopAllDiaryPlayback();
-        }
+        }*/
 
         #endregion
 

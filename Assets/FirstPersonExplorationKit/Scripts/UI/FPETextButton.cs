@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -16,13 +17,13 @@ namespace Whilefun.FPEKit
     public class FPETextButton : FPEMenuButton
     {
         
-        private Text myText;
+        private TextMeshProUGUI myText;
 
         protected override void Awake()
         {
 
             base.Awake();
-            myText = gameObject.GetComponentInChildren<Text>();
+            myText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
             if (!myText)
             {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Whilefun.FPEKit
@@ -15,16 +16,16 @@ namespace Whilefun.FPEKit
     public class FPEInventoryItemInfoPanel : MonoBehaviour
     {
 
-        private Text myTitle = null;
+        private TextMeshProUGUI myTitle = null;
         private Image myImage = null;
-        private Text myDescription = null;
+        private TextMeshProUGUI myDescription = null;
 
         void Awake()
         {
 
-            myTitle = gameObject.transform.Find("ItemTitle").GetComponent<Text>();
+            myTitle = gameObject.transform.Find("ItemTitle").GetComponent<TextMeshProUGUI>();
             myImage = gameObject.transform.Find("ItemImage").GetComponent<Image>();
-            myDescription = gameObject.transform.Find("ItemDescription").GetComponent<Text>();
+            myDescription = gameObject.transform.Find("ItemDescription").GetComponent<TextMeshProUGUI>();
 
             if (!myTitle || !myImage || !myDescription)
             {

@@ -43,10 +43,10 @@ namespace Whilefun.FPEKit
         private Sprite[] currentJournalPages = null;
         private int currentJournalPageIndex = 0;
         
-        private bool playingAudioDiary = false;
-        private bool audioDiaryPlaybackIsReplay = false;
-        private string currentDiaryTitle = "";
-        private GameObject currentAudioDiary = null;
+        //private bool playingAudioDiary = false;
+        //private bool audioDiaryPlaybackIsReplay = false;
+        //private string currentDiaryTitle = "";
+        //private GameObject currentAudioDiary = null;
         
         private GameObject currentInteractableObject = null;
         private GameObject currentHeldObject = null;
@@ -55,7 +55,7 @@ namespace Whilefun.FPEKit
         private GameObject interactionObjectExamineLocation = null;
         private GameObject interactionObjectTossLocation = null;
         private GameObject interactionInventoryLocation = null;
-        private GameObject audioDiaryPlayer = null;
+        //private GameObject audioDiaryPlayer = null;
         private GameObject secondaryInteractionSoundPlayer = null;
         private GameObject journalSFXPlayer = null;
         private GameObject genericSFXPlayer = null;
@@ -106,10 +106,10 @@ namespace Whilefun.FPEKit
         public AudioClip noteAdded;
 
         // Audio Diary stuff
-        [Tooltip("Volume fade out amount per 100ms (0.0 to 1.0, with 1.0 being 100% of the volume)")]
+        /*[Tooltip("Volume fade out amount per 100ms (0.0 to 1.0, with 1.0 being 100% of the volume)")]
         public float fadeAmountPerTenthSecond = 0.1f;
         private bool fadingDiaryAudio = false;
-        private float fadeCounter = 0.0f;
+        private float fadeCounter = 0.0f;*/
 
         // Docking stuff
         private bool dockingInProgress = false;
@@ -195,7 +195,7 @@ namespace Whilefun.FPEKit
                 interactionObjectExamineLocation = thePlayer.transform.Find("MainCamera/ObjectExamineLocation").gameObject;
                 interactionObjectTossLocation = thePlayer.transform.Find("MainCamera/ObjectTossLocation").gameObject;
                 interactionInventoryLocation = thePlayer.transform.Find("MainCamera/ObjectInInventoryPosition").gameObject;
-                audioDiaryPlayer = thePlayer.transform.Find("FPEAudioDiaryPlayer").gameObject;
+                //audioDiaryPlayer = thePlayer.transform.Find("FPEAudioDiaryPlayer").gameObject;
                 secondaryInteractionSoundPlayer = thePlayer.transform.Find("FPESecondaryInteractionSoundPlayer").gameObject;
                 journalSFXPlayer = thePlayer.transform.Find("FPEJournalSFX").gameObject;
                 genericSFXPlayer = thePlayer.transform.Find("FPEGenericSFX").gameObject;
@@ -211,7 +211,7 @@ namespace Whilefun.FPEKit
                     Debug.LogError("FPEInteractionManagerScript:: Player or its components are missing. Did you change the Player Controller prefab, or forget to tag with 'Player' tag?");
                 }
 
-                if (!audioDiaryPlayer || !secondaryInteractionSoundPlayer || !journalSFXPlayer || !genericSFXPlayer)
+                if (/*!audioDiaryPlayer || */ !secondaryInteractionSoundPlayer || !journalSFXPlayer || !genericSFXPlayer)
                 {
                     Debug.LogError("FPEInteractionManagerScript:: FPEAudioDiaryPlayer, FPESecondaryInteractionSoundPlayer, or FPEJournalSFX are missing from Player Controller. Did you break the FPEPlayerController prefab or forget to add one or both of these prefabs to your player controller?");
                 }
@@ -277,12 +277,12 @@ namespace Whilefun.FPEKit
                         if (currentInteractableObject.GetComponent<FPEInteractableBaseScript>().getInteractionType() == FPEInteractableBaseScript.eInteractionType.STATIC)
                         {
                             retrieveNote(currentInteractableObject);
-                            retrievePassiveAudioDiary(currentInteractableObject, false);
+                            //retrievePassiveAudioDiary(currentInteractableObject, false);
                         }
                         else
                         {
                             // Notes are not retrieved passively, only diaries
-                            retrievePassiveAudioDiary(currentInteractableObject, false);
+                            //retrievePassiveAudioDiary(currentInteractableObject, false);
                         }
 
                         if (slowMouseOnInteractableObjectHighlight)
@@ -412,25 +412,25 @@ namespace Whilefun.FPEKit
                             if (currentInteractableObject.GetComponent<FPEInteractableBaseScript>().getInteractionType() == FPEInteractableBaseScript.eInteractionType.STATIC)
                             {
                                 retrieveNote(currentInteractableObject);
-                                retrievePassiveAudioDiary(currentInteractableObject, true);
+                                //retrievePassiveAudioDiary(currentInteractableObject, true);
                                 currentInteractableObject.GetComponent<FPEInteractableBaseScript>().interact();
                             }
                             else if (currentInteractableObject.GetComponent<FPEInteractableBaseScript>().getInteractionType() == FPEInteractableBaseScript.eInteractionType.ACTIVATE)
                             {
                                 retrieveNote(currentInteractableObject);
-                                retrievePassiveAudioDiary(currentInteractableObject, true);
+                                //retrievePassiveAudioDiary(currentInteractableObject, true);
                                 attemptActivation(currentInteractableObject);
                             }
                             else if (currentInteractableObject.GetComponent<FPEInteractableBaseScript>().getInteractionType() == FPEInteractableBaseScript.eInteractionType.PICKUP)
                             {
                                 // Player can only ever hold one thing, regardless of this value.
-                                retrievePassiveAudioDiary(currentInteractableObject, true);
+                                //retrievePassiveAudioDiary(currentInteractableObject, true);
                             }
                             
                             else if (currentInteractableObject.GetComponent<FPEInteractableBaseScript>().getInteractionType() == FPEInteractableBaseScript.eInteractionType.JOURNAL)
                             {
                                 // Journals always require two hands
-                                retrievePassiveAudioDiary(currentInteractableObject, true);
+                                //retrievePassiveAudioDiary(currentInteractableObject, true);
                             }
                             else if (currentInteractableObject.GetComponent<FPEInteractableBaseScript>().getInteractionType() == FPEInteractableBaseScript.eInteractionType.INVENTORY)
                             {
@@ -443,7 +443,7 @@ namespace Whilefun.FPEKit
                                 {
                                     DockPlayer(currentInteractableObject.GetComponent<FPEInteractableDockScript>());
                                     retrieveNote(currentInteractableObject);
-                                    retrievePassiveAudioDiary(currentInteractableObject, true);
+                                    //retrievePassiveAudioDiary(currentInteractableObject, true);
                                 }
 
                             }
@@ -542,7 +542,7 @@ namespace Whilefun.FPEKit
                             {
 
                                 retrieveNote(currentInteractableObject);
-                                retrievePassiveAudioDiary(currentInteractableObject, true);
+                                //retrievePassiveAudioDiary(currentInteractableObject, true);
 
                                 currentInteractableObject.GetComponent<FPEInteractablePickupScript>().doPickupPutdown(false);
                                 currentInteractableObject.GetComponent<FPEInteractableBaseScript>().unHighlightObject();
@@ -567,14 +567,14 @@ namespace Whilefun.FPEKit
                                 restorePreviousMouseSensitivity(false);
                                 openJournal();
                                 retrieveNote(currentInteractableObject);
-                                retrievePassiveAudioDiary(currentInteractableObject, true);
+                                //retrievePassiveAudioDiary(currentInteractableObject, true);
 
                             }
                             else if (currentInteractableObject.GetComponent<FPEInteractableBaseScript>().getInteractionType() == FPEInteractableBaseScript.eInteractionType.ACTIVATE)
                             {
 
                                 retrieveNote(currentInteractableObject);
-                                retrievePassiveAudioDiary(currentInteractableObject, true);
+                                //retrievePassiveAudioDiary(currentInteractableObject, true);
                                 attemptActivation(currentInteractableObject);
 
                             }
@@ -586,7 +586,7 @@ namespace Whilefun.FPEKit
                                 {
 
                                     retrieveNote(currentInteractableObject);
-                                    retrievePassiveAudioDiary(currentInteractableObject, true);
+                                    //retrievePassiveAudioDiary(currentInteractableObject, true);
 
                                     currentInteractableObject.GetComponent<FPEInteractableInventoryItemScript>().doPickupPutdown(false);
                                     currentInteractableObject.GetComponent<FPEInteractableBaseScript>().unHighlightObject();
@@ -608,7 +608,7 @@ namespace Whilefun.FPEKit
 
                                     DockPlayer(currentInteractableObject.GetComponent<FPEInteractableDockScript>());
                                     retrieveNote(currentInteractableObject);
-                                    retrievePassiveAudioDiary(currentInteractableObject, true);
+                                    //retrievePassiveAudioDiary(currentInteractableObject, true);
 
                                 }
 
@@ -616,14 +616,14 @@ namespace Whilefun.FPEKit
                             else if (currentInteractableObject.GetComponent<FPEInteractableBaseScript>().getInteractionType() == FPEInteractableBaseScript.eInteractionType.AUDIODIARY)
                             {
 
-                                if (currentInteractableObject.GetComponent<FPEInteractableAudioDiaryScript>().AutomaticPlayback == false)
+                                /*if (currentInteractableObject.GetComponent<FPEInteractableAudioDiaryScript>().AutomaticPlayback == false)
                                 {
 
                                     retrieveNote(currentInteractableObject);
                                     // Note: We do NOT retrieve Audio Diary from AUDIO DIARY type, because they are already diaries :)
                                     currentInteractableObject.GetComponent<FPEInteractableAudioDiaryScript>().interact();
 
-                                }
+                                }*/
 
                             }
                             /*
@@ -873,7 +873,7 @@ namespace Whilefun.FPEKit
                     {
 
                         // Note it's possible to be playing "Audio Log" style sounds through an Interactable object that is NOT of type AudioDiary (see demoJournal, for example)
-                        if (playingAudioDiary)
+                        /*if (playingAudioDiary)
                         {
 
                             if (currentAudioDiary)
@@ -884,7 +884,7 @@ namespace Whilefun.FPEKit
                             fadingDiaryAudio = true;
                             myHUD.FadeAudioDiaryLabel();
 
-                        }
+                        }*/
 
                     }
 
@@ -983,7 +983,7 @@ namespace Whilefun.FPEKit
 
                 #region DIARY_MANAGEMENT
                 // Fading out diary audio track //
-                if (playingAudioDiary && !audioDiaryPlayer.GetComponent<AudioSource>().isPlaying)
+                /*if (playingAudioDiary && !audioDiaryPlayer.GetComponent<AudioSource>().isPlaying)
                 {
 
                     if (currentAudioDiary)
@@ -993,16 +993,16 @@ namespace Whilefun.FPEKit
 
                     hideAudioDiaryTitle();
 
-                }
+                }*/
                 #endregion
 
                 // Mouse sensitivity transition smoothing. When slowMouseOnInteractableObjectHighlight is true, we want the mouse sensitivity to somewhat smoothly restore
                 // to "full" sensitivity, but not be jarring or "pop" as soon as an object is no longer highlighted by the reticle.
                 // Note: Replace this as required if using a different FPS Character Controller like UFPS, etc. that has other integrated mouse sensitivity management and aim assist.
-                if (smoothMouseChange)
+                /* if (smoothMouseChange)
                 {
                     FPEInputManager.Instance.LookSensitivity = Vector2.MoveTowards(FPEInputManager.Instance.LookSensitivity, new Vector2(targetMouseSensitivity.x, targetMouseSensitivity.y), smoothMouseChangeRate * Time.deltaTime);
-                }
+                }*/
 
             }
             else if (currentInteractionState == eInteractionState.SUSPENDED)
@@ -1011,7 +1011,7 @@ namespace Whilefun.FPEKit
             }
 
             // We want to fade out audio for the diary regardless of menu state. This covers the case where the player skips a diary, then opens the menu. 
-            if (fadingDiaryAudio)
+           /* if (fadingDiaryAudio)
             {
 
                 // We use unscaled delta time in case the player skips then opens the menu. We want the audio to continue fading out.
@@ -1032,14 +1032,14 @@ namespace Whilefun.FPEKit
 
                 }
 
-            }
+            } */
 
             refreshHUDData();
 
         }
        
 
-        public void playNewAudioDiary(GameObject diary)
+       /* public void playNewAudioDiary(GameObject diary)
         {
 
             // if currently playing an audio diary, stop current one, reset text for new one
@@ -1069,9 +1069,9 @@ namespace Whilefun.FPEKit
                 inventoryManager.addAudioDiaryEntry(new FPEAudioDiaryEntry(diary.GetComponent<FPEInteractableAudioDiaryScript>().audioDiaryTitle, diary.GetComponent<FPEInteractableAudioDiaryScript>().audioDiaryClip, diary.GetComponent<FPEInteractableAudioDiaryScript>().ShowDiaryTitle));
             }
 
-        }
+        }*/
 
-        public void playAudioDiaryEntry(FPEAudioDiaryEntry diaryEntry, bool isReplay = true)
+        /*public void playAudioDiaryEntry(FPEAudioDiaryEntry diaryEntry, bool isReplay = true)
         {
 
             // Case where we are interupting an existing diary from in the world
@@ -1095,12 +1095,12 @@ namespace Whilefun.FPEKit
             audioDiaryPlayer.GetComponent<AudioSource>().volume = 1.0f;
             audioDiaryPlayer.GetComponent<AudioSource>().Play();
 
-        }
+        }*/
 
         /// <summary>
         /// Provides a means to do a hard stop of all audio diary playback. No text or audio fade outs will occur.
         /// </summary>
-        public void stopAllDiaryPlayback()
+        /*public void stopAllDiaryPlayback()
         {
 
             if (playingAudioDiary)
@@ -1118,9 +1118,9 @@ namespace Whilefun.FPEKit
 
             }
 
-        }
+        }*/
 
-        public void playSecondaryInteractionAudio(AudioClip secondaryClip, bool playAsAudioDiary, string audioLogText = "")
+       /* public void playSecondaryInteractionAudio(AudioClip secondaryClip, bool playAsAudioDiary, string audioLogText = "")
         {
 
             // if currently playing an audio diary, stop current one, reset text for new one
@@ -1156,7 +1156,7 @@ namespace Whilefun.FPEKit
 
             }
 
-        }
+        }*/
 
         public void stopSecondaryInteractionAudio()
         {
@@ -1164,14 +1164,14 @@ namespace Whilefun.FPEKit
         }
 
         //TODO: Rename this function in the future
-        public void hideAudioDiaryTitle()
+       /* public void hideAudioDiaryTitle()
         {
 
             currentAudioDiary = null;
             playingAudioDiary = false;
             myHUD.FadeAudioDiaryLabel();
 
-        }
+        }*/
 
         #region JOURNAL
         public void openJournal()
@@ -1585,7 +1585,7 @@ namespace Whilefun.FPEKit
         }
 
 
-        private void retrievePassiveAudioDiary(GameObject interactableObject, bool wasInteractedWith)
+        /*private void retrievePassiveAudioDiary(GameObject interactableObject, bool wasInteractedWith)
         {
 
             if (interactableObject.gameObject.GetComponent<FPEPassiveAudioDiary>())
@@ -1614,7 +1614,7 @@ namespace Whilefun.FPEKit
 
             }
 
-        }
+        } */
 
         private void attemptActivation(GameObject objectToActivate)
         {
@@ -1894,7 +1894,7 @@ namespace Whilefun.FPEKit
                         currentInteractableObject.GetComponent<FPEInteractableBaseScript>().highlightObject();
                         break;
 
-                    case FPEInteractableBaseScript.eInteractionType.AUDIODIARY:
+                    /*case FPEInteractableBaseScript.eInteractionType.AUDIODIARY:
                         if (currentInteractableObject.GetComponent<FPEInteractableAudioDiaryScript>().AutomaticPlayback == true)
                         {
                             currentInteractableObject.GetComponent<FPEInteractableBaseScript>().highlightObject();
@@ -1903,7 +1903,7 @@ namespace Whilefun.FPEKit
                         {
                             currentInteractableObject.GetComponent<FPEInteractableBaseScript>().highlightObject();
                         }
-                        break;
+                        break;*/
 
                     case FPEInteractableBaseScript.eInteractionType.DOCK:
                         if (currentInteractableObject.GetComponent<FPEInteractableDockScript>().isOccupied() == false)
@@ -2057,9 +2057,9 @@ namespace Whilefun.FPEKit
             }
 
             // Audio Diary Playback
-            myHUDData.audioDiaryPlayingRightNow = playingAudioDiary;
-            myHUDData.audioDiaryIsReplay = audioDiaryPlaybackIsReplay;
-            myHUDData.audioDiaryTitle = currentDiaryTitle;
+            //myHUDData.audioDiaryPlayingRightNow = playingAudioDiary;
+            //myHUDData.audioDiaryIsReplay = audioDiaryPlaybackIsReplay;
+            //myHUDData.audioDiaryTitle = currentDiaryTitle;
 
         }
 
