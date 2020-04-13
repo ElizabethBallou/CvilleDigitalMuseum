@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    private int sceneNum;
     
     public Image textBox;
     [HideInInspector] public TextMeshProUGUI textBoxText;
@@ -36,14 +35,6 @@ public class GameManager : MonoBehaviour
 
     public AudioClip[] myBackgroundTracks;
 
-    public bool heardMBTMIntro = false;
-    public bool heardPLIntro = false;
-    public bool heardJHIntro = false;
-
-    public InterviewData MBTMIntroductionObject;
-    public InterviewData PLIntroductionObject;
-    public InterviewData JHIntroductionObject;
-
     public GameObject startDoor;
     
 
@@ -67,7 +58,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SetupAllTextBoxes();
-        sceneNum = SceneManager.GetActiveScene().buildIndex;
         myAudioSource = gameObject.GetComponent<AudioSource>();
         Invoke("NoGoingBack", 3f);
 

@@ -22,6 +22,8 @@ public class InterviewPlayer : MonoBehaviour
 
     private Coroutine intervieweeCoroutine;
     private ConversationInfo thisConversationInfo;
+    private ConversationInfo introductionConversationInfo;
+    private ConversationInfo currentConversationInfo;
 
     private int currentChunkIndex = 0;
 
@@ -37,6 +39,8 @@ public class InterviewPlayer : MonoBehaviour
     private string _transcriptionText = "";
     private int _cutIndex;
 
+    private bool _playingIntro;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +49,12 @@ public class InterviewPlayer : MonoBehaviour
         Debug.Assert(TranscriptionDataParser.instance.TranscriptionDataDictionary != null);
         thisConversationName = thisInterview.name;
         thisConversationInfo = TranscriptionDataParser.instance.TranscriptionDataDictionary[thisConversationName];
+           
+
+      
+        
+       
+        //in the code below, need to change ""thisConversationInfo" to "currentConversationInfo"
 
     }
 
@@ -59,7 +69,30 @@ public class InterviewPlayer : MonoBehaviour
             if (!myAudioSource.isPlaying && triggeredAudioSource == false)
                 // ...and if the clip hasn't already started playing...
             {
-                myAudioSource.PlayOneShot(thisInterview.specificClip);
+                 
+                        //else{
+                            //set currentConversationInfo to thisConversationInfo
+                            ////}
+                if(TranscriptionDataParser.instance.metIntervieweeTracker.ContainsKey(thisConversationInfo.chunks[0].Speaker))
+                {
+                    //if first time talking to person
+                    //set currentConversationInfo to the introductionConversationInfo
+                    currentConversationInfo =
+                        TranscriptionDataParser.instance.metIntervieweeTracker[thisConversationInfo.chunks[0].Speaker];
+                    Debug.Log("holy shit guess we typed it out correctly");
+                    TranscriptionDataParser.instance.metIntervieweeTracker.Remove(
+                        thisConversationInfo.chunks[0].Speaker);
+                    _playingIntro = true;
+                    
+                }
+                else
+                {
+                    //if NOT the first time talking to person, set the current conversation to the one associated with
+                    //this individual object
+                    currentConversationInfo = thisConversationInfo;
+                }
+                
+                myAudioSource.PlayOneShot(currentConversationInfo.interviewData.specificClip);
                 triggeredAudioSource = true;
                 if (!GameManager.instance.textBox.IsActive())
                 {
@@ -101,33 +134,42 @@ public class InterviewPlayer : MonoBehaviour
             {
                 _setNewChunk = false; //now set that boolean back to false. ensure we don't call this bit of code every frame.
 
-                //if we have run out of chunks to display, hide the textbox
-                if (_chunkIndex >= thisConversationInfo.chunks.Length - 1)
+                //if we have run out of chunks to display, either play the next conversation info, or hide txtbox
+                if (_chunkIndex >= currentConversationInfo.chunks.Length - 1)
                 {
-                    HideTextBox();
+                        if(_playingIntro)
+                        {
+                            currentConversationInfo = thisConversationInfo;
+                            _chunkIndex = -1;
+                            _playingIntro = false;
+                        }
+                        else
+                        {
+                            HideTextBox();
+                        }
                 }
                 //otherwise, do some setup for the next chunk
-                else
+                if(_chunkIndex < currentConversationInfo.chunks.Length - 1)
                 {
                     _chunkIndex++; //move to the next chunk in the conversation
                     _timer = 0; //reset the timer to 0. (timer is only used to keep track of elapsed time between each chunk, which is why it should be 0 when we first set a new chunk)
                     _cutIndex = 0; //reset cut index (used for substring calculations later)
 
-                    HandlePortraitActivation(thisConversationInfo.chunks[_chunkIndex].Speaker); //set new portrait, because someone new is talking
+                    HandlePortraitActivation(currentConversationInfo.chunks[_chunkIndex].Speaker); //set new portrait, because someone new is talking
 
-                    _transcriptionText = thisConversationInfo.chunks[_chunkIndex].speakerText; //get a reference to the speakerText in the current chunk
+                    _transcriptionText = currentConversationInfo.chunks[_chunkIndex].speakerText; //get a reference to the speakerText in the current chunk
 
                     //calculate the duration of the current chunk based on timestamps. 
-                    if (_chunkIndex < thisConversationInfo.chunks.Length - 1)
+                    if (_chunkIndex < currentConversationInfo.chunks.Length - 1)
                     {
                         //chunk duration is now set to the time we have between this timestamp and the next time stamp
-                        _currentChunkDuration = thisConversationInfo.chunks[_chunkIndex + 1].speakerTimestamp -
-                                        thisConversationInfo.chunks[_chunkIndex].speakerTimestamp;
+                        _currentChunkDuration = currentConversationInfo.chunks[_chunkIndex + 1].speakerTimestamp -
+                                        currentConversationInfo.chunks[_chunkIndex].speakerTimestamp;
                     }
                     else
                     {
                         //i assume the full time of the interview minus the current time stamp (so the remainder of the interview time)
-                        _currentChunkDuration = (thisInterview.specificClip.length) - thisConversationInfo.chunks[_chunkIndex].speakerTimestamp;
+                        _currentChunkDuration = (currentConversationInfo.interviewData.specificClip.length) - currentConversationInfo.chunks[_chunkIndex].speakerTimestamp;
                     }
 
                 }

@@ -38,36 +38,35 @@ public class ArtisticStatementClipPlayer : MonoBehaviour
         _currentClipDuration = myClip.length;
     }
 
+    public void BeginClip()
+    {
+        Debug.Log("BeginClip is being called");
+        if (!myAudioSource.isPlaying && triggeredAudioSource == false)
+            //if the clip hasn't already started playing...
+        {
+            if (!alreadyListenedToThis)
+                //...and if I haven't already listened to this...
+            {
+
+                myAudioSource.PlayOneShot(myClip);
+                triggeredAudioSource = true;
+                if (!FPEHallwayMenu.instance.HallwayTextBox.IsActive())
+                {
+                    ShowHallwayTextBox();
+                    Debug.Log("The hallway text box is being set with text from " + this.gameObject);
+                    _isTypingOut = true; //set a flag to tell us to start the typing-out algorithm!
+
+                }
+            }
+
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        float dist = Vector3.Distance(playerTransform.position, transform.position);
-        if (dist <= distanceFromPlayer)
-            // if the player is within the declared distance...
-        {
-            //Debug.Log("The player is within triggering distance of " + this.gameObject);
-            if (!myAudioSource.isPlaying && triggeredAudioSource == false)
-                // ...and if the clip hasn't already started playing...
-            {
-                if (!alreadyListenedToThis)
-                    //...and if I haven't already listened to this...
-                {
 
-                    myAudioSource.PlayOneShot(myClip);
-                    triggeredAudioSource = true;
-                    if (!FPEHallwayMenu.instance.HallwayTextBox.IsActive())
-                    {
-                        ShowHallwayTextBox();
-                        Debug.Log("The hallway text box is being set with text from " + this.gameObject);
-                        _isTypingOut = true; //set a flag to tell us to start the typing-out algorithm!
-
-                    }
-                }
-
-            }
-        }
-        
-          //HANDLE TYPING OUT TEXT---------------------------------------------------------------------------------------------------------------
+        //HANDLE TYPING OUT TEXT---------------------------------------------------------------------------------------------------------------
           if (_isTypingOut)
           {
               _timer += Time.deltaTime; //increase timer so we know how much time is elapsed

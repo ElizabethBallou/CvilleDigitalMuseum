@@ -192,6 +192,7 @@ namespace Whilefun.FPEKit
                 }
 
                 interactionObjectPickupLocation = thePlayer.transform.Find("MainCamera/ObjectPickupLocation").gameObject;
+                Debug.Log("Found the interactionObjectPickup Location");
                 interactionObjectExamineLocation = thePlayer.transform.Find("MainCamera/ObjectExamineLocation").gameObject;
                 interactionObjectTossLocation = thePlayer.transform.Find("MainCamera/ObjectTossLocation").gameObject;
                 interactionInventoryLocation = thePlayer.transform.Find("MainCamera/ObjectInInventoryPosition").gameObject;
@@ -1325,7 +1326,9 @@ namespace Whilefun.FPEKit
             {
                 c.isTrigger = true;
             }
-
+           
+            Debug.Log("interactionObjectPickupLocation is " + interactionObjectPickupLocation.transform.position);
+            
             go.transform.position = interactionObjectPickupLocation.transform.position;
 
             // We put the pickup into the player's hands so that it is very safely and easily not destroyed when we change levels

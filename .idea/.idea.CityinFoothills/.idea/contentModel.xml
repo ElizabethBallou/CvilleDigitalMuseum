@@ -161,7 +161,6 @@
             </e>
           </e>
         </e>
-        <e p="HallwayAudioTrigger.cs" t="Include" />
         <e p="Imported" t="Include">
           <e p="Demigiant" t="Include">
             <e p="DOTween" t="Include">
@@ -177,51 +176,22 @@
               <e p="readme.txt" t="Include" />
             </e>
           </e>
-          <e p="Glitch Image Effect" t="Include">
-            <e p="Doc" t="Include">
-              <e p="readme.txt" t="Include" />
-            </e>
-            <e p="Resources" t="Include">
-              <e p="Shader" t="Include">
-                <e p="GlitchImageEffect.shader" t="Include" />
-              </e>
-            </e>
-            <e p="Script" t="Include">
-              <e p="GlitchImageEffect.cs" t="Include" />
-            </e>
-          </e>
           <e p="Modern UI Pack" t="Include">
             <e p="Read Me.txt" t="Include" />
           </e>
-          <e p="NPR Paint Filter" t="Include">
-            <e p="readme.txt" t="Include" />
-            <e p="Script" t="Include">
-              <e p="AbstractPainting.cs" t="Include" />
-              <e p="BlackboardCamera.cs" t="Include" />
-              <e p="BlackboardObject.cs" t="Include" />
-              <e p="BluePrint.cs" t="Include" />
-              <e p="CmykHalftone.cs" t="Include" />
-              <e p="FiltersController.cs" t="Include" />
-              <e p="FreeCamera.cs" t="Include" />
-              <e p="Halftone.cs" t="Include" />
-              <e p="OilPaint.cs" t="Include" />
-              <e p="PencilDot.cs" t="Include" />
-              <e p="PencilSketch.cs" t="Include" />
-              <e p="Rotation.cs" t="Include" />
-              <e p="WaterColor.cs" t="Include" />
+          <e p="OutlineEffect" t="Include">
+            <e p="Demo" t="Include">
+              <e p="MaterialSwitcher.cs" t="Include" />
+              <e p="OutlineAnimation.cs" t="Include" />
+              <e p="Rotate.cs" t="Include" />
+              <e p="Toggle.cs" t="Include" />
             </e>
-            <e p="Shader" t="Include">
-              <e p="Abstract Painting.shader" t="Include" />
-              <e p="Background.shader" t="Include" />
-              <e p="Blackboard Color.shader" t="Include" />
-              <e p="Blackboard.shader" t="Include" />
-              <e p="BluePrint.shader" t="Include" />
-              <e p="Cmyk Halftone.shader" t="Include" />
-              <e p="Halftone.shader" t="Include" />
-              <e p="Oil Paint.shader" t="Include" />
-              <e p="Pencil Dot.shader" t="Include" />
-              <e p="Pencil.shader" t="Include" />
-              <e p="Water Color.shader" t="Include" />
+            <e p="LinkedSet.cs" t="Include" />
+            <e p="Outline.cs" t="Include" />
+            <e p="OutlineEffect.cs" t="Include" />
+            <e p="Resources" t="Include">
+              <e p="OutlineBufferShader.shader" t="Include" />
+              <e p="OutlineShader.shader" t="Include" />
             </e>
           </e>
           <e p="PeterLu_HologramShader" t="Include">
@@ -229,6 +199,11 @@
             <e p="Shader" t="Include">
               <e p="BaiscRim.shader" t="Include" />
               <e p="BasicHologram.shader" t="Include" />
+            </e>
+          </e>
+          <e p="SpriteOutline" t="Include">
+            <e p="Shaders" t="Include">
+              <e p="SpriteOutline.shader" t="Include" />
             </e>
           </e>
           <e p="Stylized Nature Environment" t="Include">
@@ -245,6 +220,7 @@
           <e p="Hallway Scene Scripts" t="Include">
             <e p="ArtisticStatementClipPlayer.cs" t="Include" />
             <e p="FPEHallwayMenu.cs" t="Include" />
+            <e p="HallwayAudioTrigger.cs" t="Include" />
             <e p="HallwayDebugHandler.cs" t="Include" />
           </e>
           <e p="Interview Player Scripts" t="Include">

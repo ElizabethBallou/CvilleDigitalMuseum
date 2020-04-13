@@ -14,7 +14,7 @@ public class TranscriptionDataParser : MonoBehaviour
     public InterviewData[] interviewArray;
     private string filepath;
 
-    public Dictionary<Chunk.speakerName, bool> metIntervieweeTracker = new Dictionary<Chunk.speakerName, bool>();
+    public Dictionary<Chunk.speakerName, ConversationInfo> metIntervieweeTracker = new Dictionary<Chunk.speakerName, ConversationInfo>();
     
 
     private void Awake()
@@ -26,7 +26,7 @@ public class TranscriptionDataParser : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        interviewArray = Resources.LoadAll<InterviewData>("ScriptableObjects");
+        interviewArray = Resources.LoadAll<InterviewData>("InterviewObjects");
         
         transcriptionSpreadsheet = Resources.Load<TextAsset>("TranscriptionInformation");
         TranscriptionDataDictionary = new Dictionary<string, ConversationInfo>();
@@ -66,6 +66,7 @@ public class TranscriptionDataParser : MonoBehaviour
            thisConversationInfo.chunks = chunkClassArray;
            string conversationName = rowCells[0].Trim().ToLower();
            thisConversationInfo.interviewData = getCorrectInterviewData(conversationName);
+           Debug.Log((conversationName));
            TranscriptionDataDictionary.Add(conversationName, thisConversationInfo);
        }
     }
@@ -73,10 +74,10 @@ public class TranscriptionDataParser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Enum interviewee in Enum.GetValues(typeof(Chunk.speakerName)))
-        {
-            //metIntervieweeTracker.Add(interviewee, false);
-        }
+        metIntervieweeTracker.Add(Chunk.speakerName.AD, TranscriptionDataDictionary["js_ad_introduction"]);
+        metIntervieweeTracker.Add(Chunk.speakerName.JH, TranscriptionDataDictionary["jh_introduction"]);
+        metIntervieweeTracker.Add(Chunk.speakerName.JS, TranscriptionDataDictionary["js_ad_introduction"]);
+        metIntervieweeTracker.Add(Chunk.speakerName.PL, TranscriptionDataDictionary["pl_introduction"]);
     }
     
     private Chunk.speakerName getSpeakerNameFromString(string cellString)

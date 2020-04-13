@@ -101,13 +101,11 @@ public class LocationInfoManager : MonoBehaviour
         myFPEDoorway = aDoor.GetComponent<FPEDoorway>();
         //find the place where the player is supposed to spawn in. This is used if the player clicks "no" upon switching scenes.
         startTransform = GameObject.Find("PlayerStartLocation").GetComponent<Transform>();
-        Debug.Log("The name of aDoor is " + aDoor.name);
         
         locationText.color = fullyOpaque;
         blackBackdrop.DOFade(0f, .5f).OnComplete(() => blackBackdrop.rectTransform.SetAsFirstSibling());
         currentScene = SceneManager.GetActiveScene();
         int sceneIndex = currentScene.buildIndex;
-        Debug.Log("SceneIndex is " + sceneIndex);
        
         StartCoroutine(ShowLocationText(locationStrings[sceneIndex -2]));
         

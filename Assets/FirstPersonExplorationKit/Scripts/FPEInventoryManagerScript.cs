@@ -26,7 +26,7 @@ namespace Whilefun.FPEKit {
             APPLE = 3,
             COLLECTIBLE = 4,
             SIMPLEKEY = 5,
-            RECORD = 6
+            WEDONTWANTYOUTOKNOWUS = 6
 
         };
 
