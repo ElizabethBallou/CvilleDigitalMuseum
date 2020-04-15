@@ -192,7 +192,7 @@ namespace Whilefun.FPEKit
                 }
 
                 interactionObjectPickupLocation = thePlayer.transform.Find("MainCamera/ObjectPickupLocation").gameObject;
-                Debug.Log("Found the interactionObjectPickup Location");
+                //Debug.Log("Found the interactionObjectPickup Location");
                 interactionObjectExamineLocation = thePlayer.transform.Find("MainCamera/ObjectExamineLocation").gameObject;
                 interactionObjectTossLocation = thePlayer.transform.Find("MainCamera/ObjectTossLocation").gameObject;
                 interactionInventoryLocation = thePlayer.transform.Find("MainCamera/ObjectInInventoryPosition").gameObject;
@@ -237,7 +237,8 @@ namespace Whilefun.FPEKit
 
         void Update()
         {
-
+            
+            Debug.Assert(interactionObjectPickupLocation != null);
             if (currentInteractionState == eInteractionState.IN_MENU)
             {
 

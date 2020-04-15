@@ -40,6 +40,8 @@ public class InterviewPlayer : MonoBehaviour
     private int _cutIndex;
 
     private bool _playingIntro;
+    private float introTimer;
+    private float countTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -69,27 +71,25 @@ public class InterviewPlayer : MonoBehaviour
             if (!myAudioSource.isPlaying && triggeredAudioSource == false)
                 // ...and if the clip hasn't already started playing...
             {
-                 
-                        //else{
-                            //set currentConversationInfo to thisConversationInfo
-                            ////}
                 if(TranscriptionDataParser.instance.metIntervieweeTracker.ContainsKey(thisConversationInfo.chunks[0].Speaker))
                 {
                     //if first time talking to person
                     //set currentConversationInfo to the introductionConversationInfo
                     currentConversationInfo =
                         TranscriptionDataParser.instance.metIntervieweeTracker[thisConversationInfo.chunks[0].Speaker];
-                    Debug.Log("holy shit guess we typed it out correctly");
                     TranscriptionDataParser.instance.metIntervieweeTracker.Remove(
                         thisConversationInfo.chunks[0].Speaker);
                     _playingIntro = true;
-                    
+                    introTimer = currentConversationInfo.interviewData.specificClip.length;
+                    Debug.Log("The length of the introTimer is " + introTimer);
+
                 }
-                else
+                if (!_playingIntro)
                 {
                     //if NOT the first time talking to person, set the current conversation to the one associated with
                     //this individual object
                     currentConversationInfo = thisConversationInfo;
+                    Debug.Log("currentConversationInfo has been set to thisConversationInfo");
                 }
                 
                 myAudioSource.PlayOneShot(currentConversationInfo.interviewData.specificClip);
@@ -105,13 +105,10 @@ public class InterviewPlayer : MonoBehaviour
                 }
                     
             }
-
-            if (triggeredAudioSource && !myAudioSource.isPlaying)
-            {
-                // HideTextBox();
-            }
+            
         }
         else
+        //if we're far enough away from the object but the audio is still playing, stop it.
         {
             if (myAudioSource.isPlaying)
             {
@@ -119,8 +116,18 @@ public class InterviewPlayer : MonoBehaviour
                 HideTextBox();
                 triggeredAudioSource = false;
             }
+        }
 
+        if (_playingIntro)
+        {
+            countTime += Time.deltaTime;
             
+            if (countTime >= introTimer)
+            {
+                Debug.Log("The time is " + countTime + "and the intro clip has finished");
+                countTime = 0;
+                myAudioSource.PlayOneShot(thisConversationInfo.interviewData.specificClip);
+            }
         }
         
         //HANDLE TYPING OUT TEXT---------------------------------------------------------------------------------------------------------------
@@ -142,6 +149,7 @@ public class InterviewPlayer : MonoBehaviour
                             currentConversationInfo = thisConversationInfo;
                             _chunkIndex = -1;
                             _playingIntro = false;
+                            Debug.Log("_playingIntro has been set to false");
                         }
                         else
                         {

@@ -66,7 +66,6 @@ public class TranscriptionDataParser : MonoBehaviour
            thisConversationInfo.chunks = chunkClassArray;
            string conversationName = rowCells[0].Trim().ToLower();
            thisConversationInfo.interviewData = getCorrectInterviewData(conversationName);
-           Debug.Log((conversationName));
            TranscriptionDataDictionary.Add(conversationName, thisConversationInfo);
        }
     }

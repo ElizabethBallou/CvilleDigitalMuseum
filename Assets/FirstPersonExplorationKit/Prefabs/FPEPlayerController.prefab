@@ -15,8 +15,7 @@ GameObject:
   - component: {fileID: 114388458630364220}
   - component: {fileID: 11449600}
   - component: {fileID: 11449602}
-  - component: {fileID: 8414170054798815151}
-  - component: {fileID: -7166765498528525389}
+  - component: {fileID: 2488030911242492841}
   m_Layer: 10
   m_Name: FPEPlayerController
   m_TagString: Player
@@ -296,21 +295,7 @@ MonoBehaviour:
   MinimumX: -80
   MaximumX: 80
   enableMouseLook: 1
---- !u!136 &8414170054798815151
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149580}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-7166765498528525389
+--- !u!114 &2488030911242492841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,8 +318,7 @@ GameObject:
   - component: {fileID: 449582}
   - component: {fileID: 2049600}
   - component: {fileID: 8149602}
-  - component: {fileID: 4343935755569551534}
-  - component: {fileID: 7242699055341132987}
+  - component: {fileID: 3663151884277190081}
   m_Layer: 10
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -412,7 +396,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149582}
   m_Enabled: 1
---- !u!114 &4343935755569551534
+--- !u!114 &3663151884277190081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -466,35 +450,14 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
+  m_ShowToolkit: 1
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles:
-  - assemblyQualifiedName: GlitchImageEffect, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
   - assemblyQualifiedName: PostProcessOutline, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_AfterStackBundles: []
---- !u!114 &7242699055341132987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8df82b3a426a24479b1ef6cf768359e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  replacementShader: {fileID: 4800000, guid: a9d3ffa1a3760d14fae0179cda71477f, type: 3}
-  renderTextureFormat: 0
-  filterMode: 0
-  renderTextureDepth: 24
-  cameraClearFlags: 2
-  background: {r: 0, g: 0, b: 0, a: 1}
-  targetTexture: _CameraNormalsTexture
 --- !u!1 &149584
 GameObject:
   m_ObjectHideFlags: 0
