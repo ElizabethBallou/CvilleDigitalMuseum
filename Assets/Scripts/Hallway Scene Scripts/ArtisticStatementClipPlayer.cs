@@ -27,8 +27,7 @@ public class ArtisticStatementClipPlayer : MonoBehaviour
     private float _timer;
     private int _cutIndex;
 
-    public Light rightLight;
-    public Light leftLight;
+    public Light portraitLight;
 
     // Start is called before the first frame update
     void Start()
@@ -85,12 +84,12 @@ public class ArtisticStatementClipPlayer : MonoBehaviour
             
             //get the current index in the string we should be at, based on the percent "done" we are with this chunk
             //So if we are 50% "done" with this chunk, and the transcriptionText has 200 characters, then the first 100 characters should be typed out.
-            int charIndex = (int)Mathf.Lerp(0, fullTranscriptionString.Length, _lerpPercent);
+            int charIndex = (int)Mathf.Lerp(0, HallwayMiscFunctions.instance.hallwayLineArray[HallwayMiscFunctions.instance.hallwayLineArrayIndex].Length, _lerpPercent);
 
             //Get all the characters we should have typed out so far based on the charIndex.
             //So if charIndex is 100, then totalStringSoFar will be a string with the first 100 characters of the total string
-            string totalStringSoFar = fullTranscriptionString.Substring(0, charIndex);
-            if (totalStringSoFar == fullTranscriptionString && FPEHallwayMenu.instance.hallwayTextHidden == false)
+            string totalStringSoFar = HallwayMiscFunctions.instance.hallwayLineArray[HallwayMiscFunctions.instance.hallwayLineArrayIndex].Substring(0, charIndex);
+            if (totalStringSoFar == HallwayMiscFunctions.instance.hallwayLineArray[HallwayMiscFunctions.instance.hallwayLineArrayIndex] && FPEHallwayMenu.instance.hallwayTextHidden == false)
             {
                 Invoke("HideHallwayTextBox", 1f);
                 Invoke("turnOffLights", 1f);
@@ -143,21 +142,21 @@ public class ArtisticStatementClipPlayer : MonoBehaviour
         
         //let the player move and look again
         FPEInteractionManagerScript.Instance.enableMovement();
-
-
-
+        
     }
     
     private void RefreshHallwayTextBox()
     {
         Debug.Log("RefreshHallwayTextBox() is being called by " + gameObject);
         FPEHallwayMenu.instance.hallwayTextBoxText.text = "";
+        
+        //increase the index of the array in HallwayMiscFunctions
+        HallwayMiscFunctions.instance.increaseIndexCount();
     }
 
     private void turnOffLights()
     {
-        rightLight.gameObject.SetActive(false);
-        leftLight.gameObject.SetActive(false);
+        portraitLight.gameObject.SetActive(false);
     }
     
 }

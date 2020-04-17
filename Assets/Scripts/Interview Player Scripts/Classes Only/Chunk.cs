@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Chunk
 {
-   public enum speakerName{JS, AD, PL, JH, EB, none}
+   public enum speakerName{JS, AD, PL, JH, EB, CC, none}
 
    public speakerName Speaker;
 

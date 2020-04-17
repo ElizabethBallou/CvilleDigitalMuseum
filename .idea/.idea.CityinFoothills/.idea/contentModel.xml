@@ -211,6 +211,7 @@
           </e>
         </e>
         <e p="Resources" t="Include">
+          <e p="hallwayTextLines.txt" t="Include" />
           <e p="TranscriptionInformation.txt" t="Include" />
         </e>
         <e p="Scripts" t="Include">
@@ -221,7 +222,7 @@
             <e p="ArtisticStatementClipPlayer.cs" t="Include" />
             <e p="FPEHallwayMenu.cs" t="Include" />
             <e p="HallwayAudioTrigger.cs" t="Include" />
-            <e p="HallwayDebugHandler.cs" t="Include" />
+            <e p="HallwayMiscFunctions.cs" t="Include" />
           </e>
           <e p="Interview Player Scripts" t="Include">
             <e p="Classes Only" t="Include">

@@ -95,6 +95,8 @@ public class TranscriptionDataParser : MonoBehaviour
                 return Chunk.speakerName.JH;
             case "EB":
                 return Chunk.speakerName.EB;
+            case "CC":
+                return Chunk.speakerName.CC;
         }
 
         return Chunk.speakerName.none;

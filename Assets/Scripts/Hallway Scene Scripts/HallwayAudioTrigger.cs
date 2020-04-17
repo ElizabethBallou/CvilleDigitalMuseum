@@ -8,7 +8,6 @@ public class HallwayAudioTrigger : MonoBehaviour
 {
     
     private SpriteRenderer audioSprite;
-    public SpriteRenderer partnerSprite;
     private Transform playerTransformToAudio;
     public float minimumOpacityDistance = 7;
     public float maximumOpacityDistance = 4;
@@ -72,7 +71,6 @@ public class HallwayAudioTrigger : MonoBehaviour
             Debug.Log("I'm triggering BeginClip");
             myClipPlayer.BeginClip();
             audioSprite.DOFade(0f, .5f).OnComplete(() => gameObject.SetActive(false));
-            partnerSprite.DOFade(0f, .5f).OnComplete(() => partnerSprite.gameObject.SetActive(false));
         }
     }
     

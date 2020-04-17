@@ -63,6 +63,10 @@ public class IntroScript : MonoBehaviour
         if (beginButtonPressed)
         {
             timer += Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                timer = 29f;
+            }
             if (timer >= 30f)
             {
                 giveUpButton.gameObject.SetActive(true);
@@ -132,13 +136,13 @@ public class IntroScript : MonoBehaviour
 
     public void LoadNextScene()
     {
-        if (FPESaveLoadManager.Instance.SavedGameExists())
+        /* if (FPESaveLoadManager.Instance.SavedGameExists())
         {
+            Debug.Log("I'm trying to continue the game, which is weird as hell");
             myFPEMainMenu.continueGame();
-        }
-        else{
-            myFPEMainMenu.startNewGame();
-            }
+        }*/
+        Debug.Log("I am calling startNewGame");
+        myFPEMainMenu.startNewGame();
     }
 
 }

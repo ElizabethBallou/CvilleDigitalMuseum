@@ -124,7 +124,6 @@ public class InterviewPlayer : MonoBehaviour
             
             if (countTime >= introTimer)
             {
-                Debug.Log("The time is " + countTime + "and the intro clip has finished");
                 countTime = 0;
                 myAudioSource.PlayOneShot(thisConversationInfo.interviewData.specificClip);
             }
