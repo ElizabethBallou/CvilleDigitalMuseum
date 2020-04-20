@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    
+    [HideInInspector] public bool interviewTextBoxHidden = false;
     public Image textBox;
     [HideInInspector] public TextMeshProUGUI textBoxText;
     public Image portraitBackground;

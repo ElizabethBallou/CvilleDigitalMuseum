@@ -232,6 +232,7 @@
             </e>
             <e p="InterviewPlayer.cs" t="Include" />
             <e p="InterviewTagEnum.cs" t="Include" />
+            <e p="PortraitInfo.cs" t="Include" />
             <e p="TranscriptionDataParser.cs" t="Include" />
           </e>
           <e p="Intro Menu Scene Scripts" t="Include">
@@ -243,7 +244,6 @@
           </e>
           <e p="MouseLook.cs" t="Include" />
           <e p="Outline Post Process.shader" t="Include" />
-          <e p="PortraitInfo.cs" t="Include" />
           <e p="PostProcessOutline.cs" t="Include" />
           <e p="RenderBehaviorShaderReplacer.cs" t="Include" />
           <e p="Scene Switch Location Scripts" t="Include">

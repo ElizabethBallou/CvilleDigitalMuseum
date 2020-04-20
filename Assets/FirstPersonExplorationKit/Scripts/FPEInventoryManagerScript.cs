@@ -26,7 +26,30 @@ namespace Whilefun.FPEKit {
             APPLE = 3,
             COLLECTIBLE = 4,
             SIMPLEKEY = 5,
-            WEDONTWANTYOUTOKNOWUS = 6
+            WEDONTWANTYOUTOKNOWUS = 6,
+            FIFTEENPERCENTMAKEOVER = 7,
+            AMPLIFYINGFOOTNOTES = 8,
+            ANACTOFGOD = 9,
+            BASEDINAMHERSTCOUNTY = 10,
+            CITYBEAUTIFUL = 11,
+            DENYINGEDUCATION = 12,
+            FUNDEDBYCONFEDERATEWHITEWOMEN = 13,
+            GLORIFICATIONOLDWHITEMEN = 14,
+            KEPTCAREFULRECORDS = 15,
+            MANYOFYOUDIDNOTKNOW = 16,
+            MYBACKGROUNDHASCHANGEDALOT = 17,
+            NONEOFTHEGUIDESAREPAID = 18,
+            PARANOIABLACKMAJORITY = 19,
+            PLRESEARCHREALIZATION = 20,
+            PRODUCEHORSESHUMANS = 21,
+            PUBLICSCHOOLS = 22,
+            RECONSTRUCTION1 = 23,
+            TAXPAYERCOST = 24,
+            TODAYWEESTABLISHEDCONTROL = 25,
+            WEGIVEOURTHANKS = 26,
+            MEMORYNOTHISTORY = 27,
+            SLAVEAUCTIONBLOCK = 28,
+            CCINTRODUCTION = 29
 
         };
 

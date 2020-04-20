@@ -77,6 +77,11 @@ public class TranscriptionDataParser : MonoBehaviour
         metIntervieweeTracker.Add(Chunk.speakerName.JH, TranscriptionDataDictionary["jh_introduction"]);
         metIntervieweeTracker.Add(Chunk.speakerName.JS, TranscriptionDataDictionary["js_ad_introduction"]);
         metIntervieweeTracker.Add(Chunk.speakerName.PL, TranscriptionDataDictionary["pl_introduction"]);
+        foreach (var entry in metIntervieweeTracker)
+        {
+            Debug.Log(entry.Key);
+            Debug.Log(entry.Value.chunks[0].speakerText);
+        }
     }
     
     private Chunk.speakerName getSpeakerNameFromString(string cellString)
@@ -106,12 +111,12 @@ public class TranscriptionDataParser : MonoBehaviour
     {
         foreach (InterviewData interview in interviewArray)
         {
-            if (interview.name == conversationName)
+            if (interview.name.ToLower() == conversationName)
             {
                 return interview;
             }
         }
-
+        Debug.Log("InterviewData was not found for " + conversationName);
         return null;
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Whilefun.FPEKit;
 
 public class InterviewPlayer : MonoBehaviour
 {
@@ -73,13 +74,17 @@ public class InterviewPlayer : MonoBehaviour
             {
                 if(TranscriptionDataParser.instance.metIntervieweeTracker.ContainsKey(thisConversationInfo.chunks[0].Speaker))
                 {
+                    Debug.Log("We haven't met this person before. Retrieving intro...");
                     //if first time talking to person
                     //set currentConversationInfo to the introductionConversationInfo
                     currentConversationInfo =
                         TranscriptionDataParser.instance.metIntervieweeTracker[thisConversationInfo.chunks[0].Speaker];
+                    Debug.Log("The current speaker is" + currentConversationInfo.chunks[0].Speaker);
                     TranscriptionDataParser.instance.metIntervieweeTracker.Remove(
                         thisConversationInfo.chunks[0].Speaker);
                     _playingIntro = true;
+                    Debug.Assert(currentConversationInfo != null);
+                    Debug.Log("the specific clip is " + currentConversationInfo.interviewData.specificClip.name);
                     introTimer = currentConversationInfo.interviewData.specificClip.length;
                     Debug.Log("The length of the introTimer is " + introTimer);
 
@@ -106,16 +111,6 @@ public class InterviewPlayer : MonoBehaviour
                     
             }
             
-        }
-        else
-        //if we're far enough away from the object but the audio is still playing, stop it.
-        {
-            if (myAudioSource.isPlaying)
-            {
-                myAudioSource.Stop();
-                HideTextBox();
-                triggeredAudioSource = false;
-            }
         }
 
         if (_playingIntro)
@@ -170,13 +165,13 @@ public class InterviewPlayer : MonoBehaviour
                     if (_chunkIndex < currentConversationInfo.chunks.Length - 1)
                     {
                         //chunk duration is now set to the time we have between this timestamp and the next time stamp
-                        _currentChunkDuration = currentConversationInfo.chunks[_chunkIndex + 1].speakerTimestamp -
-                                        currentConversationInfo.chunks[_chunkIndex].speakerTimestamp;
+                        _currentChunkDuration = (currentConversationInfo.chunks[_chunkIndex + 1].speakerTimestamp -
+                                        currentConversationInfo.chunks[_chunkIndex].speakerTimestamp);
                     }
                     else
                     {
                         //i assume the full time of the interview minus the current time stamp (so the remainder of the interview time)
-                        _currentChunkDuration = (currentConversationInfo.interviewData.specificClip.length) - currentConversationInfo.chunks[_chunkIndex].speakerTimestamp;
+                        _currentChunkDuration = currentConversationInfo.interviewData.specificClip.length - currentConversationInfo.chunks[_chunkIndex].speakerTimestamp;
                     }
 
                 }
@@ -186,7 +181,12 @@ public class InterviewPlayer : MonoBehaviour
 
             //calculate what percent "done" we are with this chunk in terms of timing.
             //So if chunk is 10 seconds long, and 5 seconds has elapsed since we started the chunk, we are 50% done.
-            _lerpPercent = _timer / _currentChunkDuration; 
+            float lessThanOneChecker = 1;
+            if (_currentChunkDuration <= 1)
+            {
+                lessThanOneChecker = _currentChunkDuration - .001f;
+            }
+            _lerpPercent = _timer / (_currentChunkDuration - lessThanOneChecker); 
 
             //get the current index in the string we should be at, based on the percent "done" we are with this chunk
             //So if we are 50% "done" with this chunk, and the transcriptionText has 200 characters, then the first 100 characters should be typed out.
@@ -221,7 +221,7 @@ public class InterviewPlayer : MonoBehaviour
             //the _lerpPercent value will be greater than 1 when the _timer is >= the duration of the current chunk.
             //When this happens, we need to set the _setNewChunk flag to true, so that the next frame of Update,
             //we call the if-statement that sets a new chunk
-            if (_lerpPercent > 1)
+            if (_lerpPercent > 1 && _timer >= _currentChunkDuration)
             {
                 _setNewChunk = true;
             }
@@ -236,9 +236,8 @@ public class InterviewPlayer : MonoBehaviour
 
     private void ShowTextBox()
     {
+        FPEInteractionManagerScript.Instance.disableMovement();
 
-       
-        
         if (GameManager.instance.vignette != null)
             DOTween.To(() => GameManager.instance.vignette.intensity.value,
                 x => GameManager.instance.vignette.intensity.value = x, .45f, boxFadeTime);
@@ -254,7 +253,8 @@ public class InterviewPlayer : MonoBehaviour
 
     private void HideTextBox()
     {
-        
+        FPEInteractionManagerScript.Instance.enableMovement();
+
         if (GameManager.instance.vignette != null)
             DOTween.To(() => GameManager.instance.vignette.intensity.value,
                 x => GameManager.instance.vignette.intensity.value = x, 0, boxFadeTime);
@@ -303,7 +303,9 @@ public class InterviewPlayer : MonoBehaviour
                 case Chunk.speakerName.PL:
                     GameManager.instance.nameText.text = "Dr. Phyllis Leffler";
                     break;
-
+                case Chunk.speakerName.CC:
+                    GameManager.instance.nameText.text = "Caro Campos";
+                    break;
             }
         }
     }
