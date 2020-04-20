@@ -9,16 +9,11 @@ using Whilefun.FPEKit;
 public class ArtisticStatementClipPlayer : MonoBehaviour
 {
     public AudioClip myClip;
-    private Transform playerTransform;
-    private bool triggeredAudioSource = false;
+    [HideInInspector] public bool triggeredAudioSource = false;
     private AudioSource myAudioSource;
     public float boxFadeTime = 1f;
 
-    public float distanceFromPlayer = 2;
-    
     private bool alreadyListenedToThis = false;
-
-    public string fullTranscriptionString;
     
     //Variables for calculating typing-out. Since all calculations take place inside update, i needed to define these here. 
     private bool _isTypingOut;
@@ -26,14 +21,11 @@ public class ArtisticStatementClipPlayer : MonoBehaviour
     private float _currentClipDuration;
     private float _timer;
     private int _cutIndex;
-
-    public Light portraitLight;
-
+    
     // Start is called before the first frame update
     void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
-        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         _currentClipDuration = myClip.length;
     }
 
@@ -84,12 +76,12 @@ public class ArtisticStatementClipPlayer : MonoBehaviour
             
             //get the current index in the string we should be at, based on the percent "done" we are with this chunk
             //So if we are 50% "done" with this chunk, and the transcriptionText has 200 characters, then the first 100 characters should be typed out.
-            int charIndex = (int)Mathf.Lerp(0, HallwayMiscFunctions.instance.hallwayLineArray[HallwayMiscFunctions.instance.hallwayLineArrayIndex].Length, _lerpPercent);
+            int charIndex = (int)Mathf.Lerp(0, HallwayManager.instance.hallwayLineArray[HallwayManager.instance.hallwayLineArrayIndex].Length, _lerpPercent);
 
             //Get all the characters we should have typed out so far based on the charIndex.
             //So if charIndex is 100, then totalStringSoFar will be a string with the first 100 characters of the total string
-            string totalStringSoFar = HallwayMiscFunctions.instance.hallwayLineArray[HallwayMiscFunctions.instance.hallwayLineArrayIndex].Substring(0, charIndex);
-            if (totalStringSoFar == HallwayMiscFunctions.instance.hallwayLineArray[HallwayMiscFunctions.instance.hallwayLineArrayIndex] && FPEHallwayMenu.instance.hallwayTextHidden == false)
+            string totalStringSoFar = HallwayManager.instance.hallwayLineArray[HallwayManager.instance.hallwayLineArrayIndex].Substring(0, charIndex);
+            if (totalStringSoFar == HallwayManager.instance.hallwayLineArray[HallwayManager.instance.hallwayLineArrayIndex] && FPEHallwayMenu.instance.hallwayTextHidden == false)
             {
                 Invoke("HideHallwayTextBox", 1f);
                 Invoke("turnOffLights", 1f);
@@ -151,12 +143,13 @@ public class ArtisticStatementClipPlayer : MonoBehaviour
         FPEHallwayMenu.instance.hallwayTextBoxText.text = "";
         
         //increase the index of the array in HallwayMiscFunctions
-        HallwayMiscFunctions.instance.increaseIndexCount();
+        HallwayManager.instance.increaseIndexCount();
     }
 
     private void turnOffLights()
     {
-        portraitLight.gameObject.SetActive(false);
+        HallwayManager.instance.hallwayLightArray[HallwayManager.instance.hallwayLightArrayIndex].gameObject.SetActive(false);
+        HallwayManager.instance.hallwayLightArrayIndex++;
     }
     
 }

@@ -4,14 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Whilefun.FPEKit;
 
-public class HallwayMiscFunctions : MonoBehaviour
+public class HallwayManager : MonoBehaviour
 {
-    public static HallwayMiscFunctions instance;
+    public static HallwayManager instance;
     private Vector3 debugVector = new Vector3(.1f, 2.3f, -183f);
     public FPEDoorway myFPEDoorway;
     private TextAsset hallwayTextLines;
     [HideInInspector] public string[] hallwayLineArray;
     [HideInInspector] public int hallwayLineArrayIndex = 0;
+    public Light[] hallwayLightArray;
+    [HideInInspector] public int hallwayLightArrayIndex = 0;
+    public Material[] materialArray;
+
 
     private void Awake()
     {

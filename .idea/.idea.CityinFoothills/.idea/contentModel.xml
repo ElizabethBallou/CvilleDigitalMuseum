@@ -221,8 +221,8 @@
           <e p="Hallway Scene Scripts" t="Include">
             <e p="ArtisticStatementClipPlayer.cs" t="Include" />
             <e p="FPEHallwayMenu.cs" t="Include" />
-            <e p="HallwayAudioTrigger.cs" t="Include" />
-            <e p="HallwayMiscFunctions.cs" t="Include" />
+            <e p="HallwayManager.cs" t="Include" />
+            <e p="PortraitClicker.cs" t="Include" />
           </e>
           <e p="Interview Player Scripts" t="Include">
             <e p="Classes Only" t="Include">
@@ -250,6 +250,7 @@
             <e p="SceneSetter.cs" t="Include" />
           </e>
         </e>
+        <e p="SymbolMouseHover.cs" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
             <e p="LiberationSans - OFL.txt" t="Include" />

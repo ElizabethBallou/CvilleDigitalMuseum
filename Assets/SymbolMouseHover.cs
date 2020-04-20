@@ -1,32 +1,29 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
+using DG.Tweening;
 
-public class HallwayAudioTrigger : MonoBehaviour
+
+public class SymbolMouseHover : MonoBehaviour
 {
-    
     private SpriteRenderer audioSprite;
-    private Transform playerTransformToAudio;
+    private bool clickedObject = false;
+    private Camera cameraToLookAt;
     public float minimumOpacityDistance = 7;
     public float maximumOpacityDistance = 4;
     private float dist;
-    private Camera cameraToLookAt;
-    public Material[] materialArray;
-    public ArtisticStatementClipPlayer myClipPlayer;
-    private bool clickedObject = false;
+    private Transform playerTransformToAudio;
+    private ArtisticStatementClipPlayer myClipPlayer;
 
 
     // Start is called before the first frame update
     void Start()
     {
         audioSprite = gameObject.GetComponent<SpriteRenderer>();
-        audioSprite.material = materialArray[0];
+        myClipPlayer = gameObject.transform.parent.GetComponent<ArtisticStatementClipPlayer>();
         playerTransformToAudio = GameObject.FindWithTag("Player").GetComponent<Transform>();
         cameraToLookAt = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         audioSprite.color = Color.clear;
-
     }
 
     // Update is called once per frame
@@ -43,27 +40,26 @@ public class HallwayAudioTrigger : MonoBehaviour
             audioSprite.color = opacityColor;
             
         }
-
     }
-
+    
     private void OnMouseOver()
     {
         if (dist <= minimumOpacityDistance && clickedObject == false)
         {
-            audioSprite.material = materialArray[1];
+            audioSprite.material = HallwayManager.instance.materialArray[1];
         }
     }
 
     private void OnMouseExit()
     {
         Debug.Log("I'm no longer mousing over");
-            audioSprite.material = materialArray[0];
+        audioSprite.material = HallwayManager.instance.materialArray[0];
     }
 
     private void OnMouseDown()
     {
         clickedObject = true;
-        audioSprite.material = materialArray[0];
+        audioSprite.material = HallwayManager.instance.materialArray[0];
 
         Debug.Log("I'm clicking on this object");
         if (audioSprite.color.a >= .3f)
@@ -73,5 +69,5 @@ public class HallwayAudioTrigger : MonoBehaviour
             audioSprite.DOFade(0f, .5f).OnComplete(() => gameObject.SetActive(false));
         }
     }
-    
+
 }

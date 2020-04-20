@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
-  m_Name: JS_AD_introduction
+  m_Name: js_ad_introduction
   m_EditorClassIdentifier: 
   specificClip: {fileID: 8300000, guid: 782364c8800f4614d8a07588561cef7d, type: 3}
   InterviewTags: 0
