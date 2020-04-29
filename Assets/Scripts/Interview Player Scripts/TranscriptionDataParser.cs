@@ -79,8 +79,8 @@ public class TranscriptionDataParser : MonoBehaviour
         metIntervieweeTracker.Add(Chunk.speakerName.PL, TranscriptionDataDictionary["pl_introduction"]);
         foreach (var entry in metIntervieweeTracker)
         {
-            Debug.Log(entry.Key);
-            Debug.Log(entry.Value.chunks[0].speakerText);
+            //Debug.Log(entry.Key);
+            //Debug.Log(entry.Value.chunks[0].speakerText);
         }
     }
     

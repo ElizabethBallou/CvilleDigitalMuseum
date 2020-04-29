@@ -24,7 +24,7 @@ namespace Whilefun.FPEKit
             get { return _instance; }
         }
 
-        protected bool menuActive = false;
+        [HideInInspector] public bool menuActive = false;
         protected EventSystem myEventSystem = null;
 
         public virtual void Awake()

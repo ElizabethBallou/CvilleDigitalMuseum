@@ -20,8 +20,7 @@ public class InterviewPlayer : MonoBehaviour
 
     private string transcriptionString;
     private string portraitName;
-
-    private Coroutine intervieweeCoroutine;
+    
     private ConversationInfo thisConversationInfo;
     private ConversationInfo introductionConversationInfo;
     private ConversationInfo currentConversationInfo;
@@ -29,20 +28,27 @@ public class InterviewPlayer : MonoBehaviour
     private int currentChunkIndex = 0;
 
     private bool alreadyListenedToThis = false;
-    
-    //Variables for calculating typing-out. Since all calculations take place inside update, i needed to define these here. 
+
+    private bool isPaused = false;
+
+    //Variables for calculating typing-out. Since all calculations take place inside update, i needed to define these here.
     private bool _isTypingOut;
-    private int _chunkIndex = 0; 
+    private int _chunkIndex = 0;
     private bool _setNewChunk;
     private float _lerpPercent;
     private float _currentChunkDuration;
     private float _timer;
+    private float _asteriskTimer; // a timer used to determine how long to pause the text
     private string _transcriptionText = "";
     private int _cutIndex;
+    private int _recentAsteriskIndex = 0; //keep track of the most recent asterisk we have encountered while iterating over the text
 
     private bool _playingIntro;
     private float introTimer;
     private float countTime = 0;
+
+    private float _endOfAsteriskWaitTime = .5f; //amount of time to pause typing at the end of each asterisk (feel free to change based on preference)
+    private float _endOfChunkWaitTime = 1f; //amount of time to pause typing at the end of each chunk (feel free to change based on preference)
 
     // Start is called before the first frame update
     void Start()
@@ -52,11 +58,11 @@ public class InterviewPlayer : MonoBehaviour
         Debug.Assert(TranscriptionDataParser.instance.TranscriptionDataDictionary != null);
         thisConversationName = thisInterview.name;
         thisConversationInfo = TranscriptionDataParser.instance.TranscriptionDataDictionary[thisConversationName];
-           
 
-      
-        
-       
+
+
+
+
         //in the code below, need to change ""thisConversationInfo" to "currentConversationInfo"
 
     }
@@ -64,7 +70,7 @@ public class InterviewPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         float dist = Vector3.Distance(playerTransform.position, transform.position);
         if ( dist <= distanceFromPlayer)
             // if the player is within the declared distance...
@@ -74,19 +80,15 @@ public class InterviewPlayer : MonoBehaviour
             {
                 if(TranscriptionDataParser.instance.metIntervieweeTracker.ContainsKey(thisConversationInfo.chunks[0].Speaker))
                 {
-                    Debug.Log("We haven't met this person before. Retrieving intro...");
                     //if first time talking to person
                     //set currentConversationInfo to the introductionConversationInfo
                     currentConversationInfo =
                         TranscriptionDataParser.instance.metIntervieweeTracker[thisConversationInfo.chunks[0].Speaker];
-                    Debug.Log("The current speaker is" + currentConversationInfo.chunks[0].Speaker);
                     TranscriptionDataParser.instance.metIntervieweeTracker.Remove(
                         thisConversationInfo.chunks[0].Speaker);
                     _playingIntro = true;
                     Debug.Assert(currentConversationInfo != null);
-                    Debug.Log("the specific clip is " + currentConversationInfo.interviewData.specificClip.name);
                     introTimer = currentConversationInfo.interviewData.specificClip.length;
-                    Debug.Log("The length of the introTimer is " + introTimer);
 
                 }
                 if (!_playingIntro)
@@ -94,9 +96,8 @@ public class InterviewPlayer : MonoBehaviour
                     //if NOT the first time talking to person, set the current conversation to the one associated with
                     //this individual object
                     currentConversationInfo = thisConversationInfo;
-                    Debug.Log("currentConversationInfo has been set to thisConversationInfo");
                 }
-                
+
                 myAudioSource.PlayOneShot(currentConversationInfo.interviewData.specificClip);
                 triggeredAudioSource = true;
                 if (!GameManager.instance.textBox.IsActive())
@@ -108,25 +109,33 @@ public class InterviewPlayer : MonoBehaviour
                     _setNewChunk = true; //set a flag to tell us to update to a new chunk
                     _chunkIndex = -1; //reset the chunkIndex to -1. (it will get set to 0 later)
                 }
-                    
+
             }
-            
+
         }
 
         if (_playingIntro)
         {
             countTime += Time.deltaTime;
-            
+
             if (countTime >= introTimer)
             {
                 countTime = 0;
                 myAudioSource.PlayOneShot(thisConversationInfo.interviewData.specificClip);
             }
         }
-        
+
         //HANDLE TYPING OUT TEXT---------------------------------------------------------------------------------------------------------------
         if (_isTypingOut)
         {
+          _asteriskTimer -= Time.deltaTime;
+
+          //if we are delaying the typing after finding an asterik, then call "return". nothing after this line will execute,
+          //meaning the text will not keep typing out until after the _asteriskTimer is up.
+          if(_asteriskTimer > 0){
+            return;
+          }
+
             _timer += Time.deltaTime; //increase timer so we know how much time is elapsed
 
             //The contents of the If-Statement below handle setting a new chunk. This should not happen every frame, hence
@@ -143,7 +152,6 @@ public class InterviewPlayer : MonoBehaviour
                             currentConversationInfo = thisConversationInfo;
                             _chunkIndex = -1;
                             _playingIntro = false;
-                            Debug.Log("_playingIntro has been set to false");
                         }
                         else
                         {
@@ -156,12 +164,13 @@ public class InterviewPlayer : MonoBehaviour
                     _chunkIndex++; //move to the next chunk in the conversation
                     _timer = 0; //reset the timer to 0. (timer is only used to keep track of elapsed time between each chunk, which is why it should be 0 when we first set a new chunk)
                     _cutIndex = 0; //reset cut index (used for substring calculations later)
+                    _recentAsteriskIndex = 0; //reset the location of the most recent asterik we have found
 
                     HandlePortraitActivation(currentConversationInfo.chunks[_chunkIndex].Speaker); //set new portrait, because someone new is talking
 
                     _transcriptionText = currentConversationInfo.chunks[_chunkIndex].speakerText; //get a reference to the speakerText in the current chunk
 
-                    //calculate the duration of the current chunk based on timestamps. 
+                    //calculate the duration of the current chunk based on timestamps.
                     if (_chunkIndex < currentConversationInfo.chunks.Length - 1)
                     {
                         //chunk duration is now set to the time we have between this timestamp and the next time stamp
@@ -179,14 +188,24 @@ public class InterviewPlayer : MonoBehaviour
 
             //Ok here's where we type out the text. This algorithm runs every frame.
 
+            //First we need to calculate the amount of time to offset the typing, so that we can have typing pauses
+            //while still staying synched to the audio.
+            float timeOffset = _endOfChunkWaitTime;
+
+            //HANDLING THE PAUSE IN TYPING AFTER EACH CHUNK (BETWEEN CHARACTER SWITCHES)
+            if (_currentChunkDuration <= _endOfChunkWaitTime)
+            {
+                timeOffset = _currentChunkDuration - .001f;
+            }
+
+            //HANDLING THE PAUSE IN TYPING AFTER EACH ASTERIK (WHEN THE TEXT OVERFLOWS)
+            //Calculate the number of asteriks in this chunk, and for each asterk, add an amount of _endOfAsterikWaitTime to the offset
+            timeOffset -= (_transcriptionText.Split('*').Length - 1) * _endOfAsteriskWaitTime;
+
+
             //calculate what percent "done" we are with this chunk in terms of timing.
             //So if chunk is 10 seconds long, and 5 seconds has elapsed since we started the chunk, we are 50% done.
-            float lessThanOneChecker = 1;
-            if (_currentChunkDuration <= 1)
-            {
-                lessThanOneChecker = _currentChunkDuration - .001f;
-            }
-            _lerpPercent = _timer / (_currentChunkDuration - lessThanOneChecker); 
+            _lerpPercent = _timer / (_currentChunkDuration - timeOffset);
 
             //get the current index in the string we should be at, based on the percent "done" we are with this chunk
             //So if we are 50% "done" with this chunk, and the transcriptionText has 200 characters, then the first 100 characters should be typed out.
@@ -198,13 +217,20 @@ public class InterviewPlayer : MonoBehaviour
 
             //Here is where we need to handle starting the text back at the top when we've reached overflow
             //check to see if there are any * in the text at all
-            if (totalStringSoFar.Contains("*"))
+            if (totalStringSoFar.Contains("*") )
             {
                 //_cutIndex is a variable I am using to track where the beginning of the paragraph should start
                 //so here we set the cut index to the most recent occurance of a * in the string. So the
                 //typing-out will start one character after the most recent * found.
                 _cutIndex = totalStringSoFar.LastIndexOf('*') + 1;
 
+                //If the index of the asterik is new, meaning we have come across a new asterik, then that means
+                //reset the asterik timer so that there can be a pause in the typing before starting a new paragraph
+                if(_recentAsteriskIndex != _cutIndex){
+                  _asteriskTimer = _endOfAsteriskWaitTime;
+                  _recentAsteriskIndex = _cutIndex; //update the recent asterik index so that we don't run this if statement again until we find a new asterik
+                  return; //return will end the Update loop here, so none of the code after this will be executed (nothing will be typed out)
+                }
             }
 
             //Get the length of how many characters we want displayed on the screen this frame.
@@ -215,7 +241,6 @@ public class InterviewPlayer : MonoBehaviour
             if (_isTypingOut)
             {
                 GameManager.instance.textBoxText.text = totalStringSoFar.Substring(_cutIndex, charCount);
-                //Debug.Log("_cutIndex is " + _cutIndex + ", and charCount is " + charCount);
             }
 
             //the _lerpPercent value will be greater than 1 when the _timer is >= the duration of the current chunk.
@@ -230,9 +255,27 @@ public class InterviewPlayer : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------------------
 
 
+        //handle pausing
+        if (FPEGameMenu.Instance.menuActive)
+        {
+            if (myAudioSource.isPlaying)
+            {
+                myAudioSource.Pause();
+                isPaused = true;
+            }
+        }
+
+        if (FPEGameMenu.Instance.menuActive == false && isPaused)
+        {
+            myAudioSource.UnPause();
+        }
+
+        
 
     }
-    
+
+
+
 
     private void ShowTextBox()
     {
@@ -249,6 +292,7 @@ public class InterviewPlayer : MonoBehaviour
         GameManager.instance.portraitSprite.DOFade(1f, boxFadeTime);
         GameManager.instance.nameBox.DOFade(1f, boxFadeTime);
         GameManager.instance.nameText.DOFade(1f, boxFadeTime);
+        Debug.Log("I, " + gameObject.name + ", have finished all ShowTextBox functionality");
     }
 
     private void HideTextBox()
@@ -262,17 +306,19 @@ public class InterviewPlayer : MonoBehaviour
         GameManager.instance.portraitBorder.DOFade(0f, boxFadeTime);
         GameManager.instance.portraitSprite.DOFade(0f, boxFadeTime);
         GameManager.instance.textBox.DOFade(0f, boxFadeTime).OnComplete(() => GameManager.instance.textBox.gameObject.SetActive(false));
-        GameManager.instance.textBoxText.DOFade(0f, boxFadeTime).OnComplete(() => RefreshTextBox());
+        GameManager.instance.textBoxText.DOFade(0f, boxFadeTime);
         GameManager.instance.nameBox.DOFade(0f, boxFadeTime);
         GameManager.instance.nameText.DOFade(0f, boxFadeTime);
         GameManager.instance.nameBoxBorder.DOFade(0f, boxFadeTime);
+        Invoke("RefreshTextBox", boxFadeTime);
 
     }
 
     private void RefreshTextBox()
     {
-        StopCoroutine(intervieweeCoroutine);
         GameManager.instance.textBoxText.text = "";
+        _transcriptionText = "";
+        gameObject.SetActive(false);
     }
 
     private void HandlePortraitActivation(Chunk.speakerName thisSpeaker)
@@ -283,7 +329,7 @@ public class InterviewPlayer : MonoBehaviour
             {
                 PortraitInfo.instance.portraitDictionary[interviewee].gameObject.SetActive(false);
             }
-            
+
             PortraitInfo.instance.portraitDictionary[thisSpeaker].gameObject.SetActive(true);
 
             switch (thisSpeaker)
@@ -310,5 +356,4 @@ public class InterviewPlayer : MonoBehaviour
         }
     }
     
- 
 }

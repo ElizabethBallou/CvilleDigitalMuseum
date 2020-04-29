@@ -10,10 +10,12 @@ public class ArtisticStatementClipPlayer : MonoBehaviour
 {
     public AudioClip myClip;
     [HideInInspector] public bool triggeredAudioSource = false;
-    private AudioSource myAudioSource;
+    [HideInInspector] public AudioSource myAudioSource;
     public float boxFadeTime = 1f;
 
     private bool alreadyListenedToThis = false;
+
+    public int portraitNumber;
     
     //Variables for calculating typing-out. Since all calculations take place inside update, i needed to define these here. 
     private bool _isTypingOut;
@@ -117,11 +119,17 @@ public class ArtisticStatementClipPlayer : MonoBehaviour
     {
         //prevent the player from moving
         FPEInteractionManagerScript.Instance.disableMovement();
+        
         FPEHallwayMenu.instance.hallwayTextHidden = false;
         Debug.Log("ShowHallwayTextBox() is being called by " + gameObject);
         FPEHallwayMenu.instance.HallwayTextBox.gameObject.SetActive(true);
         FPEHallwayMenu.instance.HallwayTextBox.DOFade(.82f, boxFadeTime);
         FPEHallwayMenu.instance.hallwayTextBoxText.DOFade(1f, boxFadeTime);
+
+        if (portraitNumber == 1)
+        {
+            HallwayManager.instance.clickText.DOFade(.5f, .5f);
+        }
 
     }
 

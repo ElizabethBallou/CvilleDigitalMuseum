@@ -167,6 +167,16 @@ namespace Whilefun.FPEKit
 
             #endregion
 
+            if (GameManager.instance.textBox.IsActive())
+            {
+                deactivateReticle();
+            }
+            else
+            {
+                reticle.GetComponent<Image>().overrideSprite = inactiveReticle;
+                interactionIcon.GetComponent<Image>().enabled = false;
+            }
+
         }
 
         #region RETICLE_INTERACTION_LABEL

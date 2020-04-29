@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [HideInInspector] public bool interviewTextBoxHidden = false;
     public Image textBox;
     [HideInInspector] public TextMeshProUGUI textBoxText;
     public Image portraitBackground;
@@ -27,13 +26,6 @@ public class GameManager : MonoBehaviour
     public PostProcessVolume myPPV;
     [HideInInspector]
     public Vignette vignette;
-    
-    public float typeSpeed;
-    
-    [HideInInspector]
-    public AudioSource myAudioSource;
-
-    public AudioClip[] myBackgroundTracks;
 
     public GameObject startDoor;
     
@@ -58,7 +50,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SetupAllTextBoxes();
-        myAudioSource = gameObject.GetComponent<AudioSource>();
         Invoke("NoGoingBack", 3f);
 
     }
