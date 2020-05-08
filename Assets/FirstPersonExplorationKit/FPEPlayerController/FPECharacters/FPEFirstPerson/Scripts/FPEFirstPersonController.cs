@@ -61,8 +61,7 @@ namespace Whilefun.FPEKit {
         private Vector2 bobRangeCrouching = new Vector2(0.2f, 0.2f);
 
         [Header("Audio")]
-        [SerializeField]
-        private FPESoundBank footstepSounds;
+        private FPEFootstepHandler myFPEFootstepHandler;
         [SerializeField]
         private FPESoundBank jumpSounds;
         [SerializeField]
@@ -149,6 +148,8 @@ namespace Whilefun.FPEKit {
             cameraOffsetCrouching.y -= 0.6f;
 
             bobCurveTime = CameraBobCurve[CameraBobCurve.length - 1].time;
+
+            myFPEFootstepHandler = gameObject.GetComponent<FPEFootstepHandler>();
 
         }
 
@@ -551,7 +552,25 @@ namespace Whilefun.FPEKit {
 
             if (enableMovementSounds && movementEnabled)
             {
-                footstepSounds.Play(m_AudioSource);
+                RaycastHit ray;
+                if (Physics.Raycast(transform.position, Vector3.down, out ray, Mathf.Infinity))
+                {
+                    if (ray.transform.tag == "Grass")
+                    {
+                        myFPEFootstepHandler.PickFootstepType(myFPEFootstepHandler.grassFootsteps);
+                    }
+
+                    if (ray.transform.tag == "Stone")
+                    {
+                        myFPEFootstepHandler.PickFootstepType(myFPEFootstepHandler.stoneFootsteps);
+                    }
+
+                    if (ray.transform.tag == "Wood")
+                    {
+                        myFPEFootstepHandler.PickFootstepType(myFPEFootstepHandler.woodFootsteps);
+                    }
+
+                }
             }
 
         }

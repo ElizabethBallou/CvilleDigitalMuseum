@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Whilefun.FPEKit
 {
@@ -166,11 +167,14 @@ namespace Whilefun.FPEKit
             }
 
             #endregion
-
-            if (GameManager.instance.textBox.IsActive())
+            if (SceneManager.GetActiveScene().buildIndex != 0)
             {
-                deactivateReticle();
+                if (GameManager.instance.textBox.IsActive())
+                {
+                    deactivateReticle();
+                }
             }
+
             else
             {
                 reticle.GetComponent<Image>().overrideSprite = inactiveReticle;
@@ -193,7 +197,7 @@ namespace Whilefun.FPEKit
 
         }
 
-        private void deactivateReticle()
+        public void deactivateReticle()
         {
 
             if (HUDEnabled)

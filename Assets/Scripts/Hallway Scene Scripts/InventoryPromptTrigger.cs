@@ -4,14 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Whilefun.FPEKit;
+using TMPro;
 
 public class InventoryPromptTrigger : MonoBehaviour
 {
     public Image inventoryPrompt;
+    private TextMeshProUGUI promptTextObject;
+    public string promptText;
 
     // Start is called before the first frame update
     void Start()
     {
+        promptTextObject = inventoryPrompt.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         inventoryPrompt.gameObject.SetActive(false);
     }
 
@@ -24,6 +28,7 @@ public class InventoryPromptTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         inventoryPrompt.gameObject.SetActive(true);
+        promptTextObject.text = promptText;
         FPEInteractionManagerScript.Instance.disableMovement();
         FPEInteractionManagerScript.Instance.disableMouseLook();
         FPEInteractionManagerScript.Instance.setCursorVisibility(true);
@@ -32,7 +37,6 @@ public class InventoryPromptTrigger : MonoBehaviour
 
     public void okayButtonClick()
     {
-        Debug.Log("I'm getting clicked!");
         inventoryPrompt.gameObject.SetActive(false);
         FPEInteractionManagerScript.Instance.enableMovement();
         FPEInteractionManagerScript.Instance.enableMouseLook();

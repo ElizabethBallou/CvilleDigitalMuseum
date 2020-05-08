@@ -217,8 +217,8 @@
         <e p="Scripts" t="Include">
           <e p="backgroundAudioManager.cs" t="Include" />
           <e p="CanvasLoader.cs" t="Include" />
+          <e p="FPEFootstepHandler.cs" t="Include" />
           <e p="FPEPlayerTriggerHandler.cs" t="Include" />
-          <e p="FPESwitchSceneMenu.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="Hallway Scene Scripts" t="Include">
             <e p="ArtisticStatementClipPlayer.cs" t="Include" />
@@ -248,6 +248,7 @@
           <e p="PostProcessOutline.cs" t="Include" />
           <e p="RenderBehaviorShaderReplacer.cs" t="Include" />
           <e p="Scene Switch Location Scripts" t="Include">
+            <e p="FPESwitchSceneMenu.cs" t="Include" />
             <e p="LocationInfoManager.cs" t="Include" />
             <e p="SceneSetter.cs" t="Include" />
           </e>

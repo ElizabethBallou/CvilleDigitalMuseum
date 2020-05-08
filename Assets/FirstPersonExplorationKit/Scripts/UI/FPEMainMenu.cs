@@ -109,7 +109,6 @@ namespace Whilefun.FPEKit
 
         public void startNewGame()
         {
-            Debug.Log("We are inside startNewGame");
             if (FPESaveLoadManager.Instance.StartANewGame())
             {
                 FPESaveLoadManager.Instance.ChangeSceneToNoSave(FPESaveLoadManager.Instance.FirstLevelSceneBuildIndex);

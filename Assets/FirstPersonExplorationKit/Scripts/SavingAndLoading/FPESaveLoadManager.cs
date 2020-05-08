@@ -146,6 +146,7 @@ namespace Whilefun.FPEKit
                 }
 
             }
+            
 
         }
 
@@ -174,6 +175,8 @@ namespace Whilefun.FPEKit
             baseSavePath = Application.persistentDataPath;
             autoSavePath = Application.persistentDataPath + "/" + autoSaveDirName;
             fullSavePath = Application.persistentDataPath + "/" + fullSaveDirName;
+            
+            Debug.Log(fullSavePath);
 
             // These don't change names at runtime
 

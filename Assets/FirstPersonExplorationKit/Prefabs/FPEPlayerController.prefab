@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 11449600}
   - component: {fileID: 11449602}
   - component: {fileID: 2488030911242492841}
+  - component: {fileID: -2646303686018732407}
   m_Layer: 10
   m_Name: FPEPlayerController
   m_TagString: Player
@@ -90,7 +91,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -268,7 +269,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   bobRangeStanding: {x: 0.05, y: 0.1}
   bobRangeCrouching: {x: 0.2, y: 0.2}
-  footstepSounds: {fileID: 11400000, guid: f696b89200bb75f42bd6652d04f681f0, type: 2}
   jumpSounds: {fileID: 11400000, guid: 134786474185b3548a8027c53a522e89, type: 2}
   landingSounds: {fileID: 11400000, guid: 2a10bd2498e0c724fa6035cb9fe7fded, type: 2}
   enableMovementSounds: 1
@@ -307,6 +307,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3a4011300d07141a539e12fa877e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grassFootsteps: []
+  stoneFootsteps: []
+  woodFootsteps: []
+--- !u!114 &-2646303686018732407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66792b8f50184964984ff54d1814a689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  woodFootsteps:
+  - {fileID: 8300000, guid: 780a701d3f5cf064090d5ececac4a909, type: 3}
+  - {fileID: 8300000, guid: 40e4bd50e9a12b74b917799d33bcb521, type: 3}
+  - {fileID: 8300000, guid: 42ca2262f6af965429b3fadcc781f74e, type: 3}
+  - {fileID: 8300000, guid: 8f1de3034ecb06749a24dac19677894e, type: 3}
+  grassFootsteps:
+  - {fileID: 8300000, guid: e8551e7ecd15e1f469b0bc2da06ad86e, type: 3}
+  - {fileID: 8300000, guid: 263cb56ee46a4a54caa5f8d750b9a22d, type: 3}
+  - {fileID: 8300000, guid: feb5f3420f3211e4b8fee8addefd360d, type: 3}
+  - {fileID: 8300000, guid: 8936cf315d772ad47bccf57e69ceb16a, type: 3}
+  stoneFootsteps:
+  - {fileID: 8300000, guid: c82b765cd227eb94cbf7f1257038248f, type: 3}
+  - {fileID: 8300000, guid: cc7c6f6f6e5c83b40b19e85fb9fad5c5, type: 3}
+  - {fileID: 8300000, guid: 4c5b3c6365d7b9d4385a04a2c3b824c0, type: 3}
+  - {fileID: 8300000, guid: 73e84a01b12334b41bd335124e81d05a, type: 3}
 --- !u!1 &149582
 GameObject:
   m_ObjectHideFlags: 0

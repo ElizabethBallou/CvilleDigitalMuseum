@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class FPEPlayerTriggerHandler : MonoBehaviour
 {
+
+    public AudioClip[] grassFootsteps;
+
+    public AudioClip[] stoneFootsteps;
+
+    public AudioClip[] woodFootsteps;
     // Start is called before the first frame update
     void Start()
     {

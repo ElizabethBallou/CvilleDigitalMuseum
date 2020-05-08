@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using Whilefun.FPEKit;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
     public Vignette vignette;
 
     public GameObject startDoor;
+
+    public GameObject myMinimalHUD;
     
 
     private void Awake()
@@ -51,6 +54,9 @@ public class GameManager : MonoBehaviour
     {
         SetupAllTextBoxes();
         Invoke("NoGoingBack", 3f);
+
+        myMinimalHUD = GameObject.Find("FPEMinimalHUD(Clone)");
+        myMinimalHUD.GetComponent<FPEMinimalHUD>().HUDEnabled = true;
 
     }
 

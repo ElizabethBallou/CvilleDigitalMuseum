@@ -52,7 +52,6 @@ public class SymbolMouseHover : MonoBehaviour
 
     private void OnMouseExit()
     {
-        Debug.Log("I'm no longer mousing over");
         audioSprite.material = HallwayManager.instance.materialArray[0];
     }
 
@@ -61,7 +60,6 @@ public class SymbolMouseHover : MonoBehaviour
         clickedObject = true;
         audioSprite.material = HallwayManager.instance.materialArray[0];
 
-        Debug.Log("I'm clicking on this object");
         if (audioSprite.color.a >= .3f)
         {
             Debug.Log("I'm triggering BeginClip");

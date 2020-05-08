@@ -9,6 +9,31 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: defaultMat
     second: {fileID: 2100000, guid: c009b4cca2cbd08458f6de626c7dff83, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat12
+    second: {fileID: 2100000, guid: cab732e5f2b082248bc78ad83b61cbbf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat13
+    second: {fileID: 2100000, guid: 7a497bd24671a354a91b9e963db5f162, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat14
+    second: {fileID: 2100000, guid: 533f6191557431641adb607664de2a38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat16
+    second: {fileID: 2100000, guid: 71819260386fedb4e803b2fef8e22117, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat25
+    second: {fileID: 2100000, guid: b1862c65d642dca48813cc68c160d0d5, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -49,7 +74,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1

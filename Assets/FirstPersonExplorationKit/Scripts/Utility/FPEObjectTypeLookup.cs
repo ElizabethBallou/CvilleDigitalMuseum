@@ -46,6 +46,48 @@ namespace Whilefun.FPEKit
                 inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.COLLECTIBLE, "demoCollectible");
                 inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.SIMPLEKEY, "demoSimpleKey");
                 inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.WEDONTWANTYOUTOKNOWUS, "We don't want you to know us");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.FIFTEENPERCENTMAKEOVER,
+                    "Fifteen percent make over...");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.AMPLIFYINGFOOTNOTES,
+                    "Amplifying footnotes");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.ANACTOFGOD, "An act of God");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.BASEDINAMHERSTCOUNTY,
+                    "Based in Amherst County");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.CITYBEAUTIFUL,
+                    "The City Beautiful movement");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.DENYINGEDUCATION,
+                    "Denying education");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.FUNDEDBYCONFEDERATEWHITEWOMEN,
+                    "Funded by Confederate white women");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.GLORIFICATIONOLDWHITEMEN,
+                    "Glorification of old white men");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.KEPTCAREFULRECORDS,
+                    "Kept careful records");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.MANYOFYOUDIDNOTKNOW,
+                    "Many of you did not know");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.MYBACKGROUNDHASCHANGEDALOT,
+                    "My background has changed a lot");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.NONEOFTHEGUIDESAREPAID,
+                    "None of the guides are paid");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.PARANOIABLACKMAJORITY,
+                    "Paranoia black majority");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.PLRESEARCHREALIZATION,
+                    "Phyllis Leffler research realization");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.PRODUCEHORSESHUMANS,
+                    "Produce, horses, and humans");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.PUBLICSCHOOLS, "Public schools");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.RECONSTRUCTION1, "Reconstruction 1");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.TAXPAYERCOST, "Taxpayer cost");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.TODAYWEESTABLISHEDCONTROL,
+                    "Today we established control");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.WEGIVEOURTHANKS,
+                    "We give our thanks");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.MEMORYNOTHISTORY,
+                    "Memory not history");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.SLAVEAUCTIONBLOCK,
+                    "slave auction block");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.CCINTRODUCTION,
+                    "Caro Campos introduction");
 
                 // 
                 // To add a new item, simply add a new dictionary entry for that eInventoryItems type and 

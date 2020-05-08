@@ -17,6 +17,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 263cb56ee46a4a54caa5f8d750b9a22d, type: 3}
   - {fileID: 8300000, guid: feb5f3420f3211e4b8fee8addefd360d, type: 3}
   - {fileID: 8300000, guid: 8936cf315d772ad47bccf57e69ceb16a, type: 3}
+  - {fileID: 8300000, guid: c82b765cd227eb94cbf7f1257038248f, type: 3}
+  - {fileID: 8300000, guid: cc7c6f6f6e5c83b40b19e85fb9fad5c5, type: 3}
+  - {fileID: 8300000, guid: 4c5b3c6365d7b9d4385a04a2c3b824c0, type: 3}
+  - {fileID: 8300000, guid: 73e84a01b12334b41bd335124e81d05a, type: 3}
+  - {fileID: 8300000, guid: 780a701d3f5cf064090d5ececac4a909, type: 3}
+  - {fileID: 8300000, guid: 40e4bd50e9a12b74b917799d33bcb521, type: 3}
+  - {fileID: 8300000, guid: 42ca2262f6af965429b3fadcc781f74e, type: 3}
+  - {fileID: 8300000, guid: 8f1de3034ecb06749a24dac19677894e, type: 3}
   volume:
     minValue: 0.9
     maxValue: 1

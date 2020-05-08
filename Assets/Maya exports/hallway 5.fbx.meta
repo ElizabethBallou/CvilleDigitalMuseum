@@ -3,7 +3,72 @@ guid: e9099c0c4c906754a97356440d85e79b
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AldermanPortraitTexture
+    second: {fileID: 2100000, guid: d903b43c6f9fae64bb43f3db1161faf0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BarringerPortraitTexture
+    second: {fileID: 2100000, guid: 0b9fe8aa6ea1e9445838993d6b12fa99, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JeffersonPortrait1
+    second: {fileID: 2100000, guid: 974afe294329cd2478f7606cab19d51c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LewisPortraitTexture
+    second: {fileID: 2100000, guid: 53f5843c2ee862c47b21961884847aae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MadisonPortraitTexture
+    second: {fileID: 2100000, guid: a858002c47aa2534aba0db7b941780ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MeriweatherLewisPortrait
+    second: {fileID: 2100000, guid: 641d4f8bf318e1845a710d13fe7ff28a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Monroe2PortraitTexture
+    second: {fileID: 2100000, guid: 32c93981df54e10478a154edd63ebfaf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MosbyPortraitTexture
+    second: {fileID: 2100000, guid: 9adbc76bee349084e8b6cf108fa522e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PoePortraitTexture
+    second: {fileID: 2100000, guid: 8f3e739e5e49dea4580e3c47ed621020, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: floorcolor
+    second: {fileID: 2100000, guid: 4547e993fac83364881812fe2e293185, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: frameColor
+    second: {fileID: 2100000, guid: 1bc0d6e33093d0a41aa7f3eb56520109, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: a5c20a9a8b5e18049887f22c83bf0bdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wallcolor
+    second: {fileID: 2100000, guid: 541f9b3e02e18db4daa2863cc6ae0ffb, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -44,7 +109,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
