@@ -11,7 +11,7 @@ using Whilefun.FPEKit;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    /*
     public Image textBox;
     [HideInInspector] public TextMeshProUGUI textBoxText;
     public Image portraitBackground;
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Color transparentPortraitBorderColor;
     public PostProcessVolume myPPV;
     [HideInInspector]
-    public Vignette vignette;
+    public Vignette vignette; */
 
     public GameObject startDoor;
 
@@ -42,17 +42,17 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        transparentWhiteColor = new Color(255, 255, 255, 0);
+        /*transparentWhiteColor = new Color(255, 255, 255, 0);
         transparentBoxColor = new Color(192, 184, 184, 0);
         transparentBlackColor = new Color(0, 0, 0, 0);
-        transparentPortraitBorderColor = new Color(147, 134, 134, 0);
+        transparentPortraitBorderColor = new Color(147, 134, 134, 0);*/
 
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        SetupAllTextBoxes();
+        //SetupAllTextBoxes();
         Invoke("NoGoingBack", 3f);
 
         myMinimalHUD = GameObject.Find("FPEMinimalHUD(Clone)");
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         Destroy(startDoor);
     }
 
-    public void SetupAllTextBoxes()
+    /*public void SetupAllTextBoxes()
     {
         //setup for interview player scripts, which access the text box, text, figure, and PPV set here
         
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         
         myPPV.profile.TryGetSettings(out vignette);
 
-    }
+    }*/
     
 
     // Update is called once per frame

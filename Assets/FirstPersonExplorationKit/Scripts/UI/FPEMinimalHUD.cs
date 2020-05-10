@@ -169,10 +169,10 @@ namespace Whilefun.FPEKit
             #endregion
             if (SceneManager.GetActiveScene().buildIndex != 0)
             {
-                if (GameManager.instance.textBox.IsActive())
+                /*if (GameManager.instance.textBox.IsActive())
                 {
                     deactivateReticle();
-                }
+                }*/
             }
 
             else

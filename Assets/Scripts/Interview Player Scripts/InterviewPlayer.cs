@@ -100,9 +100,9 @@ public class InterviewPlayer : MonoBehaviour
 
                 myAudioSource.PlayOneShot(currentConversationInfo.interviewData.specificClip);
                 triggeredAudioSource = true;
-                if (!GameManager.instance.textBox.IsActive())
+                if (!FPEInterviewPlayerMenu.instance.textBox.IsActive())
                 {
-                    ShowTextBox();
+                    FPEInterviewPlayerMenu.instance.ShowTextBox();
 
                     //Start typing out text.
                     _isTypingOut = true; //set a flag to tell us to start the typing-out algorithm!
@@ -155,7 +155,8 @@ public class InterviewPlayer : MonoBehaviour
                         }
                         else
                         {
-                            HideTextBox();
+                            FPEInterviewPlayerMenu.instance.HideTextBox();
+                            Invoke("ResetTranscriptionText", boxFadeTime * 2);
                         }
                 }
                 //otherwise, do some setup for the next chunk
@@ -240,7 +241,7 @@ public class InterviewPlayer : MonoBehaviour
             //the percent "finished" we are with this chunk.
             if (_isTypingOut)
             {
-                GameManager.instance.textBoxText.text = totalStringSoFar.Substring(_cutIndex, charCount);
+                FPEInterviewPlayerMenu.instance.textBoxText.text = totalStringSoFar.Substring(_cutIndex, charCount);
             }
 
             //the _lerpPercent value will be greater than 1 when the _timer is >= the duration of the current chunk.
@@ -277,7 +278,7 @@ public class InterviewPlayer : MonoBehaviour
 
 
 
-    private void ShowTextBox()
+    /*private void ShowTextBox()
     {
         FPEInteractionManagerScript.Instance.disableMovement();
 
@@ -312,11 +313,11 @@ public class InterviewPlayer : MonoBehaviour
         GameManager.instance.nameBoxBorder.DOFade(0f, boxFadeTime);
         Invoke("RefreshTextBox", boxFadeTime);
 
-    }
+    } */
 
-    private void RefreshTextBox()
+    private void ResetTranscriptionText()
     {
-        GameManager.instance.textBoxText.text = "";
+        FPEInterviewPlayerMenu.instance.textBoxText.text = "";
         _transcriptionText = "";
         gameObject.SetActive(false);
     }
@@ -335,22 +336,22 @@ public class InterviewPlayer : MonoBehaviour
             switch (thisSpeaker)
             {
                 case Chunk.speakerName.AD:
-                    GameManager.instance.nameText.text = "Dr. Andrea Douglas";
+                    FPEInterviewPlayerMenu.instance.nameText.text = "Dr. Andrea Douglas";
                     break;
                 case Chunk.speakerName.EB:
-                    GameManager.instance.nameText.text = "Elizabeth Ballou";
+                    FPEInterviewPlayerMenu.instance.nameText.text = "Elizabeth Ballou";
                     break;
                 case Chunk.speakerName.JH:
-                    GameManager.instance.nameText.text = "Dr. Jeffrey Hantman";
+                    FPEInterviewPlayerMenu.instance.nameText.text = "Dr. Jeffrey Hantman";
                     break;
                 case Chunk.speakerName.JS:
-                    GameManager.instance.nameText.text = "Dr. Jalane Schmidt";
+                    FPEInterviewPlayerMenu.instance.nameText.text = "Dr. Jalane Schmidt";
                     break;
                 case Chunk.speakerName.PL:
-                    GameManager.instance.nameText.text = "Dr. Phyllis Leffler";
+                    FPEInterviewPlayerMenu.instance.nameText.text = "Dr. Phyllis Leffler";
                     break;
                 case Chunk.speakerName.CC:
-                    GameManager.instance.nameText.text = "Caro Campos";
+                    FPEInterviewPlayerMenu.instance.nameText.text = "Caro Campos";
                     break;
             }
         }
