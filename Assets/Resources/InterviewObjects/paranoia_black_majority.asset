@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: paranoia_black_majority
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: f9b75a3d7fb753f48926fbe0b91aa0d7, type: 3}
+  specificClip: {fileID: 8300000, guid: 23ee95d89d67faa4280ec391f637dfc6, type: 3}
   InterviewTags: 0

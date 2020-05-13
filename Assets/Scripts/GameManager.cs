@@ -11,26 +11,22 @@ using Whilefun.FPEKit;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    /*
-    public Image textBox;
-    [HideInInspector] public TextMeshProUGUI textBoxText;
-    public Image portraitBackground;
-    public Image portraitSprite;
-    public Image portraitBorder;
-    public Image nameBox;
-    public Image nameBoxBorder;
-    [HideInInspector] public TextMeshProUGUI nameText;
-    [HideInInspector] public Color transparentWhiteColor;
-    [HideInInspector] public Color transparentBoxColor;
-    [HideInInspector] public Color transparentBlackColor;
-    [HideInInspector] public Color transparentPortraitBorderColor;
-    public PostProcessVolume myPPV;
-    [HideInInspector]
-    public Vignette vignette; */
 
     public GameObject startDoor;
 
     public GameObject myMinimalHUD;
+
+    [HideInInspector] public int lawnRecordsFound = 0;
+
+    [HideInInspector] public int downtownRecordsFound = 0;
+
+    public int lawnRecordsTotal = 0;
+
+    public int downtownRecordsTotal = 0;
+
+    public TextMeshProUGUI foundRecordsText;
+
+    private bool scoringHasCompleted = false;
     
 
     private void Awake()
@@ -57,6 +53,7 @@ public class GameManager : MonoBehaviour
 
         myMinimalHUD = GameObject.Find("FPEMinimalHUD(Clone)");
         myMinimalHUD.GetComponent<FPEMinimalHUD>().HUDEnabled = true;
+        foundRecordsText.gameObject.SetActive(false);
 
     }
 
@@ -94,6 +91,35 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AddFoundRecordCount(int sceneNo)
+    {
+        if (!scoringHasCompleted)
+        {
+            if (sceneNo == 2)
+            {
+                //then it's the Lawn # that needs to be updated
+                lawnRecordsFound++;
+                foundRecordsText.text = "Lawn Records Found: " + lawnRecordsFound + "/" + lawnRecordsTotal;
+            }
+
+            if (sceneNo == 3)
+            {
+                //then it's the downtown mall
+                downtownRecordsFound++;
+                foundRecordsText.text = "Downtown Records Found: " + downtownRecordsFound + "/" + downtownRecordsTotal;
+            }
+
+            scoringHasCompleted = true;
+            Invoke("FixScoringComplete", 2f);
+        }
+        
+    }
+
+    public void FixScoringComplete()
+    {
+        scoringHasCompleted = false;
     }
     
 }

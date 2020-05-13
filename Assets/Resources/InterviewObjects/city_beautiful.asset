@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: city_beautiful
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: 9c74c0397c7d3ea4795534dd2f31e5ea, type: 3}
+  specificClip: {fileID: 8300000, guid: bef51e73b461cff4dbdc984fc62fbef6, type: 3}
   InterviewTags: 0

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: slave_auction_block
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: dbff5b3167ba730429a8c460e670d592, type: 3}
+  specificClip: {fileID: 8300000, guid: 29b58accb3f5695448dec66f7301c23e, type: 3}
   InterviewTags: 0

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: taxpayer_cost
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: 92f2d3b3fae73cb40bb16fee74e10e42, type: 3}
+  specificClip: {fileID: 8300000, guid: 2ae8a90579b113942973c621f80ed797, type: 3}
   InterviewTags: 0

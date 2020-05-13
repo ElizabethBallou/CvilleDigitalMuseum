@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: based_in_amherst_county
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: 1aa819eab4de9184081ea2c1f42b533e, type: 3}
+  specificClip: {fileID: 8300000, guid: 97aa900982a0fed48ae660a08df776f7, type: 3}
   InterviewTags: 0

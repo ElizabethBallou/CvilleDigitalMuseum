@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: produce_horses_humans
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: 4450482db16e1994aadfb1b4c2532f41, type: 3}
+  specificClip: {fileID: 8300000, guid: c9e4fd352b872ef4496f6a319569a823, type: 3}
   InterviewTags: 0

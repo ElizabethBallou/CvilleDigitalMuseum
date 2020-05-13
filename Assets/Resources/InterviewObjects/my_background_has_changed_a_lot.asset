@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: my_background_has_changed_a_lot
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: 5fdca32c35136564883bcd56a77c33ce, type: 3}
+  specificClip: {fileID: 8300000, guid: 6f46c68c7cbd62f48af44c3d91440f3d, type: 3}
   InterviewTags: 0

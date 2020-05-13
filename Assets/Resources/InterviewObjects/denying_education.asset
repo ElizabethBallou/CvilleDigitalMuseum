@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: denying_education
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: 7c5048d092bd3154499d5db40bab7180, type: 3}
+  specificClip: {fileID: 8300000, guid: e7fb3684ae6d6014596e132a09001b87, type: 3}
   InterviewTags: 0

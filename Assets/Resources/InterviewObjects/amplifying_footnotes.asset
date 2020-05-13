@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: amplifying_footnotes
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: 4dff816bdb099174997a87c7b763f41c, type: 3}
+  specificClip: {fileID: 8300000, guid: 360b53bb4768e3940989a985e7f7ab99, type: 3}
   InterviewTags: 0

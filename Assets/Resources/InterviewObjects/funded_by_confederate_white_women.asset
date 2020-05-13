@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: funded_by_confederate_white_women
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: 1a3e67b3835160b4fb1574477a37e324, type: 3}
+  specificClip: {fileID: 8300000, guid: 5a4ad97354faef4428beefa1dda8a013, type: 3}
   InterviewTags: 0

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: public_schools
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: 3752733bd7977eb419c42bf840b389db, type: 3}
+  specificClip: {fileID: 8300000, guid: 89e541e312133a74db336a4ef5e1d2fc, type: 3}
   InterviewTags: 0

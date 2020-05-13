@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: glorification_old_white_men
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: fa3f330ebdcacba478fda3dc73246913, type: 3}
+  specificClip: {fileID: 8300000, guid: 65f3035aecb9be146a8d9891d7bd4c6c, type: 3}
   InterviewTags: 0

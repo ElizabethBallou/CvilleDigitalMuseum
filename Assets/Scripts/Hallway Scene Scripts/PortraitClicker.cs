@@ -19,32 +19,21 @@ public class PortraitClicker : MonoBehaviour
 
     private int clickNumberTracker = 0;
 
-    private bool trailerfadeout = false;
+    public bool trailerfadeout = false;
     // Start is called before the first frame update
     void Start()
     {
         myMeshRenderer = gameObject.GetComponent<MeshRenderer>();
         mySymbolInfo = myClipPlayer.transform.GetComponentInChildren<SymbolMouseHover>();
-        //Invoke("TrailerWait", 2f);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        /*if (trailerfadeout)
-        {
-            myMeshRenderer.material.SetFloat("_Cutoff", cutoffValue);
-            cutoffValue = cutoffValue + .002f;
-        }*/
+       
 
     }
 
-    private void TrailerWait()
-    {
-        trailerfadeout = true;
-    }
-
-    
 
 
     private void OnMouseDown()

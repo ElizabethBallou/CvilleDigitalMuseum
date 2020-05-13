@@ -15,11 +15,14 @@ public class IntroScript : MonoBehaviour
     public static IntroScript instance;
     public FPEMainMenu myFPEMainMenu;
     public Button beginButton;
+    public Button quitButton;
     private TextMeshProUGUI beginButtonText;
+    private TextMeshProUGUI quitButtonText;
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI subhedText;
     public Image charlottesvilleMap;
     public Image typeWriter;
+    public Image blackBackdrop;
     public Button spacebarButton;
     private AudioSource spacebarBell;
     public AudioClip bellSound;
@@ -71,6 +74,8 @@ public class IntroScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        quitButtonText = quitButton.gameObject.GetComponentInChildren<TextMeshProUGUI>();
         giveUpButtonText = giveUpButton.GetComponentInChildren<TextMeshProUGUI>();
         giveUpButton.image.color = clearWhite;
         giveUpButtonText.color = clearWhite;
@@ -92,6 +97,8 @@ public class IntroScript : MonoBehaviour
         spacebarBell = spacebarButton.gameObject.GetComponent<AudioSource>();
         jeffersonTypingAudioSource = JeffersonianFactText.gameObject.GetComponent<AudioSource>();
         buriedTypingAudioSource = BuriedFactText.gameObject.GetComponent<AudioSource>();
+
+        blackBackdrop.gameObject.SetActive(false);
 
     }
 
@@ -168,9 +175,11 @@ public class IntroScript : MonoBehaviour
     public void playButtonPressed()
     {
         beginButtonPressed = true;
-        beginButton.image.DOFade(0f, 1f);
+        beginButton.image.DOFade(0f, 1f).OnComplete(() => beginButton.gameObject.SetActive(false));
         beginButton.GetComponentInChildren<TextMeshProUGUI>().DOFade(0f, 1f);
         subhedText.DOFade(0f, 1f);
+        quitButton.image.DOFade(0f, 1f).OnComplete(() => quitButton.gameObject.SetActive(false));
+        quitButtonText.DOFade(0f, 1f);
         titleText.DOFade(0f, 1f).OnComplete(() => backgroundAudioManager.instance.myAudioSource.Play());
 
         typeWriter.gameObject.SetActive(true);
@@ -186,7 +195,10 @@ public class IntroScript : MonoBehaviour
             Debug.Log("I'm trying to continue the game, which is weird as hell");
             myFPEMainMenu.continueGame();
         }*/
-        myFPEMainMenu.startNewGame();
+        blackBackdrop.gameObject.SetActive(true);
+        blackBackdrop.gameObject.transform.SetAsLastSibling();
+        blackBackdrop.DOFade(1f, .5f).OnComplete(() => myFPEMainMenu.startNewGame());
+
     }
 
     public void OnSpacebarPress()

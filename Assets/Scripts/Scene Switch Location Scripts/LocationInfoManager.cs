@@ -54,8 +54,7 @@ public class LocationInfoManager : MonoBehaviour
 
     void Start()
     {
-        //blackBackdrop.gameObject.SetActive(true);
-        //blackBackdrop.rectTransform.SetAsLastSibling();
+        blackBackdrop.rectTransform.SetAsLastSibling();
 
         playerObject = GameObject.FindWithTag("Player");
 
@@ -100,10 +99,20 @@ public class LocationInfoManager : MonoBehaviour
         //find the place where the player is supposed to spawn in. This is used if the player clicks "no" upon switching scenes.
         startTransform = GameObject.Find("PlayerStartLocation").GetComponent<Transform>();
         locationText.color = fullyOpaque;
-        //blackBackdrop.DOFade(0f, .5f).OnComplete(() => blackBackdrop.rectTransform.SetAsFirstSibling());
+        blackBackdrop.DOFade(0f, .5f).OnComplete(() => blackBackdrop.rectTransform.SetAsFirstSibling());
         currentScene = SceneManager.GetActiveScene();
         int sceneIndex = currentScene.buildIndex;
        
+        if (sceneIndex == 2)
+        {
+            GameManager.instance.foundRecordsText.gameObject.SetActive(true);
+            GameManager.instance.foundRecordsText.text = "Lawn Records Found: " + GameManager.instance.lawnRecordsFound + "/" + GameManager.instance.lawnRecordsTotal;
+        }
+
+        if (sceneIndex == 3)
+        {
+            GameManager.instance.foundRecordsText.text = "Downtown Records Found: " + GameManager.instance.downtownRecordsFound + "/" + GameManager.instance.downtownRecordsTotal;
+        }
         StartCoroutine(ShowLocationText(locationStrings[sceneIndex -1]));
         
     }

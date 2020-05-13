@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e166af9317700bb469b25298587d3ee3, type: 3}
   m_Name: we_give_our_thanks
   m_EditorClassIdentifier: 
-  specificClip: {fileID: 8300000, guid: 8031fdaecee44c440b204a69316e071d, type: 3}
+  specificClip: {fileID: 8300000, guid: de7e80ad7071c6e42940b4e48d93f4f4, type: 3}
   InterviewTags: 0

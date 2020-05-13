@@ -337,18 +337,23 @@ public class InterviewPlayer : MonoBehaviour
             {
                 case Chunk.speakerName.AD:
                     FPEInterviewPlayerMenu.instance.nameText.text = "Dr. Andrea Douglas";
+                    myAudioSource.volume = .5f;
                     break;
                 case Chunk.speakerName.EB:
                     FPEInterviewPlayerMenu.instance.nameText.text = "Elizabeth Ballou";
+                    myAudioSource.volume = .5f;
                     break;
                 case Chunk.speakerName.JH:
                     FPEInterviewPlayerMenu.instance.nameText.text = "Dr. Jeffrey Hantman";
+                    myAudioSource.volume = .5f;
                     break;
                 case Chunk.speakerName.JS:
                     FPEInterviewPlayerMenu.instance.nameText.text = "Dr. Jalane Schmidt";
+                    myAudioSource.volume = .5f;
                     break;
                 case Chunk.speakerName.PL:
                     FPEInterviewPlayerMenu.instance.nameText.text = "Dr. Phyllis Leffler";
+                    myAudioSource.volume = .5f;
                     break;
                 case Chunk.speakerName.CC:
                     FPEInterviewPlayerMenu.instance.nameText.text = "Caro Campos";
