@@ -77,7 +77,7 @@ namespace Whilefun.FPEKit
         private GameObject exitConfirmationPanel = null;
         private GameObject actionsPanelParent = null;
         private FPEInventoryActionsPanel inventoryActionsPanel = null;
-       // private GameObject pageControlPanel = null;
+        private GameObject pageControlPanel = null;
 
         // Panels and slots of different types //
         private FPEInventoryItemSlot[] inventorySlots;
@@ -87,8 +87,8 @@ namespace Whilefun.FPEKit
         private FPEMenuButton[] exitConfirmationButtons;
 
         // Page selection buttons and gamepad hints
-        //private GameObject previousPageButton = null;
-        //private GameObject nextPageButton = null;
+        private GameObject previousPageButton = null;
+        private GameObject nextPageButton = null;
         //private GameObject previousPageHint = null;
         //private GameObject nextPageHint = null;
         //private TextMeshProUGUI pageIndicatorText = null;
@@ -173,9 +173,9 @@ namespace Whilefun.FPEKit
             systemPanel = menuCanvas.gameObject.transform.Find("SystemPanel").gameObject;
             exitConfirmationPanel = menuCanvas.gameObject.transform.Find("ExitConfirmationPanel").gameObject;
             actionsPanelParent = menuCanvas.gameObject.transform.Find("InventoryActionsPanel").gameObject;
-            //pageControlPanel = menuCanvas.gameObject.transform.Find("PageControlsPanel").gameObject;
+            pageControlPanel = menuCanvas.gameObject.transform.Find("PageControlsPanel").gameObject;
 
-            if (!inventoryItemInfoPanelParent || !inventoryItemsListPanel || /*!audioDiariesPanel ||*/ !notesPanel || !noteContentsPanelParent || !systemPanel || !actionsPanelParent /*|| !pageControlPanel*/)
+            if (!inventoryItemInfoPanelParent || !inventoryItemsListPanel || /*!audioDiariesPanel ||*/ !notesPanel || !noteContentsPanelParent || !systemPanel || !actionsPanelParent || !pageControlPanel)
             {
                 Debug.LogError("FPEGameMenu:: Cannot find one or more of the menu panels! Did you rename or remove them?");
             }
@@ -247,9 +247,9 @@ namespace Whilefun.FPEKit
             }
 
             // Find Previous/Next page buttons and hints
-            //pageControlPanel.SetActive(true);
-            //previousPageButton = pageControlPanel.transform.Find("PreviousPageButton").gameObject;
-            //nextPageButton = pageControlPanel.transform.Find("NextPageButton").gameObject;
+            pageControlPanel.SetActive(true);
+            previousPageButton = pageControlPanel.transform.Find("PreviousPageButton").gameObject;
+            nextPageButton = pageControlPanel.transform.Find("NextPageButton").gameObject;
             //previousPageHint = pageControlPanel.transform.Find("RightStickHintLeft").gameObject;
             //nextPageHint = pageControlPanel.transform.Find("RightStickHintRight").gameObject;
             //pageIndicatorText = pageControlPanel.transform.Find("PageIndicatorText").gameObject.GetComponent<TextMeshProUGUI>();
@@ -597,7 +597,7 @@ namespace Whilefun.FPEKit
                     refreshItemSlotsAndDetailsView();
                     inventoryItemsListPanel.SetActive(true);
                     inventoryItemInfoPanelParent.SetActive(true);
-                    //pageControlPanel.SetActive(true);
+                    pageControlPanel.SetActive(true);
                     restoreSelectedItemSlot();
                     break;
 
@@ -614,7 +614,7 @@ namespace Whilefun.FPEKit
                     refreshNoteSlotsView();
                     notesPanel.SetActive(true);
                     noteContentsPanelParent.SetActive(true);
-                    //pageControlPanel.SetActive(true);
+                    pageControlPanel.SetActive(true);
                     //restoreSelectedNoteSlot();
                     break;
 

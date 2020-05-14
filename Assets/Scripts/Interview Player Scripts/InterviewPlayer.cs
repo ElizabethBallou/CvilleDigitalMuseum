@@ -31,6 +31,12 @@ public class InterviewPlayer : MonoBehaviour
 
     private bool isPaused = false;
 
+    //light handlers
+    public Light myLight;
+    public GameObject myLantern;
+    public Material[] myLanternMatArray;
+    public Material myLanternMat;
+
     //Variables for calculating typing-out. Since all calculations take place inside update, i needed to define these here.
     private bool _isTypingOut;
     private int _chunkIndex = 0;
@@ -60,7 +66,10 @@ public class InterviewPlayer : MonoBehaviour
         thisConversationInfo = TranscriptionDataParser.instance.TranscriptionDataDictionary[thisConversationName];
 
 
-
+        myLight = gameObject.transform.parent.GetComponentInChildren<Light>();
+        myLantern = gameObject.transform.parent.GetChild(1).GetChild(2).GetChild(0).gameObject;
+        myLanternMatArray = myLantern.GetComponent<MeshRenderer>().materials;
+        myLanternMat = myLanternMatArray[1];
 
 
         //in the code below, need to change ""thisConversationInfo" to "currentConversationInfo"
@@ -156,7 +165,12 @@ public class InterviewPlayer : MonoBehaviour
                         else
                         {
                             FPEInterviewPlayerMenu.instance.HideTextBox();
-                            Invoke("ResetTranscriptionText", boxFadeTime * 2);
+                            myLight.DOIntensity(0f, boxFadeTime * 2);
+                            myLanternMat.DisableKeyword("_EMISSION");
+                            myLanternMat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
+                            myLanternMat.SetColor("_EmissionColor", Color.black);
+
+                        Invoke("ResetTranscriptionText", boxFadeTime * 2);
                         }
                 }
                 //otherwise, do some setup for the next chunk
@@ -271,49 +285,24 @@ public class InterviewPlayer : MonoBehaviour
             myAudioSource.UnPause();
         }
 
+        //debug function
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (_isTypingOut)
+            {
+                FPEInterviewPlayerMenu.instance.HideTextBox();
+                myLight.DOIntensity(0f, boxFadeTime * 2);
+                myLanternMat.DisableKeyword("_EMISSION");
+                myLanternMat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
+                myLanternMat.SetColor("_EmissionColor", Color.black);
+                Invoke("ResetTranscriptionText", boxFadeTime * 2);
+            }
+        }
+
         
 
     }
 
-
-
-
-    /*private void ShowTextBox()
-    {
-        FPEInteractionManagerScript.Instance.disableMovement();
-
-        if (GameManager.instance.vignette != null)
-            DOTween.To(() => GameManager.instance.vignette.intensity.value,
-                x => GameManager.instance.vignette.intensity.value = x, .45f, boxFadeTime);
-        GameManager.instance.textBox.gameObject.SetActive(true);
-        GameManager.instance.textBox.DOFade(.82f, boxFadeTime);
-        GameManager.instance.textBoxText.DOFade(1f, boxFadeTime);
-        GameManager.instance.portraitBackground.DOFade(1f, boxFadeTime);
-        GameManager.instance.portraitBorder.DOFade(1f, boxFadeTime);
-        GameManager.instance.portraitSprite.DOFade(1f, boxFadeTime);
-        GameManager.instance.nameBox.DOFade(1f, boxFadeTime);
-        GameManager.instance.nameText.DOFade(1f, boxFadeTime);
-        Debug.Log("I, " + gameObject.name + ", have finished all ShowTextBox functionality");
-    }
-
-    private void HideTextBox()
-    {
-        FPEInteractionManagerScript.Instance.enableMovement();
-
-        if (GameManager.instance.vignette != null)
-            DOTween.To(() => GameManager.instance.vignette.intensity.value,
-                x => GameManager.instance.vignette.intensity.value = x, 0, boxFadeTime);
-        GameManager.instance.portraitBackground.DOFade(0f, boxFadeTime);
-        GameManager.instance.portraitBorder.DOFade(0f, boxFadeTime);
-        GameManager.instance.portraitSprite.DOFade(0f, boxFadeTime);
-        GameManager.instance.textBox.DOFade(0f, boxFadeTime).OnComplete(() => GameManager.instance.textBox.gameObject.SetActive(false));
-        GameManager.instance.textBoxText.DOFade(0f, boxFadeTime);
-        GameManager.instance.nameBox.DOFade(0f, boxFadeTime);
-        GameManager.instance.nameText.DOFade(0f, boxFadeTime);
-        GameManager.instance.nameBoxBorder.DOFade(0f, boxFadeTime);
-        Invoke("RefreshTextBox", boxFadeTime);
-
-    } */
 
     private void ResetTranscriptionText()
     {
@@ -357,6 +346,7 @@ public class InterviewPlayer : MonoBehaviour
                     break;
                 case Chunk.speakerName.CC:
                     FPEInterviewPlayerMenu.instance.nameText.text = "Caro Campos";
+                    myAudioSource.volume = 1f;
                     break;
             }
         }
