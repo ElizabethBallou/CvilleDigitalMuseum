@@ -20,11 +20,16 @@ public class PortraitClicker : MonoBehaviour
     private int clickNumberTracker = 0;
 
     public bool trailerfadeout = false;
+
+    private bool hasBeenClickedOnce = false;
+
+    [HideInInspector] public TextMeshPro clickText;
     // Start is called before the first frame update
     void Start()
     {
         myMeshRenderer = gameObject.GetComponent<MeshRenderer>();
         mySymbolInfo = myClipPlayer.transform.GetComponentInChildren<SymbolMouseHover>();
+        clickText = gameObject.transform.parent.GetComponentInChildren<TextMeshPro>();
     }
 
     // Update is called once per frame
@@ -38,34 +43,38 @@ public class PortraitClicker : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (!hasBeenClickedOnce)
+        {
+            hasBeenClickedOnce = true;
+        }
+
         if (!myClipPlayer.myAudioSource.isPlaying)
         {
             Debug.Log("I'm triggering BeginClip");
             myClipPlayer.BeginClip();
             fadeAudioSprite();
         }
-        else
+        if (hasBeenClickedOnce)
         {
             if (cutoffValue <= 1.1)
             {
-                if (clickNumberTracker == 0)
+                if (clickNumberTracker == 2)
                 {
-                    if (guideTextIndicator != 0)
-                    {
-                        HallwayManager.instance.clickText.DOFade(0f, 1f);
-                    }
+                    clickText.DOFade(0f, 1f);
                 }
+
                 myMeshRenderer.material.SetFloat("_Cutoff", cutoffValue);
                 cutoffValue = cutoffValue + .1f;
                 clickNumberTracker++;
             }
         }
+
         
     }
 
     private void fadeAudioSprite()
     {
         Debug.Log("fading audio sprite...");
-        mySymbolInfo.audioSprite.DOFade(0f, .5f);
+        mySymbolInfo.audioSprite.gameObject.SetActive(false);
     }
 }

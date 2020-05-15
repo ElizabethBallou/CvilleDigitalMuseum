@@ -49,7 +49,10 @@ namespace Whilefun.FPEKit {
             WEGIVEOURTHANKS = 26,
             MEMORYNOTHISTORY = 27,
             SLAVEAUCTIONBLOCK = 28,
-            CCINTRODUCTION = 29
+            CCINTRODUCTION = 29,
+            INEQUALITIESBUILTINTOARCHITECTURE = 30,
+            LAWNISMADEUPOF = 31,
+            OVERLOOKEDLEGACIESOFSLAVERY = 32
 
         };
 

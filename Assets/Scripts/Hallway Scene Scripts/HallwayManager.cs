@@ -20,8 +20,6 @@ public class HallwayManager : MonoBehaviour
     public TextMeshProUGUI movementTips;
     private float movementTipsDisappear = 0;
     
-    public TextMeshPro clickText;
-
 
     private void Awake()
     {

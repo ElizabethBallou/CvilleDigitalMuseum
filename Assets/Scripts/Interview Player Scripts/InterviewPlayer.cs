@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Whilefun.FPEKit;
+using UnityEngine.SceneManagement;
 
 public class InterviewPlayer : MonoBehaviour
 {
@@ -67,17 +68,20 @@ public class InterviewPlayer : MonoBehaviour
 
 
         myLight = gameObject.transform.parent.GetComponentInChildren<Light>();
-        myLantern = gameObject.transform.parent.GetChild(1).GetChild(2).GetChild(0).gameObject;
-        myLanternMatArray = myLantern.GetComponent<MeshRenderer>().materials;
-        myLanternMat = myLanternMatArray[1];
-
+        
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            myLantern = gameObject.transform.parent.GetChild(1).GetChild(2).GetChild(0).gameObject;
+            myLanternMatArray = myLantern.GetComponent<MeshRenderer>().materials;
+            myLanternMat = myLanternMatArray[1];
+        }
 
         //in the code below, need to change ""thisConversationInfo" to "currentConversationInfo"
 
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         float dist = Vector3.Distance(playerTransform.position, transform.position);

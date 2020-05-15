@@ -16,8 +16,12 @@ public class IntroScript : MonoBehaviour
     public FPEMainMenu myFPEMainMenu;
     public Button beginButton;
     public Button quitButton;
+    public Button acknowledgementsButton;
+    private TextMeshProUGUI acknowledgementButtonText;
     private TextMeshProUGUI beginButtonText;
     private TextMeshProUGUI quitButtonText;
+    public GameObject acknowledgements;
+    private bool isAcknowledgementsOpen = false;
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI subhedText;
     public Image charlottesvilleMap;
@@ -77,6 +81,7 @@ public class IntroScript : MonoBehaviour
 
         quitButtonText = quitButton.gameObject.GetComponentInChildren<TextMeshProUGUI>();
         giveUpButtonText = giveUpButton.GetComponentInChildren<TextMeshProUGUI>();
+        acknowledgementButtonText = acknowledgementsButton.GetComponentInChildren<TextMeshProUGUI>();
         giveUpButton.image.color = clearWhite;
         giveUpButtonText.color = clearWhite;
         giveUpButton.gameObject.SetActive(false);
@@ -99,6 +104,8 @@ public class IntroScript : MonoBehaviour
         buriedTypingAudioSource = BuriedFactText.gameObject.GetComponent<AudioSource>();
 
         blackBackdrop.gameObject.SetActive(false);
+
+        acknowledgements.SetActive(false);
 
     }
 
@@ -181,6 +188,8 @@ public class IntroScript : MonoBehaviour
         quitButton.image.DOFade(0f, 1f).OnComplete(() => quitButton.gameObject.SetActive(false));
         quitButtonText.DOFade(0f, 1f);
         titleText.DOFade(0f, 1f).OnComplete(() => backgroundAudioManager.instance.myAudioSource.Play());
+        acknowledgementsButton.image.DOFade(0f, 1f).OnComplete(() => acknowledgementsButton.gameObject.SetActive(false));
+        acknowledgementButtonText.DOFade(0f, 1f);
 
         typeWriter.gameObject.SetActive(true);
         spacebarButton.gameObject.SetActive(true);
@@ -257,6 +266,27 @@ public class IntroScript : MonoBehaviour
         if (buriedFactArrayIndex == buriedFactArray.Length)
         {
             buriedFactArrayIndex = 0;
+        }
+    }
+
+    public void OnAcknowledgementsButtonClick()
+    {
+        if (!isAcknowledgementsOpen)
+        {
+            acknowledgementsButton.gameObject.SetActive(false);
+            acknowledgements.SetActive(true);
+            isAcknowledgementsOpen = true;
+        }
+
+    }
+
+    public void OnAckExitClick()
+    {
+        if (isAcknowledgementsOpen)
+        {
+            acknowledgements.SetActive(false);
+            isAcknowledgementsOpen = false;
+            acknowledgementsButton.gameObject.SetActive(true);
         }
     }
 

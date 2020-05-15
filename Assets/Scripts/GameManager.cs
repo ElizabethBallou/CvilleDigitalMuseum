@@ -16,13 +16,17 @@ public class GameManager : MonoBehaviour
 
     public GameObject myMinimalHUD;
 
+    public GameObject endGameUI;
+
+    private bool isEndGameUIOpen = false;
+
     [HideInInspector] public int lawnRecordsFound = 0;
 
     [HideInInspector] public int downtownRecordsFound = 0;
 
-    public int lawnRecordsTotal = 0;
+    public int lawnRecordsTotal = 16;
 
-    public int downtownRecordsTotal = 0;
+    public int downtownRecordsTotal = 7;
 
     public TextMeshProUGUI foundRecordsText;
 
@@ -54,6 +58,7 @@ public class GameManager : MonoBehaviour
         myMinimalHUD = GameObject.Find("FPEMinimalHUD(Clone)");
         myMinimalHUD.GetComponent<FPEMinimalHUD>().HUDEnabled = true;
         foundRecordsText.gameObject.SetActive(false);
+        endGameUI.SetActive(false);
 
     }
 
@@ -90,7 +95,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
+        if (lawnRecordsFound == lawnRecordsTotal && downtownRecordsFound == downtownRecordsTotal)
+        {
+                endGameUI.SetActive(true);
+            FPEInteractionManagerScript.Instance.disableMovement();
+            FPEInteractionManagerScript.Instance.disableMouseLook();
+
+        }
     }
 
     public void AddFoundRecordCount(int sceneNo)

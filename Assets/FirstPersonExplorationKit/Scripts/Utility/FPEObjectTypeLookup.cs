@@ -88,6 +88,9 @@ namespace Whilefun.FPEKit
                     "slave auction block");
                 inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.CCINTRODUCTION,
                     "Caro Campos introduction");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.OVERLOOKEDLEGACIESOFSLAVERY, "Overlooked legacies of slavery");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.LAWNISMADEUPOF, "The Lawn is made up of");
+                inventoryItemsLookup.Add(FPEInventoryManagerScript.eInventoryItems.INEQUALITIESBUILTINTOARCHITECTURE, "Inequalities built into architecture");
 
                 // 
                 // To add a new item, simply add a new dictionary entry for that eInventoryItems type and 

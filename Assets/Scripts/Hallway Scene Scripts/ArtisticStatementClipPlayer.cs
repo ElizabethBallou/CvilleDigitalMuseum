@@ -8,6 +8,7 @@ using Whilefun.FPEKit;
 
 public class ArtisticStatementClipPlayer : MonoBehaviour
 {
+    public PortraitClicker myPortraitClicker;
     public AudioClip myClip;
     [HideInInspector] public bool triggeredAudioSource = false;
     [HideInInspector] public AudioSource myAudioSource;
@@ -125,11 +126,7 @@ public class ArtisticStatementClipPlayer : MonoBehaviour
         FPEHallwayMenu.instance.HallwayTextBox.gameObject.SetActive(true);
         FPEHallwayMenu.instance.HallwayTextBox.DOFade(.82f, boxFadeTime);
         FPEHallwayMenu.instance.hallwayTextBoxText.DOFade(1f, boxFadeTime);
-
-        if (portraitNumber == 1)
-        {
-            HallwayManager.instance.clickText.DOFade(.5f, .5f);
-        }
+        myPortraitClicker.clickText.DOFade(.5f, .5f);
 
     }
 
