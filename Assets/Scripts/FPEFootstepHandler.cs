@@ -28,6 +28,7 @@ public class FPEFootstepHandler : MonoBehaviour
         var thisClip = clipArray[Random.Range(0, clipArray.Length)];
         myAudioSource.clip = thisClip;
         myAudioSource.pitch = Random.Range(.9f, 1.1f);
+        myAudioSource.volume = Random.Range(.1f, .3f);
         myAudioSource.PlayOneShot(thisClip);
     }
 }

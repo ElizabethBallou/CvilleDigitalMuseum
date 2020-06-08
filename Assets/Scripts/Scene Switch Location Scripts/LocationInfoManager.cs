@@ -36,6 +36,12 @@ public class LocationInfoManager : MonoBehaviour
     private GameObject aDoor;
     private FPEDoorway myFPEDoorway;
 
+    public TextMeshProUGUI downtownSceneWarning;
+    private bool hasWarningShown = false;
+    private float warningTimer = 0;
+
+
+
     private void Awake()
     {
         
@@ -58,6 +64,8 @@ public class LocationInfoManager : MonoBehaviour
 
         playerObject = GameObject.FindWithTag("Player");
 
+        downtownSceneWarning.gameObject.SetActive(false);
+
     }
     
 
@@ -76,6 +84,16 @@ public class LocationInfoManager : MonoBehaviour
             locationText.DOFade(0f, 2f);
             isTextFadeTriggered = false;
             currentTime = 0;
+        }
+
+        if (hasWarningShown)
+        {
+            warningTimer += Time.deltaTime;
+            if (warningTimer >= 5f)
+            {
+                downtownSceneWarning.DOFade(0f, 2f).OnComplete(() => downtownSceneWarning.gameObject.SetActive(false));
+
+            }
         }
     }
 
@@ -112,6 +130,11 @@ public class LocationInfoManager : MonoBehaviour
         if (sceneIndex == 3)
         {
             GameManager.instance.foundRecordsText.text = "Downtown Records Found: " + GameManager.instance.downtownRecordsFound + "/" + GameManager.instance.downtownRecordsTotal;
+            if (!hasWarningShown)
+            {
+                downtownSceneWarning.gameObject.SetActive(true);
+                hasWarningShown = true;
+            }
         }
         StartCoroutine(ShowLocationText(locationStrings[sceneIndex -1]));
         
@@ -143,4 +166,5 @@ public class LocationInfoManager : MonoBehaviour
         playerObject.transform.position = new Vector3(startTransform.position.x, startTransform.position.y, startTransform.position.z);
         FPESwitchSceneMenu.instance.deactivateMenu();
     }
+
 }

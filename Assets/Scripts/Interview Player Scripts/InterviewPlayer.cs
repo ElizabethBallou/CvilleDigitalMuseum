@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class InterviewPlayer : MonoBehaviour
 {
+
+
+
     private bool triggeredAudioSource = false;
     private AudioSource myAudioSource;
     private Transform playerTransform;
@@ -21,7 +24,7 @@ public class InterviewPlayer : MonoBehaviour
 
     private string transcriptionString;
     private string portraitName;
-    
+
     private ConversationInfo thisConversationInfo;
     private ConversationInfo introductionConversationInfo;
     private ConversationInfo currentConversationInfo;
@@ -66,9 +69,8 @@ public class InterviewPlayer : MonoBehaviour
         thisConversationName = thisInterview.name;
         thisConversationInfo = TranscriptionDataParser.instance.TranscriptionDataDictionary[thisConversationName];
 
-
         myLight = gameObject.transform.parent.GetComponentInChildren<Light>();
-        
+
         if (SceneManager.GetActiveScene().buildIndex != 1)
         {
             myLantern = gameObject.transform.parent.GetChild(1).GetChild(2).GetChild(0).gameObject;
@@ -76,27 +78,28 @@ public class InterviewPlayer : MonoBehaviour
             myLanternMat = myLanternMatArray[1];
         }
 
+
+
         //in the code below, need to change ""thisConversationInfo" to "currentConversationInfo"
 
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
         float dist = Vector3.Distance(playerTransform.position, transform.position);
-        if ( dist <= distanceFromPlayer)
-            // if the player is within the declared distance...
+        if (dist <= distanceFromPlayer)
+        // if the player is within the declared distance...
         {
             if (!myAudioSource.isPlaying && triggeredAudioSource == false)
-                // ...and if the clip hasn't already started playing...
+            // ...and if the clip hasn't already started playing...
             {
-                if(TranscriptionDataParser.instance.metIntervieweeTracker.ContainsKey(thisConversationInfo.chunks[0].Speaker))
+                if (TranscriptionDataParser.instance.metIntervieweeTracker.ContainsKey(thisConversationInfo.chunks[0].Speaker))
                 {
                     //if first time talking to person
                     //set currentConversationInfo to the introductionConversationInfo
-                    currentConversationInfo =
-                        TranscriptionDataParser.instance.metIntervieweeTracker[thisConversationInfo.chunks[0].Speaker];
+                    currentConversationInfo = TranscriptionDataParser.instance.metIntervieweeTracker[thisConversationInfo.chunks[0].Speaker];
                     TranscriptionDataParser.instance.metIntervieweeTracker.Remove(
                         thisConversationInfo.chunks[0].Speaker);
                     _playingIntro = true;
@@ -141,13 +144,14 @@ public class InterviewPlayer : MonoBehaviour
         //HANDLE TYPING OUT TEXT---------------------------------------------------------------------------------------------------------------
         if (_isTypingOut)
         {
-          _asteriskTimer -= Time.deltaTime;
+            _asteriskTimer -= Time.deltaTime;
 
-          //if we are delaying the typing after finding an asterik, then call "return". nothing after this line will execute,
-          //meaning the text will not keep typing out until after the _asteriskTimer is up.
-          if(_asteriskTimer > 0){
-            return;
-          }
+            //if we are delaying the typing after finding an asterik, then call "return". nothing after this line will execute,
+            //meaning the text will not keep typing out until after the _asteriskTimer is up.
+            if (_asteriskTimer > 0)
+            {
+                return;
+            }
 
             _timer += Time.deltaTime; //increase timer so we know how much time is elapsed
 
@@ -160,25 +164,25 @@ public class InterviewPlayer : MonoBehaviour
                 //if we have run out of chunks to display, either play the next conversation info, or hide txtbox
                 if (_chunkIndex >= currentConversationInfo.chunks.Length - 1)
                 {
-                        if(_playingIntro)
-                        {
-                            currentConversationInfo = thisConversationInfo;
-                            _chunkIndex = -1;
-                            _playingIntro = false;
-                        }
-                        else
-                        {
-                            FPEInterviewPlayerMenu.instance.HideTextBox();
-                            myLight.DOIntensity(0f, boxFadeTime * 2);
-                            myLanternMat.DisableKeyword("_EMISSION");
-                            myLanternMat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
-                            myLanternMat.SetColor("_EmissionColor", Color.black);
+                    if (_playingIntro)
+                    {
+                        currentConversationInfo = thisConversationInfo;
+                        _chunkIndex = -1;
+                        _playingIntro = false;
+                    }
+                    else
+                    {
+                        FPEInterviewPlayerMenu.instance.HideTextBox();
+                        myLight.DOIntensity(0f, boxFadeTime * 2);
+                        myLanternMat.DisableKeyword("_EMISSION");
+                        myLanternMat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
+                        myLanternMat.SetColor("_EmissionColor", Color.black);
 
                         Invoke("ResetTranscriptionText", boxFadeTime * 2);
-                        }
+                    }
                 }
                 //otherwise, do some setup for the next chunk
-                if(_chunkIndex < currentConversationInfo.chunks.Length - 1)
+                if (_chunkIndex < currentConversationInfo.chunks.Length - 1)
                 {
                     _chunkIndex++; //move to the next chunk in the conversation
                     _timer = 0; //reset the timer to 0. (timer is only used to keep track of elapsed time between each chunk, which is why it should be 0 when we first set a new chunk)
@@ -219,7 +223,7 @@ public class InterviewPlayer : MonoBehaviour
 
             //HANDLING THE PAUSE IN TYPING AFTER EACH ASTERIK (WHEN THE TEXT OVERFLOWS)
             //Calculate the number of asteriks in this chunk, and for each asterk, add an amount of _endOfAsterikWaitTime to the offset
-            timeOffset -= (_transcriptionText.Split('*').Length - 1) * _endOfAsteriskWaitTime;
+            timeOffset += (_transcriptionText.Split('*').Length - 1) * _endOfAsteriskWaitTime;
 
 
             //calculate what percent "done" we are with this chunk in terms of timing.
@@ -236,7 +240,7 @@ public class InterviewPlayer : MonoBehaviour
 
             //Here is where we need to handle starting the text back at the top when we've reached overflow
             //check to see if there are any * in the text at all
-            if (totalStringSoFar.Contains("*") )
+            if (totalStringSoFar.Contains("*"))
             {
                 //_cutIndex is a variable I am using to track where the beginning of the paragraph should start
                 //so here we set the cut index to the most recent occurance of a * in the string. So the
@@ -245,10 +249,11 @@ public class InterviewPlayer : MonoBehaviour
 
                 //If the index of the asterik is new, meaning we have come across a new asterik, then that means
                 //reset the asterik timer so that there can be a pause in the typing before starting a new paragraph
-                if(_recentAsteriskIndex != _cutIndex){
-                  _asteriskTimer = _endOfAsteriskWaitTime;
-                  _recentAsteriskIndex = _cutIndex; //update the recent asterik index so that we don't run this if statement again until we find a new asterik
-                  return; //return will end the Update loop here, so none of the code after this will be executed (nothing will be typed out)
+                if (_recentAsteriskIndex != _cutIndex)
+                {
+                    _asteriskTimer = _endOfAsteriskWaitTime;
+                    _recentAsteriskIndex = _cutIndex; //update the recent asterik index so that we don't run this if statement again until we find a new asterik
+                    return; //return will end the Update loop here, so none of the code after this will be executed (nothing will be typed out)
                 }
             }
 
@@ -303,8 +308,6 @@ public class InterviewPlayer : MonoBehaviour
             }
         }
 
-        
-
     }
 
 
@@ -355,5 +358,6 @@ public class InterviewPlayer : MonoBehaviour
             }
         }
     }
-    
+
 }
+

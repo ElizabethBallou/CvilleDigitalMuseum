@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public GameObject startDoor;
-
     public GameObject myMinimalHUD;
 
     public GameObject endGameUI;
@@ -62,10 +60,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void NoGoingBack()
-    {
-        Destroy(startDoor);
-    }
+    
 
     /*public void SetupAllTextBoxes()
     {

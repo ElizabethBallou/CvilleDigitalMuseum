@@ -75,8 +75,8 @@ namespace Whilefun.FPEKit
         private FPENoteContentsPanel noteContentsPanel = null;
         private GameObject systemPanel = null;
         private GameObject exitConfirmationPanel = null;
-        private GameObject actionsPanelParent = null;
-        private FPEInventoryActionsPanel inventoryActionsPanel = null;
+        //private GameObject actionsPanelParent = null;
+        //private FPEInventoryActionsPanel inventoryActionsPanel = null;
         private GameObject pageControlPanel = null;
 
         // Panels and slots of different types //
@@ -172,10 +172,10 @@ namespace Whilefun.FPEKit
             noteContentsPanelParent = menuCanvas.gameObject.transform.Find("NoteContentsPanel").gameObject;
             systemPanel = menuCanvas.gameObject.transform.Find("SystemPanel").gameObject;
             exitConfirmationPanel = menuCanvas.gameObject.transform.Find("ExitConfirmationPanel").gameObject;
-            actionsPanelParent = menuCanvas.gameObject.transform.Find("InventoryActionsPanel").gameObject;
+            //actionsPanelParent = menuCanvas.gameObject.transform.Find("InventoryActionsPanel").gameObject;
             pageControlPanel = menuCanvas.gameObject.transform.Find("PageControlsPanel").gameObject;
 
-            if (!inventoryItemInfoPanelParent || !inventoryItemsListPanel || /*!audioDiariesPanel ||*/ !notesPanel || !noteContentsPanelParent || !systemPanel || !actionsPanelParent || !pageControlPanel)
+            if (!inventoryItemInfoPanelParent || !inventoryItemsListPanel || /*!audioDiariesPanel ||*/ !notesPanel || !noteContentsPanelParent || !systemPanel || /*!actionsPanelParent || */!pageControlPanel)
             {
                 Debug.LogError("FPEGameMenu:: Cannot find one or more of the menu panels! Did you rename or remove them?");
             }
@@ -188,13 +188,13 @@ namespace Whilefun.FPEKit
                 Debug.LogError("FPEGameMenu:: InventoryItemInfoPanel is missing its 'FPEInventoryItemInfoPanel' (script) component! Did you remove it?");
             }
 
-            actionsPanelParent.SetActive(true);
-            inventoryActionsPanel = actionsPanelParent.GetComponent<FPEInventoryActionsPanel>();
+            //actionsPanelParent.SetActive(true);
+            //inventoryActionsPanel = actionsPanelParent.GetComponent<FPEInventoryActionsPanel>();
 
-            if (inventoryActionsPanel == null)
+            /*if (inventoryActionsPanel == null)
             {
                 Debug.LogError("FPEGameMenu:: InventoryActionsPanel is missing its 'FPEInventoryActionsPanel' (script) component! Did you remove it?");
-            }
+            }*/
 
             // Inventory item slots (We should have more than one of these)
             inventoryItemsListPanel.SetActive(true);
@@ -321,13 +321,13 @@ namespace Whilefun.FPEKit
                 }
 
                 // Allow player to close actions panel without having to select and "click" the cancel button (e.g. gamepad)
-                if (actionsPanelParent.activeSelf)
+                /*if (actionsPanelParent.activeSelf)
                 {
                     if (FPEInputManager.Instance.GetButtonDown(FPEInputManager.eFPEInput.FPE_INPUT_CLOSE))
                     {
                         hideActionsForItem();
                     }
-                }
+                }*/
 
                 // Allow player to stop all diaries wihtout having to select and "click" stop button (e.g. gamepad)
                 /* if (audioDiariesPanel.activeSelf)
@@ -585,7 +585,7 @@ namespace Whilefun.FPEKit
             noteContentsPanelParent.SetActive(false);
             systemPanel.SetActive(false);
             exitConfirmationPanel.SetActive(false);
-            actionsPanelParent.SetActive(false);
+            //actionsPanelParent.SetActive(false);
             //pageControlPanel.SetActive(false);
 
             // Then force select tab and activate the correct panel(s)
@@ -735,16 +735,16 @@ namespace Whilefun.FPEKit
                 inventorySlots[s].disableSlot();
             }
 
-            actionsPanelParent.SetActive(true);
-            inventoryActionsPanel.setButtonStates(itemData[slotActionItemIndex].CanBeHeld, itemData[slotActionItemIndex].CanBeDropped, itemData[slotActionItemIndex].CanBeConsumed);
-            myEventSystem.SetSelectedGameObject(inventoryActionsPanel.getFirstPermittedActionButton().gameObject);
+            //actionsPanelParent.SetActive(true);
+            //inventoryActionsPanel.setButtonStates(itemData[slotActionItemIndex].CanBeHeld, itemData[slotActionItemIndex].CanBeDropped, itemData[slotActionItemIndex].CanBeConsumed);
+            //myEventSystem.SetSelectedGameObject(inventoryActionsPanel.getFirstPermittedActionButton().gameObject);
 
         }
 
         public void hideActionsForItem()
         {
 
-            actionsPanelParent.SetActive(false);
+            //actionsPanelParent.SetActive(false);
 
             for (int s = 0; s < inventorySlots.Length; s++)
             {

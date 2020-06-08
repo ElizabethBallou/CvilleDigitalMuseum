@@ -18,7 +18,7 @@ namespace Whilefun.FPEKit
         private FPEMenuButton dropButton;
         private FPEMenuButton consumeButton;
         private FPEMenuButton cancelButton;
-
+        /*
         void Awake()
         {
 
@@ -66,5 +66,6 @@ namespace Whilefun.FPEKit
         }
 
     }
-
+    */
+    }
 }
